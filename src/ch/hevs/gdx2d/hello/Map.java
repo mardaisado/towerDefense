@@ -15,8 +15,18 @@ public class Map {
 	public Map(int[][] map) {
 		// TODO Auto-generated constructor stub
 		this.map = map;
-		this.HEIGTH = (int) (0.5*(double)Gdx.graphics.getHeight()/(double)map.length);
-		this.WIDTH = (int) (0.5*(double)Gdx.graphics.getWidth()/(double)map[0].length);
+		//this.HEIGTH = (int) (0.5*(double)Gdx.graphics.getHeight()/(double)map.length);
+		
+		if((int) (0.5*(double)Gdx.graphics.getWidth()/(double)map[0].length) > (int) (0.5*(double)Gdx.graphics.getHeight()/(double)map.length)) {
+			this.WIDTH = (int) (0.5*(double)Gdx.graphics.getHeight()/(double)map.length);
+		}
+		else {
+			this.WIDTH = (int) (0.5*(double)Gdx.graphics.getWidth()/(double)map[0].length);
+		}
+		
+		
+
+		this.HEIGTH = WIDTH;
 	}
 	
 	public void drawMap(GdxGraphics g, BitmapImage[] assets) {
