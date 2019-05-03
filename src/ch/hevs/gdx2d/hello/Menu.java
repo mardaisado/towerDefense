@@ -31,6 +31,8 @@ public class Menu extends RenderingScreen {
 	
 	@Override
 	public void onInit() {
+		//Logger.log();
+		//System.out.println(String.format("%3d", 3));
 		
 		int buttonWidth = 1000;
 		int buttonHeight = 300;

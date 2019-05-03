@@ -20,7 +20,7 @@ public class ScreensManager extends PortableApplication {
     
     public ScreensManager() {
 		// TODO Auto-generated constructor stub
-    	super(500,600,true);
+    	super(3000,1800,true);
 	}
 
     @Override
