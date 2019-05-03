@@ -23,13 +23,11 @@ public class Game extends RenderingScreen {
 	
 	private Map mapManager;
 	
-	int[][] map = {
-			{1,1,3,4,5},
-			{1,2,3,4,5},
-			{1,2,3,4,5},
-			{1,2,3,4,5},
-			{1,2,3,4,5},
-			{1,2,3,4,5}
+	int[][][] map = {
+			{{1,0},{1,1},{1,2},{1,3},{1,0}},
+			{{2,0},{2,1},{2,2},{2,3},{2,0}},
+			{{3,0},{3,1},{3,2},{3,3},{3,0}},
+			{{4,0},{4,1},{4,2},{4,3},{4,0}}
 	};
 
 	@Override
@@ -54,6 +52,9 @@ public class Game extends RenderingScreen {
 		//float t = computePercentage();
 		float angle = 0;
 
+		// THE GAME
+		
+		
 		// Draw everything
 		//g.drawTransformedPicture(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() / 2.0f, angle, 1.0f, imgBitmap);
 		//g.drawStringCentered(Gdx.graphics.getHeight() * 0.8f, "Welcome to gdx2d !");
