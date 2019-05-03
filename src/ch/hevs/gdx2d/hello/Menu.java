@@ -34,8 +34,8 @@ public class Menu extends RenderingScreen {
 		//Logger.log();
 		//System.out.println(String.format("%3d", 3));
 		
-		int buttonWidth = 1000;
-		int buttonHeight = 300;
+		int buttonWidth = Gdx.graphics.getWidth()/10;
+		int buttonHeight = Gdx.graphics.getHeight()/10;
 
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
@@ -46,13 +46,12 @@ public class Menu extends RenderingScreen {
 		newGameButton = new TextButton("PLAY", skin); // Use the initialized skin
 		newGameButton.setWidth(buttonWidth);
 		newGameButton.setHeight(buttonHeight);
-		newGameButton.getLabel().setFontScale(10, 10);
+	
 
 		quitGameButton = new TextButton("EXIT", skin); // Use the initialized skin
 		quitGameButton.setWidth(buttonWidth);
 		quitGameButton.setHeight(buttonHeight);
-		quitGameButton.getLabel().setFontScale(10, 10);
-
+	
 		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));
 		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .4));
 
