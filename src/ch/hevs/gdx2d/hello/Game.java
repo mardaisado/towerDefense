@@ -7,12 +7,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Interpolation;
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
-import ch.hevs.gdx2d.desktop.PortableApplication;
 
 /**
  * Hello World demo.
@@ -56,7 +54,7 @@ public class Game extends RenderingScreen {
 		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
 		
 		float screenHeigth = Gdx.graphics.getHeight();
-		tileSize = screenHeigth/(tiledMap.getProperties().get("width",Integer.class)*64f);
+		tileSize = (((int)(screenHeigth/(tiledMap.getProperties().get("width",Integer.class)))/64f));
 		
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);	
 	}
