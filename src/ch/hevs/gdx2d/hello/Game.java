@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.hello;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -36,6 +37,8 @@ public class Game extends RenderingScreen {
 	
 	TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
+	float tileSize = 0;
+	
 
 	@Override
 	public void onInit() {
@@ -51,8 +54,11 @@ public class Game extends RenderingScreen {
 		
 		
 		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
-		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		
+		float screenHeigth = Gdx.graphics.getHeight();
+		tileSize = screenHeigth/(tiledMap.getProperties().get("width",Integer.class)*64f);
+		
+		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);	
 	}
 
 	@Override
@@ -69,6 +75,8 @@ public class Game extends RenderingScreen {
 		
 		//g.zoom(4f);
 		//g.moveCamera(position.x, position.y);
+		g.moveCamera((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/-2f, (Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/-2f);
+		g.getCamera().update();
 		
 		tiledMapRenderer.setView(g.getCamera());
 		tiledMapRenderer.render();
