@@ -1,14 +1,19 @@
 package ch.hevs.gdx2d.hello;
 
+import java.util.Vector;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
+import ch.hevs.gdx2d.demos.scrolling.objects.Pipe;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
+import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
 
 /**
@@ -25,6 +30,8 @@ public class Game extends PortableApplication {
 	
 	private Map mapManager;
 	
+	final double FRAME_TIME = 0.2; // Duration of each frame
+	
 	int[][][] map = {
 			{{1,0},{1,1},{1,2},{1,3},{1,0}},
 			{{2,0},{2,1},{2,2},{2,3},{2,0}},
@@ -32,12 +39,16 @@ public class Game extends PortableApplication {
 			{{4,0},{4,1},{4,2},{4,3},{4,0}}
 	};
 	
+	Vector<Object> toDraw = new Vector<Object>();
+	
 	TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
 	float tileSize;
 	
 	int map0x;
 	int map0y;
+	
+	float dt = 0;
 	
 
 	@Override
@@ -61,7 +72,9 @@ public class Game extends PortableApplication {
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);	
 
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
-		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);		
+		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
+		//add object
+		//toDraw.add(new Pipe(1500, 90));
 	}
 
 	@Override
@@ -69,17 +82,30 @@ public class Game extends PortableApplication {
 		// Clears the screen
 		g.clear();
 
-		// THE GAME
-		//g.moveCamera(1000, 1000, 1000, 1000);
-		
-		//g.zoom(4f);
-		//g.moveCamera(position.x, position.y);
+		//get time
+		dt += Gdx.graphics.getDeltaTime();
+
+		// Process update
+		if (dt > FRAME_TIME) {
+			dt = 0;
+			//Update
+			for (Object obj : toDraw) {
+				((UpdateObject) obj).update(g);
+			}
+		}
+
+		// Camera fixe
 		g.moveCamera(-map0x, -map0y);
 		g.getCamera().update();
 		
+		// Draw map
 		tiledMapRenderer.setView(g.getCamera());
 		tiledMapRenderer.render();
 		
+		// draw object
+		for (Object obj : toDraw) {
+			((DrawableObject) obj).draw(g);
+		}
 		
 		// Draw everything
 		//g.drawTransformedPicture(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() / 2.0f, angle, 1.0f, imgBitmap);
