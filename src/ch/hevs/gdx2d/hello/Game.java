@@ -1,14 +1,13 @@
 package ch.hevs.gdx2d.hello;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
-import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
+import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
 
@@ -19,7 +18,7 @@ import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
  * @author Pierre-André Mudry (mui)
  * @version 2.1
  */
-public class Game extends RenderingScreen {
+public class Game extends PortableApplication {
 
 	private BitmapImage imgBitmap;
 	private BitmapImage[] assets;
@@ -40,12 +39,12 @@ public class Game extends RenderingScreen {
 
 	@Override
 	public void onInit() {
-
+		
 		// Load a custom image (or from the lib "res/lib/icon64.png")
 		imgBitmap = new BitmapImage("data/images/hei-pi.png");
 		
 		// Load assets
-		assets = loadAssets();
+		assets = Utils.loadAssets();
 
 		// Create Map
 		mapManager = new Map(map);
@@ -63,10 +62,6 @@ public class Game extends RenderingScreen {
 	public void onGraphicRender(GdxGraphics g) {
 		// Clears the screen
 		g.clear();
-
-		// Compute the angle of the image using an elastic interpolation
-		//float t = computePercentage();
-		float angle = 0;
 
 		// THE GAME
 		//g.moveCamera(1000, 1000, 1000, 1000);
@@ -88,24 +83,7 @@ public class Game extends RenderingScreen {
 		//g.drawSchoolLogo();
 	}
 	
-	@Override
-	public void dispose() {
-		imgBitmap.dispose();
-		PhysicsWorld.dispose();
-		super.dispose();
+	public static void main(String[] args) {
+		new Game();
 	}
-	
-	public static BitmapImage[] loadAssets() {
-		BitmapImage[] tmp = new BitmapImage[299];
-		String tmp2 = "";
-		for (int i = 0; i < tmp.length; i++) {
-			tmp2 = String.format("%03d", i);
-			tmp[i] = new BitmapImage("data/assets/PNG/Retina/towerDefense_tile" + tmp2 + ".png");
-		}
-		return tmp;
-	}
-
-//	public static void main(String[] args) {
-//		new Game();
-//	}
 }
