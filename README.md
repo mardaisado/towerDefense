@@ -1,9 +1,39 @@
-# Hello gdx2d
+# Tower Defense
 
-Desktop bootstrap project based on the latest gdx2d library. The project is ready to use in Eclipse or IntelliJ IDE. It uses the `gdx2d-desktop` library version `1.2.1`.
+## ENNEMI : 
+ 
+  Une classe d'ennemi avec des attributs de PV, Vitesse, apparenece ET Position
+  Fonctions communes à tous les ennemis
 
-The project can be imported directly in Eclipse. The `gdx2d` sources are available in the library Jar file (in the `libs` folder). The Javadoc API of the library can be found [here](https://hevs-isi.github.io/gdx2d/javadoc/).
+## DEFENSE :
 
-Java 1.6 or higher is required to run this project. An `Ant` build script is provided to export the project as a runnable Jar (available in the `dist` folder).
+  Une classe de defenses (Parent, interface?) 
+    Une sous-classe pour le type de defense avec chaque défense qui a sa sous-classe
+    
+  Une classe projectile
+    Une sous-classe pour le type de projectile et 1 projectile = 1 sous-classe
+    
+  Fonctions communes à toutes les défenses
+  
+ 
+## DRAW DEFENSE | ENNEMI :
+ 
+  Fonction draw avec obj draw (Deja tout fait) 
+  Une liste de choses à afficher 
+ 
+## UPADTE PROJECTILES | ENNEMI :
+ 
+   Fonction update qui va s'activer chaque x temps et qui va update la position de projectile et ennemis
+   
+ 
+## MAP :
+  
+   Chaque case a ses attributs 
 
-To export the project, you can use the provided Ant script. Run `$ ant jar` and then `$ ant run` to launch it. The main class of the project must be configured in the `build.properties` file. The source code of the project are also included in the exported Jar.
+  
+## UI :
+ 
+   Test de drag avec g2xd 
+    
+   TO DO
+    
