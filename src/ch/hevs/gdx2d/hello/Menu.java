@@ -25,7 +25,7 @@ public class Menu extends RenderingScreen {
 	
 	Skin skin;
 	Stage stage;
-	TextButton newGameButton, quitGameButton;
+	TextButton newGameButton, quitGameButton, settingGameButton;
 	TextField textArea;
 	static private ScreenManager s;
 	
@@ -51,10 +51,16 @@ public class Menu extends RenderingScreen {
 		quitGameButton = new TextButton("EXIT", skin); // Use the initialized skin
 		quitGameButton.setWidth(buttonWidth);
 		quitGameButton.setHeight(buttonHeight);
+		
+		settingGameButton = new TextButton("SETTINGS", skin); // Use the initialized skin
+		settingGameButton.setWidth(buttonWidth);
+		settingGameButton.setHeight(buttonHeight);
+	
+
 	
 		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));
 		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .4));
-
+		settingGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .1));
 //		textArea = new TextField("Enter some text...", skin);
 //		textArea.setWidth(buttonWidth);
 //		textArea.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .4));
@@ -74,6 +80,7 @@ public class Menu extends RenderingScreen {
 		 */
 		stage.addActor(newGameButton);
 		stage.addActor(quitGameButton);
+		stage.addActor(settingGameButton);
 		//stage.addActor(textArea);
 
 		quitGameButton.addListener(new ClickListener() {
