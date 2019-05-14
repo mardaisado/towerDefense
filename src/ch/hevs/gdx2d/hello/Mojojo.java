@@ -9,6 +9,10 @@ public class Mojojo extends Ennemi {
 
 	BitmapImage base;
 	
+	int temp=0;
+	
+	int speed=3;
+	
 	int[][] position = {
 			{64,64},{120,120},{180,180},{240,240},{260,260},{120,120} 
 	};
@@ -22,7 +26,7 @@ public class Mojojo extends Ennemi {
 	public Point findNextPosition(int tempo)
 	{
 		
-		return new Point((position[tempo][1]),(position[tempo][2]));
+		return new Point((position[tempo][0]),(position[tempo][1]));
 	}
 
 	@Override
@@ -35,6 +39,44 @@ public class Mojojo extends Ennemi {
 	public void update(GdxGraphics g) {
 		
 		
+		
+		if(pos.x==225 && pos.y==359)
+		{
+			temp=1;			
+		} 
+		if(pos.x==225 && pos.y==203)
+		{
+			temp=2;			
+		}
+		if(pos.x==537 && pos.y==203)
+		{
+			temp=3;	
+		}
+		
+		switch (temp) {
+		
+		case 0:
+			pos.x=(int) (pos.x+speed);
+			pos.y=(int) (359);			
+					
+			break;
+			
+		case 1:
+			pos.y=(int) (pos.y-speed);		
+					
+			break;
+
+		case 2:
+			
+			pos.x=(int) (pos.x+speed);
+					
+			break;
+
+		default:
+			break;
+		}
+	
+
 		
 	}
 

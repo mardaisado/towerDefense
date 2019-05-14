@@ -32,7 +32,7 @@ public class Game extends PortableApplication {
 	
 	private Map mapManager;
 	
-	final double FRAME_TIME = 0.2; // Duration of each frame
+	final double FRAME_TIME = 0.05; // Duration of each frame
 	
 	int[][][] map = {
 			{{1,0},{1,1},{1,2},{1,3},{1,0}},
@@ -55,7 +55,7 @@ public class Game extends PortableApplication {
 	final static double PERCENTAGEOFSCREEN =0.5;
 	
 	public Game() {
-		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),true);
+		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),false);
 	}
 
 	@Override
@@ -77,6 +77,10 @@ public class Game extends PortableApplication {
 
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
+		
+		toDraw.add(new Tourelle((new Point((10*(int)tileSize*(int)64f),(10*(int)tileSize*(int)64f))),1/tileSize,assets[180],assets[249]));
+		toDraw.add(new Mojojo((new Point((10*(int)tileSize*(int)64f),(10*(int)tileSize*(int)64f))),assets[268]));
+
 	}
 
 	@Override
@@ -122,7 +126,20 @@ public class Game extends PortableApplication {
 		// TODO Auto-generated method stub
 		super.onClick(x, y, button);
 		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),1/tileSize,assets[180],assets[249]));
+		System.out.println(x-map0x);
+		System.out.println(y-map0y);
 	}
+	
+	@Override
+	public void onKeyUp(int keycode) {
+		super.onKeyUp(keycode);
+		toDraw.add(new Mojojo((new Point((10*(int)tileSize*(int)64f),(10*(int)tileSize*(int)64f))),assets[268]));
+		
+		
+	}
+	
+	
+
 	
 	public static void main(String[] args) {
 		new Game();
