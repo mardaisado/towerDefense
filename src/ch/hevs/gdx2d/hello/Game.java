@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.hello;
 
+import java.awt.Toolkit;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
@@ -10,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
-import ch.hevs.gdx2d.demos.scrolling.objects.Pipe;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
@@ -50,12 +50,14 @@ public class Game extends PortableApplication {
 	
 	float dt = 0;
 	
+	final static double PERCENTAGEOFSCREEN =0.5;
+	
+	public Game() {
+		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),false);
+	}
 
 	@Override
 	public void onInit() {
-		
-		// Load a custom image (or from the lib "res/lib/icon64.png")
-		imgBitmap = new BitmapImage("data/images/hei-pi.png");
 		
 		// Load assets
 		assets = Utils.loadAssets();
