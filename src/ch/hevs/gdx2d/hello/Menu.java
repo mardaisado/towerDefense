@@ -25,7 +25,7 @@ public class Menu extends RenderingScreen {
 	
 	Skin skin;
 	Stage stage;
-	TextButton newGameButton, quitGameButton;
+	TextButton newGameButton, quitGameButton, settingGameButton;
 	TextField textArea;
 	static private ScreenManager s;
 	
@@ -34,8 +34,8 @@ public class Menu extends RenderingScreen {
 		//Logger.log();
 		//System.out.println(String.format("%3d", 3));
 		
-		int buttonWidth = 1000;
-		int buttonHeight = 300;
+		int buttonWidth = Gdx.graphics.getWidth()/10;
+		int buttonHeight = Gdx.graphics.getHeight()/10;
 
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
@@ -46,16 +46,21 @@ public class Menu extends RenderingScreen {
 		newGameButton = new TextButton("PLAY", skin); // Use the initialized skin
 		newGameButton.setWidth(buttonWidth);
 		newGameButton.setHeight(buttonHeight);
-		newGameButton.getLabel().setFontScale(10, 10);
+	
 
 		quitGameButton = new TextButton("EXIT", skin); // Use the initialized skin
 		quitGameButton.setWidth(buttonWidth);
 		quitGameButton.setHeight(buttonHeight);
-		quitGameButton.getLabel().setFontScale(10, 10);
+		
+		settingGameButton = new TextButton("SETTINGS", skin); // Use the initialized skin
+		settingGameButton.setWidth(buttonWidth);
+		settingGameButton.setHeight(buttonHeight);
+	
 
+	
 		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));
 		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .4));
-
+		settingGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .1));
 //		textArea = new TextField("Enter some text...", skin);
 //		textArea.setWidth(buttonWidth);
 //		textArea.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .4));
@@ -75,6 +80,7 @@ public class Menu extends RenderingScreen {
 		 */
 		stage.addActor(newGameButton);
 		stage.addActor(quitGameButton);
+		stage.addActor(settingGameButton);
 		//stage.addActor(textArea);
 
 		quitGameButton.addListener(new ClickListener() {

@@ -7,12 +7,12 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 
 public class Map {
 
-	int[][] map;
+	int[][][] map;
 	final int HEIGTH;
 	final int WIDTH;
 	
 	
-	public Map(int[][] map) {
+	public Map(int[][][] map) {
 		// TODO Auto-generated constructor stub
 		this.map = map;
 		//this.HEIGTH = (int) (0.5*(double)Gdx.graphics.getHeight()/(double)map.length);
@@ -36,7 +36,7 @@ public class Map {
 //		}
 		for (int i = 0; i < map[0].length; i++) {
 			for (int j = 0; j < map.length; j++) {
-				g.drawTransformedPicture(WIDTH +WIDTH*i*2,-HEIGTH+HEIGTH*(map.length-j)*2, 0, WIDTH, HEIGTH, assets[map[j][i]]);
+				g.drawTransformedPicture(WIDTH +WIDTH*i*2,-HEIGTH+HEIGTH*(map.length-j)*2, map[j][i][1]*90, WIDTH, HEIGTH, assets[map[j][i][0]]);
 			}
 		}
 		

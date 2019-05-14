@@ -5,6 +5,7 @@ import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.ScreenManager;
 import ch.hevs.gdx2d.lib.utils.Logger;
+import java.awt.Toolkit;
 import com.badlogic.gdx.Input;
 
 /**
@@ -18,9 +19,10 @@ public class ScreensManager extends PortableApplication {
     private ScreenManager s = new ScreenManager();
     private int transactionTypeId;
     
+    final static double PERCENTAGEOFSCREEN =0.5;
     public ScreensManager() {
 		// TODO Auto-generated constructor stub
-    	super(3000,1800,false);
+    	super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),false);
 	}
 
     @Override
