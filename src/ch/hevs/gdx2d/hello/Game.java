@@ -35,7 +35,10 @@ public class Game extends RenderingScreen {
 	
 	TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
-	float tileSize = 0;
+	float tileSize;
+	
+	int map0x;
+	int map0y;
 	
 
 	@Override
@@ -57,6 +60,9 @@ public class Game extends RenderingScreen {
 		tileSize = (((int)(screenHeigth/(tiledMap.getProperties().get("width",Integer.class)))/64f));
 		
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);	
+
+		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
+		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);		
 	}
 
 	@Override
@@ -73,7 +79,7 @@ public class Game extends RenderingScreen {
 		
 		//g.zoom(4f);
 		//g.moveCamera(position.x, position.y);
-		g.moveCamera((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/-2f, (Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/-2f);
+		g.moveCamera(-map0x, -map0y);
 		g.getCamera().update();
 		
 		tiledMapRenderer.setView(g.getCamera());
