@@ -7,6 +7,7 @@ import java.util.Vector;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -54,7 +55,7 @@ public class Game extends PortableApplication {
 	final static double PERCENTAGEOFSCREEN =0.5;
 	
 	public Game() {
-		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),false);
+		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),true);
 	}
 
 	@Override
@@ -76,8 +77,6 @@ public class Game extends PortableApplication {
 
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
-		//add object
-		toDraw.add(new Tourelle(new Point(100, 100), assets[180]));
 	}
 
 	@Override
@@ -116,6 +115,13 @@ public class Game extends PortableApplication {
 		//mapManager.drawMap(g,assets);
 		//g.drawFPS();
 		//g.drawSchoolLogo();
+	}
+	
+	@Override
+	public void onClick(int x, int y, int button) {
+		// TODO Auto-generated method stub
+		super.onClick(x, y, button);
+		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),1/tileSize,assets[180],assets[249]));
 	}
 	
 	public static void main(String[] args) {

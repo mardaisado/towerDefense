@@ -8,22 +8,32 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 public class Tourelle extends Defense {
 
 	BitmapImage base;
+	BitmapImage movingPart;
+	float angle;
+	float scale ;
 	
-	public Tourelle(Point pos, BitmapImage base) {
+	
+	public Tourelle(Point pos,float scale,BitmapImage base, BitmapImage movingPart) {
 		super(pos);
 		this.base = base;
+		this.movingPart = movingPart;
+		this.scale = scale;
 		
 	}
 
 	@Override
 	public void draw(GdxGraphics g) {
-		g.drawTransformedPicture(pos.x, pos.y, 0, (float) 0.2, base);
+		//draw the base
+		g.drawTransformedPicture(pos.x, pos.y, 0, scale, base);
 		
+		//draw the "tourelle"
+		g.drawTransformedPicture(pos.x, pos.y, angle, scale, movingPart);
 	}
 
 	@Override
 	public void update(GdxGraphics g) {
-		
+		angle = (float) (angle + 5);
+
 		
 	}
 
