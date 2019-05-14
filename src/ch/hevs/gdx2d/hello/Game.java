@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.hello;
 
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.Vector;
 
@@ -76,7 +77,7 @@ public class Game extends PortableApplication {
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		//add object
-		//toDraw.add(new Pipe(1500, 90));
+		toDraw.add(new Tourelle(new Point(100, 100), assets[180]));
 	}
 
 	@Override
