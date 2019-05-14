@@ -1,11 +1,11 @@
-# Tower Defense
+# The Tower Defense
 
-## ENNEMI : 
+## Ennemis : 
  
   Une classe d'ennemi avec des attributs de PV, Vitesse, apparenece ET Position
   Fonctions communes à tous les ennemis
 
-## DEFENSE :
+## Défenses :
 
   Une classe de defenses (Parent, interface?) 
     Une sous-classe pour le type de defense avec chaque défense qui a sa sous-classe
@@ -16,17 +16,17 @@
   Fonctions communes à toutes les défenses
   
  
-## DRAW DEFENSE | ENNEMI :
+## Draw défenses | Ennemis :
  
   Fonction draw avec obj draw (Deja tout fait) 
   Une liste de choses à afficher 
  
-## UPADTE PROJECTILES | ENNEMI :
+## Update défenses | Ennemis  :
  
    Fonction update qui va s'activer chaque x temps et qui va update la position de projectile et ennemis
    
  
-## MAP :
+## Map :
   
    Chaque case a ses attributs 
 
