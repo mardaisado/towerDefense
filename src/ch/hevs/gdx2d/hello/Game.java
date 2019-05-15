@@ -79,7 +79,7 @@ public class Game extends PortableApplication {
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		
 		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249]));
-		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),assets[268]));
+		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 
 	}
 
@@ -132,7 +132,7 @@ public class Game extends PortableApplication {
 	@Override
 	public void onKeyUp(int keycode) {
 		super.onKeyUp(keycode);
-		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),assets[268]));
+		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 	}
 	
 	

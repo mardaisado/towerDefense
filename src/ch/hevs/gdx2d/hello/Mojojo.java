@@ -13,13 +13,15 @@ public class Mojojo extends Ennemi {
 	
 	int speed=2;
 	
+	float scale;
 	int[][] position = {
 			{64,64},{120,120},{180,180},{240,240},{260,260},{120,120} 
 	};
 	
-	public Mojojo(Point pos, BitmapImage base) {
+	public Mojojo(Point pos,float scale, BitmapImage base) {
 		super(pos);
 		this.base = base;
+		this.scale = scale;
 		
 	}
 	// Use for find next position of the ennemis (propreties of tile)
@@ -31,7 +33,7 @@ public class Mojojo extends Ennemi {
 
 	@Override
 	public void draw(GdxGraphics g) {
-		g.drawTransformedPicture(pos.x, pos.y, 0, (float) 0.2, base);
+		g.drawTransformedPicture(pos.x, pos.y, 0, scale/2, base);
 		
 	}
 
