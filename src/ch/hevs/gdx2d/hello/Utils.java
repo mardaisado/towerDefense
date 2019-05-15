@@ -1,5 +1,11 @@
 package ch.hevs.gdx2d.hello;
 
+import java.awt.Point;
+
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
+
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 
 public class Utils {
@@ -11,5 +17,37 @@ public class Utils {
 			tmp[i] = new BitmapImage("data/assets/PNG/Retina/towerDefense_tile" + tmp2 + ".png");
 		}
 		return tmp;
+	}
+	
+	public static boolean isWalkable(TiledMapTile tile) {
+		if (tile == null)
+			return false;
+
+//		Boolean test = tile.getProperties().get("walkable",Boolean.class);
+//		
+//		if (test == null) {
+//			System.out.println("heyyyyyyyyyy");
+//			return false;
+//		}
+		return true;
+		//return Boolean.parseBoolean(test.toString());
+	}
+	
+	public static TiledMapTile getTile(Point position,TiledMapTileLayer tiledLayer) {
+		if (position.x < 0 || position.y < 0) {
+			return null;
+		}
+		
+		try {
+			//private TiledMapTileLayer tiledLayer;
+			//tiledLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
+			int x = (int) ((double)position.x / (double)tiledLayer.getTileWidth()) ;
+			int y = (int) ((double)position.y / (double)tiledLayer.getTileHeight()) ;
+
+			return tiledLayer.getCell(x, y).getTile();
+		} catch (Exception e) {
+
+			return null;
+		}
 	}
 }

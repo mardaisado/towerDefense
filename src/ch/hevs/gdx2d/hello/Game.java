@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
@@ -47,6 +48,8 @@ public class Game extends PortableApplication {
 	TiledMapRenderer tiledMapRenderer;
 	float tileSize;
 	
+	TiledMapTileLayer tiledLayer;
+	
 	int map0x;
 	int map0y;
 	
@@ -74,6 +77,7 @@ public class Game extends PortableApplication {
 		tileSize = (((int)(screenHeigth/(tiledMap.getProperties().get("width",Integer.class)))/64f));
 		
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);	
+		tiledLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Calque 2");
 
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
@@ -127,6 +131,8 @@ public class Game extends PortableApplication {
 		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249]));
 //		System.out.println(x-map0x);
 //		System.out.println(y-map0y);
+		// is walkable
+		System.out.println(Utils.isWalkable(Utils.getTile(new Point(x-map0x,y-map0y), tiledLayer)));
 	}
 	
 	@Override
