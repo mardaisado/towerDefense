@@ -24,10 +24,10 @@ public class Tourelle extends Defense {
 	@Override
 	public void draw(GdxGraphics g) {
 		//draw the base
-		g.drawTransformedPicture(pos.x, pos.y, 0, scale, base);
+		g.drawTransformedPicture(pos.x, pos.y, 0,scale*32f,scale*32f, base);
 		
 		//draw the "tourelle"
-		g.drawTransformedPicture(pos.x, pos.y, angle, scale, movingPart);
+		g.drawTransformedPicture(pos.x, pos.y, angle, scale*32f,scale*32f, movingPart);
 	}
 
 	@Override
