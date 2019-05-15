@@ -78,8 +78,8 @@ public class Game extends PortableApplication {
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		
-		toDraw.add(new Tourelle((new Point((10*(int)tileSize*(int)64f),(10*(int)tileSize*(int)64f))),1/tileSize,assets[180],assets[249]));
-		toDraw.add(new Mojojo((new Point((10*(int)tileSize*(int)64f),(10*(int)tileSize*(int)64f))),assets[268]));
+		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize/2,assets[180],assets[249]));
+		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),assets[268]));
 
 	}
 
@@ -125,7 +125,7 @@ public class Game extends PortableApplication {
 	public void onClick(int x, int y, int button) {
 		// TODO Auto-generated method stub
 		super.onClick(x, y, button);
-		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),1/tileSize,assets[180],assets[249]));
+		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize/2,assets[180],assets[249]));
 		System.out.println(x-map0x);
 		System.out.println(y-map0y);
 	}
@@ -133,9 +133,7 @@ public class Game extends PortableApplication {
 	@Override
 	public void onKeyUp(int keycode) {
 		super.onKeyUp(keycode);
-		toDraw.add(new Mojojo((new Point((10*(int)tileSize*(int)64f),(10*(int)tileSize*(int)64f))),assets[268]));
-		
-		
+		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),assets[268]));
 	}
 	
 	
