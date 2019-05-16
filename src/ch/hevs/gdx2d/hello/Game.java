@@ -43,6 +43,7 @@ public class Game extends PortableApplication {
 	};
 	
 	Vector<Object> toDraw = new Vector<Object>();
+	Vector<Ennemi> ennemis = new Vector<Ennemi>();
 	
 	TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
@@ -56,10 +57,10 @@ public class Game extends PortableApplication {
 	
 	float dt = 0;
 	
-	final static double PERCENTAGEOFSCREEN =0.5;
+	final static double PERCENTAGEOFSCREEN =1.5;
 	
 	public Game() {
-		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),false);
+		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),true);
 	}
 
 	@Override
@@ -83,8 +84,8 @@ public class Game extends PortableApplication {
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		
-		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249]));
-		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
+		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],ennemis));
+		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 
 	}
 
@@ -103,6 +104,9 @@ public class Game extends PortableApplication {
 			for (Object obj : toDraw) {
 				((UpdateObject) obj).update(g);
 			}
+			for (Ennemi obj : ennemis) {
+				((UpdateObject) obj).update(g);
+			}
 		}
 
 		// Camera fixe
@@ -118,6 +122,9 @@ public class Game extends PortableApplication {
 			((DrawableObject) obj).draw(g);
 		}
 		
+		for (Ennemi obj : ennemis) {
+			((DrawableObject) obj).draw(g);
+		}
 		// Draw everything
 		//g.drawTransformedPicture(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() / 2.0f, angle, 1.0f, imgBitmap);
 		//g.drawStringCentered(Gdx.graphics.getHeight() * 0.8f, "Welcome to gdx2d !");
@@ -129,7 +136,7 @@ public class Game extends PortableApplication {
 	@Override
 	public void onClick(int x, int y, int button) {
 		super.onClick(x, y, button);
-		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249]));
+		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],ennemis));
 		System.out.println((int)((x-map0x)/(tileSize*64f)));
 		System.out.println((int)((y-map0y)/(tileSize*64f)));
 		// is walkable
@@ -141,7 +148,7 @@ public class Game extends PortableApplication {
 		super.onKeyUp(keycode);
 		int x=0;
 		double y=13.5;
-		toDraw.add(new Mojojo((new Point((int)((x)*tileSize*64f),(int)((y)*tileSize*64f))),tileSize,assets[268]));
+		ennemis.add(new Mojojo((new Point((int)((x)*tileSize*64f),(int)((y)*tileSize*64f))),tileSize,assets[268]));
 	}
 	
 	
