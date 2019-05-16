@@ -2,6 +2,9 @@ package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 
@@ -12,6 +15,9 @@ public class Mojojo extends Ennemi {
 	int temp=0;
 	
 	int speed=2;
+	
+	
+	
 	
 	float scale;
 	int[][] position = {
@@ -42,29 +48,26 @@ public class Mojojo extends Ennemi {
 		
 		// Code dégeu, sorry auré, t'avais ka trouver comment mettre des propreties
 		
-		if(pos.x==226 && pos.y==364)
+		if(pos.x>=(int)((8.5)*scale*64f) )
 		{
 			temp=1;			
 		} 
-		if(pos.x==226 && pos.y==204)
+		if(pos.y<=(int)((7.5)*scale*64f))
 		{
 			temp=2;			
 		}
-		if(pos.x==536 && pos.y==204)
-		{
-			temp=3;	
-		}
+
 		
 		switch (temp) {
 		
 		case 0:
-			pos.x=(int) (pos.x+speed);
-			pos.y=(int) (364);			
+			pos.x=(pos.x+speed);
+				
 					
 			break;
 			
 		case 1:
-			pos.y=(int) (pos.y-speed);		
+			pos.y=(pos.y-speed);		
 					
 			break;
 

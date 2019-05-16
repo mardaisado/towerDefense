@@ -33,7 +33,7 @@ public class Game extends PortableApplication {
 	
 	private Map mapManager;
 	
-	final double FRAME_TIME = 0.05; // Duration of each frame
+	final double FRAME_TIME = 0.015; // Duration of each frame
 	
 	int[][][] map = {
 			{{1,0},{1,1},{1,2},{1,3},{1,0}},
@@ -47,6 +47,7 @@ public class Game extends PortableApplication {
 	TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
 	float tileSize;
+	
 	
 	TiledMapTileLayer tiledLayer;
 	
@@ -129,8 +130,8 @@ public class Game extends PortableApplication {
 	public void onClick(int x, int y, int button) {
 		super.onClick(x, y, button);
 		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249]));
-//		System.out.println(x-map0x);
-//		System.out.println(y-map0y);
+		System.out.println((int)((x-map0x)/(tileSize*64f)));
+		System.out.println((int)((y-map0y)/(tileSize*64f)));
 		// is walkable
 		System.out.println(Utils.isWalkable(Utils.getTile(new Point(x-map0x,y-map0y), tiledLayer)));
 	}
@@ -138,7 +139,9 @@ public class Game extends PortableApplication {
 	@Override
 	public void onKeyUp(int keycode) {
 		super.onKeyUp(keycode);
-		toDraw.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
+		int x=0;
+		double y=13.5;
+		toDraw.add(new Mojojo((new Point((int)((x)*tileSize*64f),(int)((y)*tileSize*64f))),tileSize,assets[268]));
 	}
 	
 	
