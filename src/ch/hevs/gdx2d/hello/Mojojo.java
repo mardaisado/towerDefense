@@ -29,6 +29,13 @@ public class Mojojo extends Ennemi {
 		this.base = base;
 		this.scale = scale;
 		
+		changeSpeedForScale();
+	}
+	private void changeSpeedForScale()
+	{
+		speed = (int) (speed/scale);
+		
+		
 	}
 	// Use for find next position of the ennemis (propreties of tile)
 	// La fonction va regarder autour d'elle les pixels walkable et prendre le suivant 
