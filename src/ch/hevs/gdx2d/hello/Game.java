@@ -20,11 +20,11 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
 
 /**
- * Hello World demo.
+ * The Tower Defense 
  *
- * @author Christopher Métrailler (mei)
- * @author Pierre-André Mudry (mui)
- * @version 2.1
+ * @author Mardaisado (Aurélien Héritier)
+ * @author Limace (Jérémy Merle)
+ * @version 0.3
  */
 public class Game extends PortableApplication {
 
