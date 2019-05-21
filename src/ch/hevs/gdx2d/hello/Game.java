@@ -44,6 +44,7 @@ public class Game extends PortableApplication {
 	
 	Vector<Object> toDraw = new Vector<Object>();
 	Vector<Ennemi> ennemis = new Vector<Ennemi>();
+	Vector<Projectile> projectile = new Vector<Projectile>();
 	
 	TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
@@ -84,7 +85,8 @@ public class Game extends PortableApplication {
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		
-		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],ennemis));
+		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
+		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 
 	}
@@ -107,6 +109,9 @@ public class Game extends PortableApplication {
 			for (Ennemi obj : ennemis) {
 				((UpdateObject) obj).update(g);
 			}
+			for (Projectile obj : projectile) {
+				((UpdateObject) obj).update(g);
+			}
 		}
 
 		// Camera fixe
@@ -125,6 +130,9 @@ public class Game extends PortableApplication {
 		for (Ennemi obj : ennemis) {
 			((DrawableObject) obj).draw(g);
 		}
+		for (Projectile obj : projectile) {
+			((DrawableObject) obj).draw(g);
+		}
 		// Draw everything
 		//g.drawTransformedPicture(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() / 2.0f, angle, 1.0f, imgBitmap);
 		//g.drawStringCentered(Gdx.graphics.getHeight() * 0.8f, "Welcome to gdx2d !");
@@ -136,7 +144,7 @@ public class Game extends PortableApplication {
 	@Override
 	public void onClick(int x, int y, int button) {
 		super.onClick(x, y, button);
-		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],ennemis));
+		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		System.out.println((int)((x-map0x)/(tileSize*64f)));
 		System.out.println((int)((y-map0y)/(tileSize*64f)));
 		// is walkable
