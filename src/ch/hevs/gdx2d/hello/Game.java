@@ -46,9 +46,9 @@ public class Game extends PortableApplication {
 	Vector<Ennemi> ennemis = new Vector<Ennemi>();
 	Vector<Projectile> projectile = new Vector<Projectile>();
 	
-	TiledMap tiledMap;
+	static TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
-	float tileSize;
+	static float tileSize;
 	
 	
 	TiledMapTileLayer tiledLayer;
@@ -59,9 +59,10 @@ public class Game extends PortableApplication {
 	float dt = 0;
 	
 	final static double PERCENTAGEOFSCREEN =1.5;
+	final static boolean FULLSCREEN = true;
 	
 	public Game() {
-		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),true);
+		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
 	}
 
 	@Override
@@ -85,10 +86,10 @@ public class Game extends PortableApplication {
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		
+		toDraw.add(new PickDefenseGUI(assets));
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
-
 	}
 
 	@Override
