@@ -9,7 +9,7 @@ public class PickDefenseGUI implements DrawableObject,UpdateObject{
 	BitmapImage[] assets;
 	BitmapImage image;
 	BitmapImage t1;
-	BitmapImage[] t;
+	Dragable[] t;
 	float x;
 	float y;
 	float facteur;
@@ -22,31 +22,37 @@ public class PickDefenseGUI implements DrawableObject,UpdateObject{
 		y = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f)*image.getImage().getWidth()/image.getImage().getHeight());
 		facteur = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f))/(float)image.getImage().getHeight();
 
-		BitmapImage[] tmp = {
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png"),
-			new BitmapImage("data/images/t1.png")
+		String[] tmp = {
+			"data/images/t1.png",
+			"data/images/t1.png",
+			"data/images/t1.png",
+			"data/images/t1.png",
+			"data/images/t1.png",
+			"data/images/t1.png",
+			"data/images/t1.png",
+			"data/images/t1.png",
+			"data/images/t1.png"
 		};
-		t = tmp;
+		
+		t = new Dragable[tmp.length];
+		
+		for (int i = 0; i < (t.length/2+t.length%2); i++) {
+			
+			for (int j = 0; j < 2; j++) {
+				if(i*2+j < t.length) {
+					t[i*2+j] = new Dragable(tmp[i*2+j],x+(95+110*j)*facteur, x-(95+110*i) * facteur ,90*facteur/2);
+				}
+			}
+		}
+		
 	}
 	
 	@Override
 	public void draw(GdxGraphics g) {
 		g.drawTransformedPicture(x+y/2, x/2 ,0,y/2, x/2, image);
 		
-		for (int i = 0; i < (t.length/2+t.length%2); i++) {
-			
-			for (int j = 0; j < 2; j++) {
-				if(i*2+j < t.length) {
-					g.drawTransformedPicture(x+(95+110*j)*facteur, x-(95+110*i) * facteur ,0,90*facteur/2, 90*facteur/2, t[i*2+j]);
-				}
-			}
+		for (int i = 0; i < t.length; i++) {
+			t[i].draw(g);
 		}
 		
 	}
