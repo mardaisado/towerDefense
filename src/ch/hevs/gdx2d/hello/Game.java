@@ -44,12 +44,15 @@ public class Game extends PortableApplication {
 	
 	Vector<Object> toDraw = new Vector<Object>();
 	Vector<Ennemi> ennemis = new Vector<Ennemi>();
+	Vector<Dragable> dragable = new Vector<Dragable>();
 	Vector<Projectile> projectile = new Vector<Projectile>();
 	
 	static TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
 	static float tileSize;
-	
+	Point lastClick;
+	Preview preview;
+	PickDefenseGUI defenseGui;
 	
 	TiledMapTileLayer tiledLayer;
 	
@@ -61,6 +64,16 @@ public class Game extends PortableApplication {
 	final static double PERCENTAGEOFSCREEN =1.5;
 	final static boolean FULLSCREEN = true;
 	
+	// { pick image, dragable image, radius}
+	Object[][] defenseChoice = {
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",300f},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",400f},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",500f},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",600f},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f}
+	};	
 	public Game() {
 		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
 	}
@@ -86,7 +99,21 @@ public class Game extends PortableApplication {
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		
-		toDraw.add(new PickDefenseGUI(assets));
+		preview = new Preview();
+		defenseGui = new PickDefenseGUI(dragable);
+		
+		
+		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
+			for (int j = 0; j < 2; j++) {
+				if(i*2+j < defenseChoice.length) {
+					dragable.add(new Dragable(defenseChoice[i*2+j],defenseGui.x+(95+110*j)*defenseGui.facteur, defenseGui.x-(95+110*i) * defenseGui.facteur ,90*defenseGui.facteur/2));
+				}
+			}
+		}
+		
+		//preview.setImage(assets[271], tileSize);
+		toDraw.add(defenseGui);
+		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
@@ -128,12 +155,19 @@ public class Game extends PortableApplication {
 			((DrawableObject) obj).draw(g);
 		}
 		
+		for (Dragable obj : dragable) {
+			((DrawableObject) obj).draw(g);
+		}
+		
 		for (Ennemi obj : ennemis) {
 			((DrawableObject) obj).draw(g);
 		}
 		for (Projectile obj : projectile) {
 			((DrawableObject) obj).draw(g);
 		}
+		
+		preview.draw(g);
+
 		// Draw everything
 		//g.drawTransformedPicture(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() / 2.0f, angle, 1.0f, imgBitmap);
 		//g.drawStringCentered(Gdx.graphics.getHeight() * 0.8f, "Welcome to gdx2d !");
@@ -145,11 +179,25 @@ public class Game extends PortableApplication {
 	@Override
 	public void onClick(int x, int y, int button) {
 		super.onClick(x, y, button);
-		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
-		System.out.println((int)((x-map0x)/(tileSize*64f)));
-		System.out.println((int)((y-map0y)/(tileSize*64f)));
-		// is walkable
-		System.out.println(Utils.isWalkable(Utils.getTile(new Point(x-map0x,y-map0y), tiledLayer)));
+		//toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+		lastClick = new Point(x-map0x, y-map0y);
+		//		System.out.println((int)((x-map0x)/(tileSize*64f)));
+//		System.out.println((int)((y-map0y)/(tileSize*64f)));
+//		System.out.println(x-map0x);
+//		System.out.println(y-map0y);
+		//System.out.println("yes: "+x +" / "+y);
+//		// is walkable
+//		System.out.println(Utils.isWalkable(Utils.getTile(new Point(x-map0x,y-map0y), tiledLayer)));
+	}
+	
+	@Override
+	public void onRelease(int x, int y, int button) {
+		// TODO Auto-generated method stub
+		super.onRelease(x, y, button);
+		if (preview.getVisible()) {
+			preview.setVisible(false);
+			toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+		}
 	}
 	
 	@Override
@@ -158,6 +206,27 @@ public class Game extends PortableApplication {
 		int x=0;
 		double y=13.5;
 		ennemis.add(new Mojojo((new Point((int)((x)*tileSize*64f),(int)((y)*tileSize*64f))),tileSize,assets[268]));
+	}
+	
+	@Override
+	public void onDrag(int x, int y) {
+		// TODO Auto-generated method stub
+		super.onDrag(x, y);
+		for (Dragable obj : dragable) {
+			boolean h = ((Dragable) obj).check(lastClick.x,lastClick.y);
+			if(h == true) {
+				//print preview
+				//((Dragable) obj).
+				if (!preview.getVisible()) {
+					preview.setVisible(true);
+					preview.setRadius((float)obj.defense[2]);
+					preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
+				}
+				preview.move(x-map0x, y-map0y);
+				//System.out.println("oiiiiiiiiii");
+			}
+		}
+		//System.out.println(x +" / "+y);
 	}
 	
 	
