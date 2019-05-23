@@ -30,11 +30,18 @@ public class Tourelle extends Defense {
 	
 	public Ennemi findEnnemi() {	
 		Ennemi target = null;
+		Ennemi tmp = null;
 		for (int i = 0; i < ennemi.size(); i++) {
 			if(pos.distanceSq(ennemi.get(i).pos) <= rangeSq) {
-				target = ennemi.get(i);
-				angle = getAngle(target.pos);
-				break;
+				tmp = ennemi.get(i);
+				if(target == null) {
+					target = tmp;
+					angle = getAngle(target.pos);
+				}
+				if(((Mojojo)tmp).getProgress() > ((Mojojo)target).getProgress()) {
+					target = tmp;
+					angle = getAngle(target.pos);
+				}
 			}
 		}
 		return target;
