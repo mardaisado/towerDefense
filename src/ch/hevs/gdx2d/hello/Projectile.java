@@ -6,7 +6,7 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-public class Projectile implements DrawableObject,UpdateObject {
+public class Projectile implements DrawableObject {
 
 	Point endPoint;
 	Point pos;
@@ -33,28 +33,21 @@ public class Projectile implements DrawableObject,UpdateObject {
 	    }
 	}
 
-	@Override
-	public void update(GdxGraphics g) {
-		
+	public boolean update(GdxGraphics g) {
 		if (index < steps) {
 			index++;
 			pos.translate(offsetX, offsetY);
 		}
 		else {
 			// delete objects
-			delete = true;
+			return true;
 		}
-		
-		
+		return false;
 	}
 
 	@Override
 	public void draw(GdxGraphics g) {
 		//draw the projectile
-		if(!delete) {
-			g.drawTransformedPicture(pos.x, pos.y, angle,scale/2, image);
-		}
-		
-		
+		g.drawTransformedPicture(pos.x, pos.y, angle,scale/2, image);
 	}
 }

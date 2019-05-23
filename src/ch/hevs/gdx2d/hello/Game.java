@@ -137,9 +137,19 @@ public class Game extends PortableApplication {
 			for (Ennemi obj : ennemis) {
 				((UpdateObject) obj).update(g);
 			}
+			Projectile[] tmp = new Projectile[projectile.size()];
+			int i = 0;
 			for (Projectile obj : projectile) {
-				((UpdateObject) obj).update(g);
+				if (obj.update(g)) {
+					tmp[i] = obj;
+					i++;
+				}
 			}
+			for (int j = 0; j < i; j++) {
+				projectile.remove(tmp[j]);
+			}
+			
+			//System.out.println(projectile.size());
 		}
 
 		// Camera fixe
