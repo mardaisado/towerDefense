@@ -15,11 +15,14 @@ public class Preview implements DrawableObject,UpdateObject {
 	//BitmapImage ring = null;
 	float scale;
 	float radius = 100f;
-	Color ringColor;
+	Color ringGrey;
+	Color ringRed;
+	boolean placeable = true;
 	
 	public Preview() {
 		pos = new Point(0,0);
-		ringColor = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+		ringGrey = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+		ringRed = new Color(1f, 0f, 0f, 0.4f);
 		//ring = new BitmapImage("data/images/redRing.png");
 	}
 	
@@ -34,6 +37,10 @@ public class Preview implements DrawableObject,UpdateObject {
 	
 	public void setVisible(boolean b) {
 		visible = b;
+	}
+	
+	public void setPlaceable(boolean b) {
+		placeable = b;
 	}
 	
 	public void setImage(BitmapImage img,float scale) {
@@ -56,7 +63,13 @@ public class Preview implements DrawableObject,UpdateObject {
 		// TODO Auto-generated method stub
 		if(visible) {
 			//g.drawFilledCircle(pos.x, pos.y, radius , ringColor) ;
-			g.drawFilledCircle(pos.x, pos.y, radius , new Color(0.5f, 0.5f, 0.5f, 0.4f)) ;
+			if (placeable) {
+				g.drawFilledCircle(pos.x, pos.y, radius , ringGrey);
+			}
+			else {
+				g.drawFilledCircle(pos.x, pos.y, radius , ringRed);
+			}
+			
 			//g.drawAntiAliasedCircle(pos.x, pos.y, radius, new Color(0.5f, 0.5f, 0.5f, 0.4f));
 			//g.drawAlphaPicture(pos.x,  pos.y, 0, scale, 0.4f, ring);
 			g.drawTransformedPicture(pos.x, pos.y, 0, scale/2, image);
