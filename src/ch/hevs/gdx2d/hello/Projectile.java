@@ -15,6 +15,7 @@ public class Projectile implements DrawableObject {
 	int offsetX;
 	int offsetY;
 	int steps = 10;
+	int anim = 5;
 	int index = 0;
 	boolean delete = false;
 	float angle;
@@ -35,13 +36,17 @@ public class Projectile implements DrawableObject {
 
 	public boolean update(GdxGraphics g) {
 		if (index < steps) {
-			index++;
 			pos.translate(offsetX, offsetY);
+		}
+		else if(index < steps+anim){
+			//animation
+			image = new BitmapImage("data/assets/tank/PNG/Retina/explosion"+(index-steps+1)+".png");
 		}
 		else {
 			// delete objects
 			return true;
 		}
+		index++;
 		return false;
 	}
 
