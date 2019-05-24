@@ -13,7 +13,8 @@ public class Tourelle extends Defense {
 	BitmapImage movingPart;
 	float angle;
 	float scale;
-	float rangeSq = 1000000; // => range de 100
+	float rangeSq = 1000000; // => range de 1000
+	float radius = 1000;
 	float cooldown = 1;
 	BitmapImage[] assets;
 	float dt = 0;

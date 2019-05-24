@@ -22,6 +22,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	float facteur;
 	boolean visible = false;
 	Defense defense;
+	Color ringGrey;
 	
 	BitmapFont font;
 	
@@ -42,6 +43,8 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 		parameter.color = Color.WHITE;
 		font = generator.generateFont(parameter);
 	
+		ringGrey = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+		
 	}
 	
 	public void setVisible(boolean b) {
@@ -74,6 +77,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 		if(visible) {
 			g.drawTransformedPicture(y/2, x/2 ,0,y/2, x/2, image);
 			g.drawString(0.05f*y, 0.8f*x, "hello\nyes\nDEFENSE : "+defense.toString(),font);
+			g.drawFilledCircle(defense.pos.x, defense.pos.y, ((Tourelle)defense).radius , ringGrey);
 		}
 	}
 
