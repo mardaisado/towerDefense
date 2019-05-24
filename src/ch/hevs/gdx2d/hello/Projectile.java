@@ -25,6 +25,8 @@ public class Projectile implements DrawableObject {
 		this.endPoint = endPoint;
 		this.scale = scale;
 		this.image = image;
+		steps = (int) (startPoint.distance(endPoint)/(Game.tileSize*32f));
+		//System.out.println("steps : "+steps);
 		offsetX = (endPoint.x-pos.x)/steps;
 		offsetY = (endPoint.y-pos.y)/steps;
 	    angle = (float) Math.toDegrees(Math.atan2(endPoint.y - pos.y, endPoint.x - pos.x))-90;

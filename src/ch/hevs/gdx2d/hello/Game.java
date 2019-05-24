@@ -220,7 +220,6 @@ public class Game extends PortableApplication {
 	
 	@Override
 	public void onDrag(int x, int y) {
-		// TODO Auto-generated method stub
 		super.onDrag(x, y);
 		for (Dragable obj : dragable) {
 			boolean h = ((Dragable) obj).check(lastClick.x,lastClick.y);
