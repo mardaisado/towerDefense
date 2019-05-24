@@ -44,6 +44,7 @@ public class Game extends PortableApplication {
 	
 	Vector<Object> toDraw = new Vector<Object>();
 	Vector<Ennemi> ennemis = new Vector<Ennemi>();
+	Vector<Defense> defense = new Vector<Defense>();
 	Vector<Dragable> dragable = new Vector<Dragable>();
 	Vector<Projectile> projectile = new Vector<Projectile>();
 	
@@ -52,7 +53,8 @@ public class Game extends PortableApplication {
 	static float tileSize;
 	Point lastClick;
 	Preview preview;
-	PickDefenseGUI defenseGui;
+	PickDefenseGUI pickGui;
+	OverviewGUI defenseGui;
 	
 	TiledMapTileLayer tiledLayer;
 	
@@ -100,22 +102,24 @@ public class Game extends PortableApplication {
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 		
 		preview = new Preview();
-		defenseGui = new PickDefenseGUI(dragable);
+		pickGui = new PickDefenseGUI(dragable);
+		defenseGui = new OverviewGUI();
 		
 		
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
 			for (int j = 0; j < 2; j++) {
 				if(i*2+j < defenseChoice.length) {
-					dragable.add(new Dragable(defenseChoice[i*2+j],defenseGui.x+(95+110*j)*defenseGui.facteur, defenseGui.x-(95+110*i) * defenseGui.facteur ,90*defenseGui.facteur/2));
+					dragable.add(new Dragable(defenseChoice[i*2+j],pickGui.x+(95+110*j)*pickGui.facteur, pickGui.x-(95+110*i) * pickGui.facteur ,90*pickGui.facteur/2));
 				}
 			}
 		}
 		
 		//preview.setImage(assets[271], tileSize);
 		toDraw.add(defenseGui);
+		toDraw.add(pickGui);
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
-		toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+		//toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 	}
 
@@ -135,6 +139,9 @@ public class Game extends PortableApplication {
 				((UpdateObject) obj).update(g);
 			}
 			for (Ennemi obj : ennemis) {
+				((UpdateObject) obj).update(g);
+			}
+			for (Defense obj : defense) {
 				((UpdateObject) obj).update(g);
 			}
 			Projectile[] tmp = new Projectile[projectile.size()];
@@ -169,6 +176,10 @@ public class Game extends PortableApplication {
 			((DrawableObject) obj).draw(g);
 		}
 		
+		for (Defense obj : defense) {
+			((DrawableObject) obj).draw(g);
+		}
+		
 		for (Ennemi obj : ennemis) {
 			((DrawableObject) obj).draw(g);
 		}
@@ -191,7 +202,16 @@ public class Game extends PortableApplication {
 		super.onClick(x, y, button);
 		//toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		lastClick = new Point(x-map0x, y-map0y);
-		//		System.out.println((int)((x-map0x)/(tileSize*64f)));
+		//find overview
+		if (defenseGui.getVisible()) {
+			defenseGui.clicked(x-map0x, y-map0y);
+		}
+		Defense def = Utils.getDefenseClicked(defense,x-map0x, y-map0y);
+		if (def != null) {
+			defenseGui.setVisible(true);
+			defenseGui.setDefense(def);
+		}
+//		System.out.println((int)((x-map0x)/(tileSize*64f)));
 //		System.out.println((int)((y-map0y)/(tileSize*64f)));
 //		System.out.println(x-map0x);
 //		System.out.println(y-map0y);
@@ -206,7 +226,7 @@ public class Game extends PortableApplication {
 		super.onRelease(x, y, button);
 		if (preview.getVisible()) {
 			preview.setVisible(false);
-			toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+			defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		}
 	}
 	
