@@ -66,7 +66,7 @@ public class Game extends PortableApplication {
 	
 	// { pick image, dragable image, radius}
 	Object[][] defenseChoice = {
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
+			{"data/images/t1.png","data/images/t1_p.png",100f},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",300f},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",400f},
