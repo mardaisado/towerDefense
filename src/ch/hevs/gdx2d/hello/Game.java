@@ -242,7 +242,7 @@ public class Game extends PortableApplication {
 		super.onKeyUp(keycode);
 		int x=0;
 		double y=13.5;
-		ennemis.add(new Mojojo(tileSize,assets[268],tiledMap));
+		ennemis.add(new Mojojo(tileSize,assets[268],tiledMap,100,100));
 	}
 	
 	@Override

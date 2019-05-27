@@ -21,13 +21,14 @@ public class Mojojo extends Ennemi {
 	TiledMapTileLayer tiledLayer;
 	
 	int progress=0;
-	
+		
 	TiledMap map;
 	
 	float scale;
 	
-	public Mojojo(float scale, BitmapImage base, TiledMap map) {
-		
+	public Mojojo(float scale, BitmapImage base, TiledMap map, int hp, int reward) {
+				
+		super(hp, reward);
 		this.tiledLayer=(TiledMapTileLayer) map.getLayers().get(0);
 		this.base = base;
 		this.scale = scale;
@@ -40,13 +41,6 @@ public class Mojojo extends Ennemi {
 	private void changeSpeedForScale()
 	{
 		speed = (int) (speed/scale);
-		
-		
-	}
-
-	public int getProgress()
-	{
-		return progress;
 	}
 	
 	private boolean isWalkable(TiledMapTile tile) {
@@ -118,6 +112,8 @@ public class Mojojo extends Ennemi {
 		
 	}
 	
+	
+	
 	private TiledMapTile getTile(Point pos, int offsetX, int offsetY) {
 		try {
 			int x = (int) (pos.x / tiledLayer.getTileWidth()) + offsetX;
@@ -142,7 +138,7 @@ public class Mojojo extends Ennemi {
 		TiledMapTile currentCell = Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) );
 		int direction = 0;
 		
-			
+					
 		direction = getDirection(currentCell);
 		progress++;
 		System.out.println("Position update" + this );
