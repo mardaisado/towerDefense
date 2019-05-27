@@ -65,6 +65,7 @@ public class Game extends PortableApplication {
 	
 	final static double PERCENTAGEOFSCREEN =1.5;
 	final static boolean FULLSCREEN = false;
+	final static int START_MONEY = 600;
 	
 	// { pick image, dragable image, radius}
 	Object[][] defenseChoice = {
