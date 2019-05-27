@@ -64,7 +64,7 @@ public class Game extends PortableApplication {
 	float dt = 0;
 	
 	final static double PERCENTAGEOFSCREEN =1.5;
-	final static boolean FULLSCREEN = true;
+	final static boolean FULLSCREEN = false;
 	
 	// { pick image, dragable image, radius}
 	Object[][] defenseChoice = {
@@ -96,7 +96,7 @@ public class Game extends PortableApplication {
 		tileSize = (((int)(screenHeigth/(tiledMap.getProperties().get("width",Integer.class)))/64f));
 		
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);	
-		tiledLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Calque 2");
+		tiledLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
 
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
@@ -228,6 +228,7 @@ public class Game extends PortableApplication {
 			preview.setVisible(false);
 			defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		}
+
 	}
 	
 	@Override
@@ -235,7 +236,7 @@ public class Game extends PortableApplication {
 		super.onKeyUp(keycode);
 		int x=0;
 		double y=13.5;
-		ennemis.add(new Mojojo((new Point((int)((x)*tileSize*64f),(int)((y)*tileSize*64f))),tileSize,assets[268]));
+		ennemis.add(new Mojojo((new Point(0,0)),tileSize,assets[268],tiledLayer,tiledMap));
 	}
 	
 	@Override

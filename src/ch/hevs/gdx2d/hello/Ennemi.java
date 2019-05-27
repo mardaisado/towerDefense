@@ -11,7 +11,7 @@ public abstract class Ennemi implements DrawableObject,UpdateObject {
 	Point pos;
 	
 	public Ennemi(Point pos) {
-		this.pos = pos;
+		
 	}
 	
 	
