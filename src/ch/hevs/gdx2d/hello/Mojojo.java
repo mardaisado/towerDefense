@@ -141,7 +141,7 @@ public class Mojojo extends Ennemi {
 					
 		direction = getDirection(currentCell);
 		progress++;
-		System.out.println("Position update" + this );
+		//System.out.println("Position update" + this );
 		goNextPosition(direction);	
 		
 	}
