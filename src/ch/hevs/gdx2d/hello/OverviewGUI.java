@@ -26,6 +26,8 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	
 	BitmapFont font;
 	
+	UpgradeButton upgradeButton;
+	
 	public OverviewGUI() {
 		//this.assets = assets;
 		image = new BitmapImage("data/images/backGUI.png");
@@ -45,6 +47,8 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	
 		ringGrey = new Color(0.5f, 0.5f, 0.5f, 0.4f);
 		
+		upgradeButton = new UpgradeButton(x,y);
+		
 	}
 	
 	public void setVisible(boolean b) {
@@ -59,10 +63,12 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 		if (!(x >= 0 && x <= this.y && y >= 0 && y <= this.x)) {
 			setVisible(false);
 		}
+		upgradeButton.clicked(x, y);
 	}
 	
 	public void setDefense(Defense def) {
 		this.defense = def;
+		upgradeButton.setDefense(def);
 	}
 	
 	@Override
@@ -76,8 +82,9 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 		// TODO Auto-generated method stub
 		if(visible) {
 			g.drawTransformedPicture(y/2, x/2 ,0,y/2, x/2, image);
-			g.drawString(0.05f*y, 0.8f*x, "hello\nyes\nDEFENSE : "+defense.toString(),font);
+			g.drawString(0.05f*y, 0.8f*x, defense.defenseName+"\n\n"+"Level : "+defense.level +"\nHits : "+defense.nbHits,font);
 			g.drawFilledCircle(defense.pos.x, defense.pos.y, ((Tourelle)defense).radius , ringGrey);
+			upgradeButton.draw(g);
 		}
 	}
 

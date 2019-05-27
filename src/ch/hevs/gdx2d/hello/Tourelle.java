@@ -19,9 +19,11 @@ public class Tourelle extends Defense {
 	BitmapImage[] assets;
 	float dt = 0;
 	
+	final static String DEFENSE_NAME = "Tourelle très jolie";
+	
 	
 	public Tourelle(Point pos,float scale,BitmapImage base, BitmapImage movingPart,BitmapImage[] assets,Vector<Ennemi> ennemi,Vector<Projectile> projectile) {
-		super(pos,ennemi,projectile);
+		super(pos,ennemi,projectile,DEFENSE_NAME);
 		this.base = base;
 		this.movingPart = movingPart;
 		this.scale = scale;
@@ -88,6 +90,7 @@ public class Tourelle extends Defense {
 				hello = (Mojojo)(target);
 				preshot = updatePoint(new Point(hello.pos.x,hello.pos.y), scale, hello.speed, 10);
 				projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(preshot.x, preshot.y), scale, assets[251]));
+				nbHits++;
 			}
 			//System.out.println(projectile.capacity());
 			//projectile.addElement(new Projectile(new Point(0, 0), new Point(0, 0), scale, base));
