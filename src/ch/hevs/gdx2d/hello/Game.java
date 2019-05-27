@@ -244,7 +244,7 @@ public class Game extends PortableApplication {
 		super.onKeyUp(keycode);
 		int x=0;
 		double y=13.5;
-		ennemis.add(new Mojojo((new Point(0,0)),tileSize,assets[268],tiledLayer,tiledMap));
+		ennemis.add(new Mojojo(tileSize,assets[268],tiledMap,100,100));
 	}
 	
 	@Override
@@ -261,7 +261,7 @@ public class Game extends PortableApplication {
 					preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
 				}
 				preview.move(x-map0x, y-map0y);
-				//System.out.println("oiiiiiiiiii");
+				
 			}
 		}
 		//System.out.println(x +" / "+y);

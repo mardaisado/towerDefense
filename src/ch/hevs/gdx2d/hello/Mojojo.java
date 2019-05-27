@@ -16,28 +16,24 @@ public class Mojojo extends Ennemi {
 
 	BitmapImage base;
 	
-	int temp=0;
-	
 	int speed=2;
 		
 	TiledMapTileLayer tiledLayer;
 	
-
-
 	int progress=0;
-	
+		
 	TiledMap map;
 	
 	float scale;
 	
-	public Mojojo(Point pos,float scale, BitmapImage base, TiledMapTileLayer tiledLayer, TiledMap map) {
-		super(pos);
-		
-		this.tiledLayer=tiledLayer;
+	public Mojojo(float scale, BitmapImage base, TiledMap map, int hp, int reward) {
+				
+		super(hp, reward);
+		this.tiledLayer=(TiledMapTileLayer) map.getLayers().get(0);
 		this.base = base;
 		this.scale = scale;
 		this.map=map;
-	
+		
 		goStart();
 
 		changeSpeedForScale();
@@ -45,17 +41,7 @@ public class Mojojo extends Ennemi {
 	private void changeSpeedForScale()
 	{
 		speed = (int) (speed/scale);
-		
-		
 	}
-
-	public int getProgress()
-	{
-		return progress;
-	}
-
-
-
 	
 	private boolean isWalkable(TiledMapTile tile) {
 		if (tile == null)
@@ -76,12 +62,10 @@ public class Mojojo extends Ennemi {
 			
 			Object test2 = tile.getProperties().get("direction");
 
-			
-			System.out.println(test2);
 			return (int) (test2);
 		}
 		
-		System.out.println("nul");
+
 		
 		return 0;
 	}
@@ -90,33 +74,22 @@ public class Mojojo extends Ennemi {
 	{
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
-				System.out.println(i+"/"+j);
-				System.out.println(scale);
-				System.out.println(new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f)));
 				if((Utils.getTile(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), tiledLayer).getProperties().get("start") != null))
 				{					
-					System.out.println("tile start found ");
 					if((Utils.getTile(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), tiledLayer).getProperties().get("start",boolean.class)) == true)
-					{	System.out.println("tile start REAL found ");	
-					System.out.println("x vaut: " + i + " et y vaut : "+ j);	
-				  		pos = new Point((int)((i)*scale*64f),(int)((j+0.5)*scale*64f));
-				  		//pos = new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f));
-						return;
+					{	
+						pos = new Point((int)((i)*scale*64f),(int)((j+0.5)*scale*64f));
+				  		return;
 					}
 				}
 			} 
 			
 		}
-
-		System.out.println("tile start not found ");
 	}
 	
 	public void goNextPosition(int direction)
 	{
 		
-		System.out.println(pos);
-		System.out.println(direction);
-
 		
 		int speed = 2;
 		switch (direction) {
@@ -137,8 +110,9 @@ public class Mojojo extends Ennemi {
 			break;
 		}
 		
-		System.out.println(pos);
 	}
+	
+	
 	
 	private TiledMapTile getTile(Point pos, int offsetX, int offsetY) {
 		try {
@@ -161,32 +135,14 @@ public class Mojojo extends Ennemi {
 	@Override
 	public void update(GdxGraphics g) {
 
-	
-		/*
-		for (int i = 0; i < 23; i++) {
-			for (int j = 0; j < 23; j++) {
-				
-				System.out.print(Utils.getTile(new Point((int)((i)*scale*64f),(int)((j)*scale*64f)), tiledLayer).getProperties().get("direction"));
-				
-				if( (Utils.getTile(new Point((int)((i)*scale*64f),(int)((j)*scale*64f)), tiledLayer).getProperties().get("direction")) != null)
-						{
-					System.out.println( " x :" + i + " y : " + j);	
-						}
-				
-			} System.out.println("");
-			
-		}
-		*/
-
-		TiledMapTile nextCell = null;
 		TiledMapTile currentCell = Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) );
 		int direction = 0;
 		
+					
 		direction = getDirection(currentCell);
-		
-		System.out.println("oui"+direction);
+		progress++;
+		System.out.println("Position update" + this );
 		goNextPosition(direction);	
-
 		
 	}
 
