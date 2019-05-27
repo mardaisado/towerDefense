@@ -80,11 +80,12 @@ public class Mojojo extends Ennemi {
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
 				System.out.println(i+"/"+j);
+				System.out.println(scale);
 				System.out.println(new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f)));
-				if((Utils.getTile(new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f)), tiledLayer).getProperties().get("start") != null))
+				if((Utils.getTile(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), tiledLayer).getProperties().get("start") != null))
 				{					
 					System.out.println("tile start found ");
-					if((Utils.getTile(new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f)), tiledLayer).getProperties().get("start",boolean.class)) == true)
+					if((Utils.getTile(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), tiledLayer).getProperties().get("start",boolean.class)) == true)
 					{	System.out.println("tile start REAL found ");	
 					System.out.println("x vaut: " + i + " et y vaut : "+ j);	
 				  		pos = new Point((int)((i)*scale*64f),(int)((j+0.5)*scale*64f));
@@ -165,7 +166,7 @@ public class Mojojo extends Ennemi {
 		*/
 
 		TiledMapTile nextCell = null;
-		TiledMapTile currentCell = Utils.getTile(new Point((int) (pos.x),(int) (pos.y)), (TiledMapTileLayer) (map.getLayers().get(0)) );
+		TiledMapTile currentCell = Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) );
 		int direction = 0;
 		
 		direction = getDirection(currentCell);
