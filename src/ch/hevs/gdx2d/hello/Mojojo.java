@@ -34,9 +34,12 @@ public class Mojojo extends Ennemi {
 		this.scale = scale;
 		this.map=map;
 		
+		System.out.println(hp);
+		
 		goStart();
 
 		changeSpeedForScale();
+
 	}
 	private void changeSpeedForScale()
 	{
@@ -65,8 +68,6 @@ public class Mojojo extends Ennemi {
 			return (int) (test2);
 		}
 		
-
-		
 		return 0;
 	}
 	
@@ -85,6 +86,7 @@ public class Mojojo extends Ennemi {
 			} 
 			
 		}
+	
 	}
 	
 	public void goNextPosition(int direction)
@@ -125,6 +127,16 @@ public class Mojojo extends Ennemi {
 			return null;
 		}
 	}
+	
+	public boolean checkDeath()
+	{
+		if(hp>0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
 
 	@Override
 	public void draw(GdxGraphics g) {
@@ -134,15 +146,22 @@ public class Mojojo extends Ennemi {
 
 	@Override
 	public void update(GdxGraphics g) {
-
-		TiledMapTile currentCell = Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) );
-		int direction = 0;
 		
-					
-		direction = getDirection(currentCell);
-		progress++;
-		//System.out.println("Position update" + this );
-		goNextPosition(direction);	
+		
+		if(checkDeath())
+		{				
+			TiledMapTile currentCell = Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) );
+			int direction = 0;			
+							
+			direction = getDirection(currentCell);
+			progress++;
+				//System.out.println("Position update" + this );
+			goNextPosition(direction);				
+		}
+		else
+		{
+			pos=new Point(0,0);
+		}
 		
 	}
 

@@ -17,7 +17,8 @@ public abstract class Ennemi implements DrawableObject,UpdateObject {
 	int reward;	
 	
 	public Ennemi(int hp, int reward) {
-		
+		this.hp = hp;
+		this.reward=reward;
 	}
 	
 	public int getReward()
@@ -48,6 +49,8 @@ public abstract class Ennemi implements DrawableObject,UpdateObject {
 	 */
 	public boolean giveDamage(int damage)
 	{
+		hp= hp-damage;
+		
 		if(hp-damage <= 0)
 		{
 			return false;

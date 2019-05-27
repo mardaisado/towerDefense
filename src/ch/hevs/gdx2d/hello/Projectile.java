@@ -19,12 +19,16 @@ public class Projectile implements DrawableObject {
 	int index = 0;
 	boolean delete = false;
 	float angle;
+	Ennemi target;
+	int power;
 
-	public Projectile(Point startPoint,Point endPoint,float scale,BitmapImage image) {
+	public Projectile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,Ennemi target) {
 		this.pos = startPoint;
 		this.endPoint = endPoint;
 		this.scale = scale;
 		this.image = image;
+		this.target=target;
+		this.power=power;
 		steps = (int) (startPoint.distance(endPoint)/(Game.tileSize*32f));
 		//System.out.println("steps : "+steps);
 		offsetX = (endPoint.x-pos.x)/steps;
@@ -43,6 +47,14 @@ public class Projectile implements DrawableObject {
 		else if(index < steps+anim){
 			//animation
 			image = new BitmapImage("data/assets/tank/PNG/Retina/explosion"+(index-steps+1)+".png");
+		
+			System.out.println("shooted ");
+			System.out.println(target.getHP());
+			if(!target.giveDamage(power))
+			{
+				Game.money.addMoneyCount(target.reward);
+			}
+			
 		}
 		else {
 			// delete objects

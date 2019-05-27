@@ -97,7 +97,7 @@ public class Tourelle extends Defense {
 				
 				hello = (Mojojo)(target);
 				preshot = updatePoint(new Point(hello.pos.x,hello.pos.y), scale, hello.speed, 10);
-				projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(preshot.x, preshot.y), scale, assets[251]));
+				projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(preshot.x, preshot.y), scale, assets[251],10,target));
 				nbHits++;
 			}
 			//System.out.println(projectile.capacity());
