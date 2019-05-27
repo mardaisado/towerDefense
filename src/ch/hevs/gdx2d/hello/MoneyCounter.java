@@ -37,6 +37,14 @@ public class MoneyCounter implements DrawableObject,UpdateObject{
 		this.moneyCount = moneyCount;
 	}
 	
+	public void addMoneyCount(int moneyToAdd) {
+		moneyCount += moneyToAdd;
+	}
+	
+	public void takeOffMoneyCount(int moneyToTakeOff) {
+		moneyCount -= moneyToTakeOff;
+	}
+	
 	public int getMoneyCount() {
 		return moneyCount;
 	}

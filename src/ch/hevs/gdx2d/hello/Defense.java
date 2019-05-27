@@ -16,20 +16,23 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	int[] cost= {1000,2000,3000};
 	int nbHits = 0;
 	String defenseName;
+	int price;
 	
-	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Projectile> projectile,String defenseName) {
+	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Projectile> projectile,String defenseName,int price) {
 		this.pos = pos;
 		this.ennemi = ennemi;
 		this.projectile = projectile;
 		this.defenseName = defenseName;
+		this.price = price;
 	}
-	
+
 	public int nextUpgradePrice() {
 		return cost[level];
 	}
 	
 	public void upgrade() {
 		if(level<3) {
+			Game.money.takeOffMoneyCount(nextUpgradePrice());
 			level++;
 		}
 	}
