@@ -70,7 +70,7 @@ public class UpgradeButton implements DrawableObject{
 
 	@Override
 	public void draw(GdxGraphics g) {
-		if (notClickable) {
+		if (defense.level >= 3) {
 			g.drawTransformedPicture((0.92f*overviewY-y),overviewX/2 ,0,y,x, greyButton);
 			g.drawString((0.92f*overviewY-y),overviewX/2+overviewX/20,"max",font,1);
 		}

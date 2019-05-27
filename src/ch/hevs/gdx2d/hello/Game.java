@@ -232,9 +232,11 @@ public class Game extends PortableApplication {
 		super.onRelease(x, y, button);
 		if (preview.getVisible()) {
 			preview.setVisible(false);
-			defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+			if(money.getMoneyCount()>= Tourelle.PRICE) {
+				defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+				money.takeOffMoneyCount(Tourelle.PRICE);
+			}
 		}
-
 	}
 	
 	@Override
