@@ -68,7 +68,8 @@ public class Game extends PortableApplication {
 	
 	// { pick image, dragable image, radius}
 	Object[][] defenseChoice = {
-			{"data/images/t1.png","data/images/t1_p.png",100f},
+			{"data/images/t1.png","data/images/t1_p.png",200f},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",300f},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",400f},
@@ -117,6 +118,7 @@ public class Game extends PortableApplication {
 		//preview.setImage(assets[271], tileSize);
 		toDraw.add(defenseGui);
 		toDraw.add(pickGui);
+		toDraw.add(new MoneyCounter(START_MONEY));
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		//toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));

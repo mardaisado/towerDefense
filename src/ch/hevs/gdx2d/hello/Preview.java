@@ -64,10 +64,10 @@ public class Preview implements DrawableObject,UpdateObject {
 		if(visible) {
 			//g.drawFilledCircle(pos.x, pos.y, radius , ringColor) ;
 			if (placeable) {
-				g.drawFilledCircle(pos.x, pos.y, radius , ringGrey);
+				g.drawFilledCircle(pos.x, pos.y, radius*Game.tileSize , ringGrey);
 			}
 			else {
-				g.drawFilledCircle(pos.x, pos.y, radius , ringRed);
+				g.drawFilledCircle(pos.x, pos.y, radius*Game.tileSize , ringRed);
 			}
 			
 			//g.drawAntiAliasedCircle(pos.x, pos.y, radius, new Color(0.5f, 0.5f, 0.5f, 0.4f));

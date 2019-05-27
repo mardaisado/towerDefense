@@ -13,8 +13,10 @@ public class Tourelle extends Defense {
 	BitmapImage movingPart;
 	float angle;
 	float scale;
-	float rangeSq = 1000000; // => range de 1000
-	float radius = 1000;
+	
+	static final float RADIUS = 200;
+	float rangeSq = 100; // => range de 1000
+	float radius = 100;
 	float cooldown = 1;
 	BitmapImage[] assets;
 	float dt = 0;
@@ -28,7 +30,8 @@ public class Tourelle extends Defense {
 		this.movingPart = movingPart;
 		this.scale = scale;
 		this.assets = assets;
-		
+		radius = RADIUS;
+		rangeSq = RADIUS*RADIUS*Game.tileSize*Game.tileSize;
 	}
 	
 	public Ennemi findEnnemi() {	
