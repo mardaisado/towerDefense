@@ -22,7 +22,11 @@ public class Mojojo extends Ennemi {
 		
 	TiledMapTileLayer tiledLayer;
 	
-	TiledMap map;
+
+
+	int progress=0;
+	
+
 	
 	float scale;
 	
@@ -44,6 +48,18 @@ public class Mojojo extends Ennemi {
 		
 		
 	}
+
+	public int getProgress()
+	{
+		return progress;
+	}
+	// Use for find next position of the ennemis (propreties of tile)
+	// La fonction va regarder autour d'elle les pixels walkable et prendre le suivant 
+	public Point findNextPosition(int tempo)
+	{		
+		return new Point((position[tempo][0]),(position[tempo][1]));
+	}
+
 
 	
 	private boolean isWalkable(TiledMapTile tile) {
@@ -96,6 +112,7 @@ public class Mojojo extends Ennemi {
 			} 
 			
 		}
+
 		System.out.println("tile start not found ");
 	}
 	
@@ -104,6 +121,11 @@ public class Mojojo extends Ennemi {
 		
 		System.out.println(pos);
 		System.out.println(direction);
+
+
+		progress++;
+		switch (temp) {
+
 		
 		int speed = 2;
 		switch (direction) {

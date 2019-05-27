@@ -1,6 +1,7 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
+import java.util.Vector;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -49,5 +50,17 @@ public class Utils {
 
 			return null;
 		}
+	}
+	
+	public static Defense getDefenseClicked(Vector<Defense> defense,int x,int y) {
+		Defense def;
+		int width = 40;
+		for (int i = 0; i < defense.size(); i++) {
+			def = defense.elementAt(i);
+			if ((x >= def.pos.x-width && x <= def.pos.x+width && y >= def.pos.y-width && y <= def.pos.y+width)) {
+				return def;
+			}
+		}
+		return null;
 	}
 }
