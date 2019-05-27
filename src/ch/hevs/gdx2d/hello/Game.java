@@ -63,6 +63,8 @@ public class Game extends PortableApplication {
 	
 	float dt = 0;
 	
+	static MoneyCounter money = null;
+	
 	final static double PERCENTAGEOFSCREEN =1.5;
 	final static boolean FULLSCREEN = false;
 	final static int START_MONEY = 600;
@@ -106,6 +108,7 @@ public class Game extends PortableApplication {
 		preview = new Preview();
 		pickGui = new PickDefenseGUI(dragable);
 		defenseGui = new OverviewGUI();
+		money = new MoneyCounter(START_MONEY);
 		
 		
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
@@ -119,7 +122,7 @@ public class Game extends PortableApplication {
 		//preview.setImage(assets[271], tileSize);
 		toDraw.add(defenseGui);
 		toDraw.add(pickGui);
-		toDraw.add(new MoneyCounter(START_MONEY));
+		toDraw.add(money);
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		//toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
