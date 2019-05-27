@@ -148,6 +148,8 @@ public class Game extends PortableApplication {
 		toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		System.out.println((int)((x-map0x)/(tileSize*64f)));
 		System.out.println((int)((y-map0y)/(tileSize*64f)));
+		System.out.println((int)((x-map0x)));
+		System.out.println((int)((y-map0y)));
 		// is walkable
 		System.out.println(Utils.isWalkable(Utils.getTile(new Point(x-map0x,y-map0y), tiledLayer)));
 	}
