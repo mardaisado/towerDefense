@@ -33,6 +33,11 @@ public class Utils {
 		return true;
 		//return Boolean.parseBoolean(test.toString());
 	}
+	/*
+	public static bitmap ChoosePet()
+	{
+		return asset[299];
+	}*/
 	
 	public static TiledMapTile getTile(Point position,TiledMapTileLayer tiledLayer) {
 		if (position.x < 0 || position.y < 0) {

@@ -247,6 +247,7 @@ public class Game extends PortableApplication {
 		ennemis.add(new Mojojo(tileSize,assets[299],tiledMap,100,100));
 	}
 	
+	
 	@Override
 	public void onDrag(int x, int y) {
 		super.onDrag(x, y);

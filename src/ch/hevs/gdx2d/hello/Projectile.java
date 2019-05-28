@@ -47,7 +47,9 @@ public class Projectile implements DrawableObject {
 		else if(index < steps+anim){
 			//animation
 			image = new BitmapImage("data/assets/tank/PNG/Retina/explosion"+(index-steps+1)+".png");
-		
+
+		}
+		else {
 			System.out.println("shooted ");
 			System.out.println(target.getHP());
 			if(!target.giveDamage(power))
@@ -55,9 +57,6 @@ public class Projectile implements DrawableObject {
 				Game.money.addMoneyCount(target.reward);
 			}
 			
-		}
-		else {
-			// delete objects
 			return true;
 		}
 		index++;
