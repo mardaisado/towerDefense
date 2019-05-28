@@ -74,7 +74,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	@Override
 	public void update(GdxGraphics g) {
 		// TODO Auto-generated method stub
-		
+		upgradeButton.update(g);
 	}
 
 	@Override
