@@ -37,7 +37,7 @@ public class Projectile implements DrawableObject {
 		}
 
 	    angle = (float) Math.toDegrees(Math.atan2(endPoint.y - pos.y, endPoint.x - pos.x))-90;
-	    
+
 	    if(angle < 0){
 	        angle += 360;
 	    }
@@ -56,7 +56,7 @@ public class Projectile implements DrawableObject {
 			System.out.println("shooted ");
 			System.out.println(target.getHP());
 			target.giveDamage(power);
-			
+
 			return true;
 		}
 		index++;
