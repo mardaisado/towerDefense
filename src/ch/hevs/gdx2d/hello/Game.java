@@ -278,6 +278,13 @@ public void onDrag(int x, int y) {
 				preview.setRadius((float)obj.defense[2]);
 				preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
 			}
+			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),"posable",tiledMap)) == true)
+			{
+				preview.setPlaceable(true);
+			}
+			else {
+				preview.setPlaceable(false);
+			}
 
 			preview.move(x-map0x, y-map0y);
 
