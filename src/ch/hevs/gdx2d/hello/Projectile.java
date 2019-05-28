@@ -53,8 +53,6 @@ public class Projectile implements DrawableObject {
 
 		}
 		else {
-			System.out.println("shooted ");
-			System.out.println(target.getHP());
 			if(!target.giveDamage(power))
 			{
 				Game.money.addMoneyCount(target.reward);
