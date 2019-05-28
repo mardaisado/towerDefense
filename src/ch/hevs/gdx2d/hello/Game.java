@@ -168,7 +168,7 @@ public class Game extends PortableApplication {
 				}
 			}
 			
-			//System.out.println("size "+projectile.size());
+			//System.out.println("size "+ennemi.size());
 		}
 
 		// Camera fixe

@@ -3,6 +3,7 @@ package ch.hevs.gdx2d.hello;
 import java.awt.Point;
 import java.util.Vector;
 
+import com.badlogic.gdx.graphics.g2d.freetype.FreeType.Bitmap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
@@ -33,11 +34,7 @@ public class Utils {
 		return true;
 		//return Boolean.parseBoolean(test.toString());
 	}
-	/*
-	public static bitmap ChoosePet()
-	{
-		return asset[299];
-	}*/
+	
 	
 	public static TiledMapTile getTile(Point position,TiledMapTileLayer tiledLayer) {
 		if (position.x < 0 || position.y < 0) {

@@ -38,7 +38,6 @@ public class Mojojo extends Ennemi {
 		this.base = base;
 		this.scale = scale;
 		this.map=map;
-	
 		goStart();
  
 		directionSave= (int) Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) ).getProperties().get("direction");		changeSpeedForScale();
