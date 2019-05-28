@@ -46,20 +46,12 @@ public class Mojojo extends Ennemi {
  
 		directionSave= (int) Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) ).getProperties().get("direction");		changeSpeedForScale();
 	}
-	private void changeSpeedForScale()
+	
+private void changeSpeedForScale()
 	{
 		speed = (int) (speed/scale);
 	}
-	
-	private boolean isWalkable(TiledMapTile tile) {
-		if (tile == null)
-			return false;
-
-		Object test = tile.getProperties().get("walk");
-
-		return Boolean.parseBoolean(test.toString());
-	}
-	
+		
 	private int getDirection(TiledMapTile tile) {
 		if (tile == null)
 			return 0;
@@ -94,44 +86,6 @@ public class Mojojo extends Ennemi {
 		
 		return pos;
 			
-	}
-	
-	private boolean atTheMiddle(int dir)
-	{
-		TiledMapTile currentCell = Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) );
-				
-		switch (dir) {
-		case 1:
-				if(Math.abs(posOld.x-pos.x) <= 0)
-				{
-					return true;
-				}
-			break;
-
-		case 2:
-				if(Math.abs(posOld.y-pos.y) <= 0)
-				{
-					return true;
-				}
-			break;
-		case 3:
-				if(Math.abs(posOld.x-pos.x) <= 0)
-				{
-					return true;
-				}
-			break;
-		case 4:
-				if(Math.abs(posOld.y-pos.y) <= 0)
-				{
-					return true;
-				}
-			break;
-		default:
-			break;
-		}
-			
-			
-		return true;
 	}
 	
 	public void goStart()
@@ -225,16 +179,16 @@ public class Mojojo extends Ennemi {
 	}
 
 	@Override
-	public void update(GdxGraphics g) {
+	public boolean update(GdxGraphics g) {
 		
 		
 		if(checkDeath())
 		{				
 			
-			int direction = 3;
+			int direction = 0;
 
 			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave).x/scale) ,(int) (getOffset(directionSave).y/scale) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
-			
+				
 							
 			direction = getDirection(currentCell);
 			
@@ -244,12 +198,14 @@ public class Mojojo extends Ennemi {
 			
 			directionSave=direction;
 			
-			goNextPosition(direction);		
+			goNextPosition(direction);	
+			
+			return false;
 			
 		}
 		else
 		{
-			pos= new Point(0,0);
+			return true;
 		}
 		
 	}

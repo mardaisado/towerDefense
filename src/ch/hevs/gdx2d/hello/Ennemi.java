@@ -6,7 +6,7 @@ import java.awt.Point;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-public abstract class Ennemi implements DrawableObject,UpdateObject {
+public abstract class Ennemi implements DrawableObject {
 
 	Point pos;
 	
@@ -61,6 +61,6 @@ public abstract class Ennemi implements DrawableObject,UpdateObject {
 	@Override
 	public abstract void draw(GdxGraphics g);
 
-	@Override
-	public abstract void update(GdxGraphics g);
+	public abstract boolean update(GdxGraphics g);
+
 }

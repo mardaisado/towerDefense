@@ -44,7 +44,7 @@ public class Game extends PortableApplication {
 	};
 	
 	Vector<Object> toDraw = new Vector<Object>();
-	Vector<Ennemi> ennemis = new Vector<Ennemi>();
+	Vector<Ennemi> ennemi = new Vector<Ennemi>();
 	Vector<Defense> defense = new Vector<Defense>();
 	Vector<Dragable> dragable = new Vector<Dragable>();
 	Vector<Projectile> projectile = new Vector<Projectile>();
@@ -145,14 +145,19 @@ public class Game extends PortableApplication {
 			for (Object obj : toDraw) {
 				((UpdateObject) obj).update(g);
 			}
-			for (Ennemi obj : ennemis) {
-				((UpdateObject) obj).update(g);
-			}
 			for (Defense obj : defense) {
 				((UpdateObject) obj).update(g);
 			}
-			Projectile[] tmp = new Projectile[projectile.size()];
-			int i = 0;
+			
+			Iterator<Ennemi> q = ennemi.iterator();
+			while(q.hasNext()) {
+				Ennemi obj;
+				obj = q.next();
+				if (((Ennemi) obj).update(g)) {
+					q.remove();
+				}
+			}
+			
 			
 			Iterator<Projectile> p = projectile.iterator();
 			while(p.hasNext()) {
@@ -180,7 +185,7 @@ public class Game extends PortableApplication {
 			((DrawableObject) obj).draw(g);
 		}
 		
-		for (Ennemi obj : ennemis) {
+		for (Ennemi obj : ennemi) {
 			((DrawableObject) obj).draw(g);
 		}
 		for (Projectile obj : projectile) {
@@ -235,7 +240,7 @@ public class Game extends PortableApplication {
 		if (preview.getVisible()) {
 			preview.setVisible(false);
 			if(money.getMoneyCount()>= Tourelle.PRICE) {
-				defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+				defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemi,projectile));
 				money.takeOffMoneyCount(Tourelle.PRICE);
 			}
 		}
@@ -246,7 +251,7 @@ public class Game extends PortableApplication {
 		super.onKeyUp(keycode);
 		int x=0;
 		double y=13.5;
-		ennemis.add(new Mojojo(tileSize,assets[299],tiledMap,100,100));
+		ennemi.add(new Mojojo(tileSize,assets[299],tiledMap,100,100));
 	}
 	
 	
