@@ -3,7 +3,9 @@ package ch.hevs.gdx2d.hello;
 import java.awt.Point;
 import java.util.Vector;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeType.Bitmap;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
@@ -35,6 +37,25 @@ public class Utils {
 		//return Boolean.parseBoolean(test.toString());
 	}
 	
+	public static boolean returnStateForBool(Point pos, String proprety, TiledMap map)
+	{
+		
+		float screenHeigth = Gdx.graphics.getHeight();
+		float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
+		TiledMapTile tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+		if(tile!=null)
+		{
+			if((tile).getProperties().get("posable")!=null)
+			{			
+				Object tpe = tile.getProperties().get(proprety);
+				
+				return (boolean) tpe;						
+			}
+		}
+		return false;		
+
+		
+	}
 	
 	public static TiledMapTile getTile(Point position,TiledMapTileLayer tiledLayer) {
 		if (position.x < 0 || position.y < 0) {
