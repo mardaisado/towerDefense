@@ -17,12 +17,15 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 
 	BitmapImage[] assets;
 	BitmapImage image;
+	BitmapImage ringGrey;
 	float x;
 	float y;
 	float facteur;
 	boolean visible = false;
 	Defense defense;
-	Color ringGrey;
+	//Color ringGrey;
+	float circleScale;
+	
 	
 	BitmapFont font;
 	
@@ -45,7 +48,8 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 		parameter.color = Color.WHITE;
 		font = generator.generateFont(parameter);
 	
-		ringGrey = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+		//ringGrey = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+		ringGrey = new BitmapImage("data/images/greyCircle.png");
 		
 		upgradeButton = new UpgradeButton(x,y);
 		
@@ -69,6 +73,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	public void setDefense(Defense def) {
 		this.defense = def;
 		upgradeButton.setDefense(def);
+		circleScale = 2*((Tourelle)def).radius*Game.tileSize/ringGrey.getImage().getHeight();
 	}
 	
 	@Override
@@ -81,7 +86,8 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	public void draw(GdxGraphics g) {
 		// TODO Auto-generated method stub
 		if(visible) {
-			g.drawFilledCircle(defense.pos.x, defense.pos.y, ((Tourelle)defense).radius*Game.tileSize , ringGrey);
+			g.drawAlphaPicture(defense.pos.x,  defense.pos.y, 0, circleScale, 0.4f, ringGrey);
+			//g.drawFilledCircle(defense.pos.x, defense.pos.y, ((Tourelle)defense).radius*Game.tileSize , ringGrey);
 			g.drawTransformedPicture(y/2, x/2 ,0,y/2, x/2, image);
 			g.drawString(0.05f*y, 0.8f*x, defense.defenseName+"\n\n"+"Level : "+defense.level +"\nHits : "+defense.nbHits,font);
 			upgradeButton.draw(g);
