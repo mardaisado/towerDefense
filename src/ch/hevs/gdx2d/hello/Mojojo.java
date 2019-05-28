@@ -2,12 +2,9 @@ package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Vector2;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
@@ -29,6 +26,8 @@ public class Mojojo extends Ennemi {
 	int directionSave;
 	
 	boolean changeDir=false;
+
+	float angle = 0;
 	
 	Point posOld;
 	
@@ -39,15 +38,13 @@ public class Mojojo extends Ennemi {
 		this.base = base;
 		this.scale = scale;
 		this.map=map;
-		
-		System.out.println(hp);
-		
+	
 		goStart();
  
 		directionSave= (int) Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) ).getProperties().get("direction");		changeSpeedForScale();
 	}
 	
-private void changeSpeedForScale()
+	private void changeSpeedForScale()
 	{
 		speed = (int) (speed/scale);
 	}
@@ -77,7 +74,6 @@ private void changeSpeedForScale()
 				return new Point( (pos.x ) ,(int) ((pos.y/scale -0.5) *scale));
 		
 		case 3:
-				System.out.println(new Point( ((int) ((pos.x/scale/speed +0.5) *scale*speed))  , pos.y) );
 				return new Point( ((int) ((pos.x/scale/speed +0.5) *scale*speed) ) , pos.y);
 
 		case 4:
@@ -96,7 +92,7 @@ private void changeSpeedForScale()
 				{					
 					if((Utils.getTile(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), tiledLayer).getProperties().get("start",boolean.class)) == true)
 					{	
-						pos = new Point((int)((i+0)*scale*64f),(int)((j+0.5)*scale*64f));
+						pos = new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f));
 				  		return;
 					}
 				}
@@ -108,41 +104,30 @@ private void changeSpeedForScale()
 	
 	public void goNextPosition(int direction)
 	{
-		
-		
-		int speed = 2;
 		switch (direction) {
 		case 1:
 				pos = new Point(pos.x + ((int)((0)*scale*speed)), pos.y + ((int)((1)*scale*speed)) );
+				angle=90;
 			break;
 
 		case 2:
 				pos = new Point(pos.x + ((int)((0)*scale*speed)), pos.y + ((int)((-1)*scale*speed)) );
+				angle=180;
 			break;
 		case 3:
 				pos = new Point(pos.x + ((int)((1)*scale*speed)), pos.y + ((int)((0)*scale*speed)) );
+				angle=270;
 			break;
 		case 4:
 				pos = new Point(pos.x + ((int)((-1)*scale*speed)), pos.y + ((int)((0)*scale*speed)) );
+				angle=360;
 			break;
 		default:
 			break;
 		}
 		
 	}
-	
-	private TiledMapTile getTile(Point pos, int offsetX, int offsetY) {
-		try {
-			int x = (int) (pos.x / tiledLayer.getTileWidth()) + offsetX;
-			int y = (int) (pos.y / tiledLayer.getTileHeight()) + offsetY;
 
-			return tiledLayer.getCell(x, y).getTile();
-		} catch (Exception e) {
-
-			return null;
-		}
-	}
-	
 	public boolean checkDeath()
 	{
 		if(hp>0)
@@ -174,7 +159,7 @@ private void changeSpeedForScale()
 
 	@Override
 	public void draw(GdxGraphics g) {
-		g.drawTransformedPicture(pos.x, pos.y, 0, scale/2, base);
+		g.drawTransformedPicture(pos.x, pos.y, angle-270, scale/2, base);
 		
 	}
 
@@ -188,8 +173,7 @@ private void changeSpeedForScale()
 			int direction = 0;
 
 			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave).x/scale) ,(int) (getOffset(directionSave).y/scale) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
-				
-							
+						
 			direction = getDirection(currentCell);
 			
 			progress++;
