@@ -241,10 +241,20 @@ public class Game extends PortableApplication {
 		super.onRelease(x, y, button);
 		if (preview.getVisible()) {
 			preview.setVisible(false);
-			if(money.getMoneyCount()>= Tourelle.PRICE) {
-				defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemi,projectile));
-				money.takeOffMoneyCount(Tourelle.PRICE);
+			if(Utils.getTile(new Point((int) ((x-map0x) /tileSize),(int) ((y-map0y) /tileSize)),tiledLayer).getProperties().get("posable")!=null)
+			{
+				System.out.println("Not null");
+				if((boolean) Utils.getTile(new Point((int) ((x-map0x) /tileSize),(int) ((y-map0y) /tileSize)),tiledLayer).getProperties().get("posable") == true)
+				{
+					System.out.println("true");
+					if(money.getMoneyCount()>= Tourelle.PRICE) {
+						defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemi,projectile));
+						money.takeOffMoneyCount(Tourelle.PRICE);
+					}
+				}
+				
 			}
+
 		}
 	}
 	
@@ -265,11 +275,13 @@ public class Game extends PortableApplication {
 			if(h == true) {
 				//print preview
 				//((Dragable) obj).
+							
 				if (!preview.getVisible()) {
 					preview.setVisible(true);
 					preview.setRadius((float)obj.defense[2]);
 					preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
 				}
+
 				preview.move(x-map0x, y-map0y);
 				
 			}
