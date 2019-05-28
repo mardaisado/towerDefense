@@ -40,7 +40,7 @@ public class Mojojo extends Ennemi {
 		this.scale = scale;
 		this.map=map;
 		
-		System.out.println(hp);
+		//System.out.println(hp);
 		
 		goStart();
  

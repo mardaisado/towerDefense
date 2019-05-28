@@ -53,8 +53,8 @@ public class Projectile implements DrawableObject {
 
 		}
 		else {
-			System.out.println("shooted ");
-			System.out.println(target.getHP());
+			//System.out.println("shooted ");
+			//System.out.println(target.getHP());
 			target.giveDamage(power);
 
 			return true;
