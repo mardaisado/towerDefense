@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.util.Iterator;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
@@ -152,17 +153,17 @@ public class Game extends PortableApplication {
 			}
 			Projectile[] tmp = new Projectile[projectile.size()];
 			int i = 0;
-			for (Projectile obj : projectile) {
-				if (obj.update(g)) {
-					tmp[i] = obj;
-					i++;
+			
+			Iterator<Projectile> p = projectile.iterator();
+			Projectile obj;
+			while(p.hasNext()) {
+				obj = p.next();
+				if (((Projectile) obj).update(g)) {
+					p.remove();
 				}
 			}
-			for (int j = 0; j < i; j++) {
-				projectile.remove(tmp[j]);
-			}
 			
-			//System.out.println(projectile.size());
+			//System.out.println("size "+projectile.size());
 		}
 
 		// Camera fixe
