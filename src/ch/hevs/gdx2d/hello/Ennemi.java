@@ -16,6 +16,8 @@ public abstract class Ennemi implements DrawableObject {
 	
 	int reward;	
 	
+	boolean alive = true;
+	
 	public Ennemi(int hp, int reward) {
 		this.hp = hp;
 		this.reward=reward;
@@ -47,15 +49,15 @@ public abstract class Ennemi implements DrawableObject {
 	 *            The power of the damage
 	 * @return True if the ennemi is alive, , false otherwise
 	 */
-	public boolean giveDamage(int damage)
+	public void giveDamage(int damage)
 	{
 		hp= hp-damage;
 		
-		if(hp-damage <= 0)
+		if(hp <= 0 && alive)
 		{
-			return false;
+			alive = false;
+			Game.money.addMoneyCount(reward);
 		}
-		return true;
 	}
 	
 	@Override
