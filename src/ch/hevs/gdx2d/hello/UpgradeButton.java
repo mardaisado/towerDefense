@@ -11,10 +11,11 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-public class UpgradeButton implements DrawableObject{
+public class UpgradeButton implements DrawableObject,UpdateObject{
 
 	BitmapImage greyButton;
 	BitmapImage greenButton;
+	BitmapImage button;
 	
 	BitmapFont font;
 	
@@ -48,37 +49,44 @@ public class UpgradeButton implements DrawableObject{
 	
 	public void setDefense(Defense defense) {
 		this.defense = defense;
-		if (defense.level < 3) {
-			notClickable = false;
-		}
-		else{
-			notClickable = true;
-		}
 	}
 	
 	public void clicked(int x,int y) {
 		if ((x >= (0.92f*overviewY-2*this.y) && x <= (0.92f*overviewY) && y >= overviewX/2-this.x && y <= overviewX/2+this.x)) {
 			defense.upgrade();
-			if (defense.level < 3) {
-				notClickable = false;
-			}
-			else{
-				notClickable = true;
-			}
 		}
 	}
 
 	@Override
 	public void draw(GdxGraphics g) {
 		if (defense.level >= 3) {
-			g.drawTransformedPicture((0.92f*overviewY-y),overviewX/2 ,0,y,x, greyButton);
+			g.drawTransformedPicture((0.92f*overviewY-y),overviewX/2 ,0,y,x, button);
 			g.drawString((0.92f*overviewY-y),overviewX/2+overviewX/20,"max",font,1);
 		}
 		else {
-			g.drawTransformedPicture((0.92f*overviewY-y),overviewX/2 ,0,y,x, greenButton);
+			g.drawTransformedPicture((0.92f*overviewY-y),overviewX/2 ,0,y,x, button);
 			g.drawString((0.92f*overviewY-y),overviewX/2+overviewX/20,defense.nextUpgradePrice()+"$" ,font,1);
 		}
 		
 		
+	}
+
+	@Override
+	public void update(GdxGraphics g) {
+		// TODO Auto-generated method stub
+		if(defense != null) {
+			if (defense.level >= 3) {
+				notClickable = true;
+				button = greyButton;
+			}
+			else if(Game.money.getMoneyCount() < defense.nextUpgradePrice()) {
+				notClickable = true;
+				button = greyButton;
+			}
+			else {
+				notClickable = false;
+				button = greenButton;
+			}
+		}
 	}
 }

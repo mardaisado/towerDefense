@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.util.Iterator;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
@@ -152,17 +153,17 @@ public class Game extends PortableApplication {
 			}
 			Projectile[] tmp = new Projectile[projectile.size()];
 			int i = 0;
-			for (Projectile obj : projectile) {
-				if (obj.update(g)) {
-					tmp[i] = obj;
-					i++;
+			
+			Iterator<Projectile> p = projectile.iterator();
+			while(p.hasNext()) {
+				Projectile obj;
+				obj = p.next();
+				if (((Projectile) obj).update(g)) {
+					p.remove();
 				}
 			}
-			for (int j = 0; j < i; j++) {
-				projectile.remove(tmp[j]);
-			}
 			
-			//System.out.println(projectile.size());
+			//System.out.println("size "+projectile.size());
 		}
 
 		// Camera fixe
@@ -174,13 +175,6 @@ public class Game extends PortableApplication {
 		tiledMapRenderer.render();
 		
 		// draw object
-		for (Object obj : toDraw) {
-			((DrawableObject) obj).draw(g);
-		}
-		
-		for (Dragable obj : dragable) {
-			((DrawableObject) obj).draw(g);
-		}
 		
 		for (Defense obj : defense) {
 			((DrawableObject) obj).draw(g);
@@ -190,6 +184,14 @@ public class Game extends PortableApplication {
 			((DrawableObject) obj).draw(g);
 		}
 		for (Projectile obj : projectile) {
+			((DrawableObject) obj).draw(g);
+		}
+		
+		for (Object obj : toDraw) {
+			((DrawableObject) obj).draw(g);
+		}
+		
+		for (Dragable obj : dragable) {
 			((DrawableObject) obj).draw(g);
 		}
 		
