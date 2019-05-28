@@ -88,6 +88,8 @@ public class Game extends PortableApplication {
 	@Override
 	public void onInit() {
 		
+		setTitle("Best Tower Defense Game you've ever seen");
+		
 		// Load assets
 		assets = Utils.loadAssets();
 
