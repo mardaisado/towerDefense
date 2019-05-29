@@ -56,6 +56,7 @@ public class Game extends PortableApplication {
 	Preview preview;
 	PickDefenseGUI pickGui;
 	OverviewGUI defenseGui;
+	PlayButton playButton;
 
 	TiledMapTileLayer tiledLayer;
 
@@ -112,6 +113,7 @@ public class Game extends PortableApplication {
 		pickGui = new PickDefenseGUI(dragable);
 		defenseGui = new OverviewGUI();
 		money = new MoneyCounter(START_MONEY);
+		playButton = new PlayButton();
 
 
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
@@ -126,6 +128,7 @@ public class Game extends PortableApplication {
 		toDraw.add(defenseGui);
 		toDraw.add(pickGui);
 		toDraw.add(money);
+		toDraw.add(playButton);
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		//toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
@@ -221,6 +224,9 @@ public class Game extends PortableApplication {
 		if (defenseGui.getVisible()) {
 			defenseGui.clicked(x-map0x, y-map0y);
 		}
+		
+		playButton.clicked(x-map0x, y-map0y);
+		
 		Defense def = Utils.getDefenseClicked(defense,x-map0x, y-map0y);
 		if (def != null) {
 			defenseGui.setVisible(true);
