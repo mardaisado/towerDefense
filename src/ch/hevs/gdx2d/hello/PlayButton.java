@@ -8,8 +8,11 @@ public class PlayButton implements DrawableObject,UpdateObject{
 
 	BitmapImage playButton;
 	BitmapImage fastButton;
+	BitmapImage fastButtonClicked;
 	
 	boolean play = false;
+	
+	boolean fast = false;
 	
 	float x;
 	float y;
@@ -22,6 +25,7 @@ public class PlayButton implements DrawableObject,UpdateObject{
 		
 		playButton = new BitmapImage("data/images/playButton.png");
 		fastButton = new BitmapImage("data/images/fastButton.png");
+		fastButtonClicked = new BitmapImage("data/images/fastButtonClicked.png");
 		
 		scale =  0.1f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f))/playButton.getImage().getHeight();
 	}
@@ -34,7 +38,18 @@ public class PlayButton implements DrawableObject,UpdateObject{
 	
 	public void clicked(int x,int y) {
 		if(x >= this.y-scale*playButton.getImage().getHeight()/2 && x <= this.y+scale*playButton.getImage().getHeight()/2  && y >= this.x-scale*playButton.getImage().getHeight()/2  && y <= this.x+scale*playButton.getImage().getHeight()/2 ) {
-			play = !play;
+			if (play) {
+				if (fast) {
+					fast = false;
+				}
+				else {
+					fast = true;
+				}
+			}
+			else {
+				play = true;
+				// start wave
+			}
 		}
 	}
 
@@ -42,7 +57,12 @@ public class PlayButton implements DrawableObject,UpdateObject{
 	public void draw(GdxGraphics g) {
 		// TODO Auto-generated method stub
 		if (play) {
-			g.drawTransformedPicture(y, x, 0,scale, fastButton);
+			if (fast) {
+				g.drawTransformedPicture(y, x, 0,scale, fastButtonClicked);
+			}
+			else {
+				g.drawTransformedPicture(y, x, 0,scale, fastButton);
+			}
 		}
 		else {
 			g.drawTransformedPicture(y, x, 0,scale, playButton);
