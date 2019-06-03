@@ -107,10 +107,6 @@ public class Tourelle extends Defense {
 		}
 	}
 	
-	public static Point updatePoint(Point pos,float scale, int speed, int n) {
-		// Code dégeu, sorry auré, t'avais ka trouver comment mettre des propreties
-			
-		return pos;
-	}
+
 	
 }

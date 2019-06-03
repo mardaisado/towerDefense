@@ -248,7 +248,7 @@ public class Game extends PortableApplication {
 		if (preview.getVisible()) {
 			preview.setVisible(false);
 			
-			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),"posable",tiledMap)) == true)
+			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true)
 			{
 				if(money.getMoneyCount()>= Tourelle.PRICE) {
 					defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemi,projectile));
@@ -284,7 +284,7 @@ public void onDrag(int x, int y) {
 				preview.setRadius((float)obj.defense[2]);
 				preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
 			}
-			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),"posable",tiledMap)) == true)
+			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true)
 			{
 				preview.setPlaceable(true);
 			}

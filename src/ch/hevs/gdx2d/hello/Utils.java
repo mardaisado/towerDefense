@@ -37,24 +37,69 @@ public class Utils {
 		//return Boolean.parseBoolean(test.toString());
 	}
 	
-	public static boolean returnStateForBool(Point pos, String proprety, TiledMap map)
+	public static boolean returnStateForBool(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
 		
 		float screenHeigth = Gdx.graphics.getHeight();
 		float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
-		TiledMapTile tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+		if(tile==null)
+		{
+			tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+		}
+		
 		if(tile!=null)
 		{
-			if((tile).getProperties().get("posable")!=null)
+			if((tile).getProperties().get(proprety)!=null)
 			{			
 				Object tpe = tile.getProperties().get(proprety);
 				
 				return (boolean) tpe;						
 			}
 		}
-		return false;		
-
+		return false;			
+	}
+	public static int returnStateForInt(Point pos,TiledMapTile tile, String proprety, TiledMap map)
+	{
 		
+		float screenHeigth = Gdx.graphics.getHeight();
+		float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
+		if(tile==null)
+		{
+			tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+		}
+		
+		if(tile!=null)
+		{
+			if((tile).getProperties().get(proprety)!=null)
+			{			
+				Object tpe = tile.getProperties().get(proprety);
+				
+				return (int) tpe;						
+			}
+		}
+		return 0;			
+	}
+	
+	public static String returnStateForString(Point pos,TiledMapTile tile, String proprety, TiledMap map)
+	{
+		
+		float screenHeigth = Gdx.graphics.getHeight();
+		float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
+		if(tile==null)
+		{
+			tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+		}
+		
+		if(tile!=null)
+		{
+			if((tile).getProperties().get(proprety)!=null)
+			{			
+				Object tpe = tile.getProperties().get(proprety);
+				
+				return (String) tpe;						
+			}
+		}
+		return "";			
 	}
 	
 	public static TiledMapTile getTile(Point position,TiledMapTileLayer tiledLayer) {
