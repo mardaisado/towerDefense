@@ -3,12 +3,10 @@ package ch.hevs.gdx2d.hello;
 import java.awt.Point;
 import java.util.Vector;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeType.Bitmap;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Vector2;
+
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 
@@ -23,28 +21,27 @@ public class Utils {
 		return tmp;
 	}
 	
-	public static boolean isWalkable(TiledMapTile tile) {
-		if (tile == null)
-			return false;
-
-//		Boolean test = tile.getProperties().get("walkable",Boolean.class);
-//		
-//		if (test == null) {
-//			System.out.println("heyyyyyyyyyy");
-//			return false;
-//		}
-		return true;
-		//return Boolean.parseBoolean(test.toString());
-	}
-	
+	/**
+	 * Func for return the proprety on a position or a tile
+	 *
+	 * @param Pos
+	 *            Position of the proprety
+	 * @param tile
+	 *            Tile of the proprety (null if you would give the position)
+	 * @param proprety
+	 *            name of the proprety
+	 * @param map
+	 * 			 
+	 * @return True if the ennemi is alive, , false otherwise
+	 */
 	public static boolean returnStateForBool(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
 		
-		float screenHeigth = Gdx.graphics.getHeight();
-		float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
+		//	float screenHeigth = Gdx.graphics.getHeight();
+		//	float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
 		if(tile==null)
 		{
-			tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+			tile = getTile(new Point((int) (pos.x),(int) ((pos.y))),(TiledMapTileLayer) map.getLayers().get(0));
 		}
 		
 		if(tile!=null)
@@ -61,11 +58,11 @@ public class Utils {
 	public static int returnStateForInt(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
 		
-		float screenHeigth = Gdx.graphics.getHeight();
-		float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
+		//	float screenHeigth = Gdx.graphics.getHeight();
+		//	float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
 		if(tile==null)
 		{
-			tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+			tile = getTile(new Point((int) (pos.x),(int) ((pos.y))),(TiledMapTileLayer) map.getLayers().get(0));
 		}
 		
 		if(tile!=null)
@@ -83,11 +80,11 @@ public class Utils {
 	public static String returnStateForString(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
 		
-		float screenHeigth = Gdx.graphics.getHeight();
-		float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
+	//	float screenHeigth = Gdx.graphics.getHeight();
+	//	float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
 		if(tile==null)
 		{
-			tile = getTile(new Point((int) (pos.x/tileSize),(int) ((pos.y)/tileSize)),(TiledMapTileLayer) map.getLayers().get(0));
+			tile = getTile(new Point((int) (pos.x),(int) ((pos.y))),(TiledMapTileLayer) map.getLayers().get(0));
 		}
 		
 		if(tile!=null)

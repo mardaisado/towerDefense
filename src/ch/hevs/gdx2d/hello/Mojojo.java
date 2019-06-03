@@ -2,8 +2,6 @@ package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
 
-import org.lwjgl.Sys;
-
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -49,53 +47,16 @@ public class Mojojo extends Ennemi {
 	{
 		speed = (int) (speed/scale);
 	}
-		
-	private int getDirection(TiledMapTile tile) {
-		if (tile == null)
-			return 0;
-			
-		if(tile.getProperties().get("direction")!=null)
-		{
-		
-			Object test2 = tile.getProperties().get("direction");
-
-			return (int) (test2);
-		}
-		
-		return 0;
-	}
-	
-	private Point adapatPos(int dir)
-	{		
-		switch (dir) {
-		case 1:
-				return new Point( ((int) ((pos.x/scale/speed -0.5) *scale*speed) ) , pos.y);
-				
-		case 2:
-				return new Point( (pos.x ) ,(int) ((pos.y/scale -0.5) *scale));
-		
-		case 3:
-				return new Point( ((int) ((pos.x/scale/speed +0.5) *scale*speed) ) , pos.y);
-
-		case 4:
-				return new Point( pos.x  ,(int) ((pos.y/scale/speed +0.5) *scale*speed));
-		}
-		
-		return pos;
-			
-	}
 	
 	public void goStart()
 	{
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
-				if((Utils.getTile(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), tiledLayer).getProperties().get("start") != null))
-				{					
-					if((Utils.getTile(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), tiledLayer).getProperties().get("start",boolean.class)) == true)
-					{	
-						pos = new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f));
-				  		return;
-					}
+				if((Utils.returnStateForBool(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), null, "start", map)))
+				{	
+					pos = new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f));
+			  		return;
+					
 				}
 			} 
 			

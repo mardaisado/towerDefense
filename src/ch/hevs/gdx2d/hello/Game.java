@@ -6,9 +6,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -18,7 +16,6 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
-import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
 
 /**
  * The Tower Defense 
@@ -29,10 +26,7 @@ import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
  */
 public class Game extends PortableApplication {
 
-	private BitmapImage imgBitmap;
 	private BitmapImage[] assets;
-
-	private Map mapManager;
 
 	final double FRAME_TIME = 0.015; // Duration of each frame
 
@@ -93,10 +87,6 @@ public class Game extends PortableApplication {
 
 		// Load assets
 		assets = Utils.loadAssets();
-
-		// Create Map
-		mapManager = new Map(map);
-
 
 		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
 
@@ -264,8 +254,7 @@ public class Game extends PortableApplication {
 @Override
 public void onKeyUp(int keycode) {
 	super.onKeyUp(keycode);
-	int x=0;
-	double y=13.5;
+
 	ennemi.add(new Mojojo(tileSize,assets[299],tiledMap,100,100));
 }
 
