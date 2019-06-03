@@ -2,6 +2,8 @@ package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
 
+import org.lwjgl.Sys;
+
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -101,28 +103,27 @@ public class Mojojo extends Ennemi {
 	
 	}
 	
-	public void goNextPosition(int direction)
+	public Point goNextPosition(int direction, Point position)
 	{
 		switch (direction) {
 		case 1:
-				pos = new Point(pos.x + ((int)((0)*scale*speed)), pos.y + ((int)((1)*scale*speed)) );
 				angle=90;
-			break;
-
+				return new Point(position.x + ((int)((0)*scale*speed)), position.y + ((int)((1)*scale*speed)) );
+				
 		case 2:
-				pos = new Point(pos.x + ((int)((0)*scale*speed)), pos.y + ((int)((-1)*scale*speed)) );
 				angle=180;
-			break;
+				return new Point(position.x + ((int)((0)*scale*speed)), position.y + ((int)((-1)*scale*speed)) );
+				
 		case 3:
-				pos = new Point(pos.x + ((int)((1)*scale*speed)), pos.y + ((int)((0)*scale*speed)) );
 				angle=270;
-			break;
+				return new Point(position.x + ((int)((1)*scale*speed)), position.y + ((int)((0)*scale*speed)) );
+					
 		case 4:
-				pos = new Point(pos.x + ((int)((-1)*scale*speed)), pos.y + ((int)((0)*scale*speed)) );
 				angle=360;
-			break;
+				return new Point(position.x + ((int)((-1)*scale*speed)), position.y + ((int)((0)*scale*speed)) );
+					
 		default:
-			break;
+			return position;
 		}
 		
 	}
@@ -137,23 +138,46 @@ public class Mojojo extends Ennemi {
 		return false;
 	}
 	
-	private Point getOffset(int direction)
+	private Point getOffset(int direction, Point position)
 	{
 		switch (direction) {
 		case 1:
-				return new Point( (int) (pos.x + (0.5 * scale * 64f)) , pos.y);
+				return new Point( (int) (position.x + (0.5 * scale * 64f)) , position.y);
 				
 		case 2:
-				return new Point( (pos.x ) ,(int) (pos.y + (0.5 * scale * 64f)));
+				return new Point( (position.x ) ,(int) (position.y + (0.5 * scale * 64f)));
 		
 		case 3:
-				return new Point( (int) (pos.x - (0.5 * scale * 64f)) , pos.y);
+				return new Point( (int) (position.x - (0.5 * scale * 64f)) , position.y);
 
 		case 4:
-				return new Point( pos.x  ,(int) (pos.y - (0.5 * scale * 64f)));
+				return new Point( position.x  ,(int) (position.y - (0.5 * scale * 64f)));
 		}
 		
-		return pos;
+		return position;
+	}
+	
+	public Point prediction(int updateInFutur)
+	{
+		Point output = pos;
+		
+		int directionSaveTemp=directionSave;
+		int direction =0;
+		
+		for(int i=0;i<	updateInFutur;i++)
+		{
+			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSaveTemp,output).x/scale) ,(int) (getOffset(directionSaveTemp,output).y/scale) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
+						
+			direction = getDirection(currentCell);
+			
+			//System.out.println("Position update" + this );
+			
+			directionSave=direction;
+			
+			output=goNextPosition(direction,output);	
+		}
+		
+		return output ;
 	}
 
 	@Override
@@ -167,11 +191,11 @@ public class Mojojo extends Ennemi {
 		
 		
 		if(checkDeath())
-		{				
+		{		
 			
 			int direction = 0;
 
-			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave).x/scale) ,(int) (getOffset(directionSave).y/scale) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
+			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave,pos).x/scale) ,(int) (getOffset(directionSave,pos).y/scale) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
 						
 			direction = getDirection(currentCell);
 			
@@ -181,7 +205,7 @@ public class Mojojo extends Ennemi {
 			
 			directionSave=direction;
 			
-			goNextPosition(direction);	
+			pos=goNextPosition(direction,pos);	
 			
 			return false;
 			
