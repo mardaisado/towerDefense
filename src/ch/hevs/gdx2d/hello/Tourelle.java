@@ -96,7 +96,8 @@ public class Tourelle extends Defense {
 				//Here
 				
 				hello = (Mojojo)(target);
-				preshot = updatePoint(new Point(hello.pos.x,hello.pos.y), scale, hello.speed, 10);
+				//preshot = updatePoint(new Point(hello.pos.x,hello.pos.y), scale, hello.speed, 10);
+				preshot = hello.prediction(10);
 				projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(preshot.x, preshot.y), scale, assets[251],10,target));
 				nbHits++;
 			}
@@ -108,42 +109,7 @@ public class Tourelle extends Defense {
 	
 	public static Point updatePoint(Point pos,float scale, int speed, int n) {
 		// Code dégeu, sorry auré, t'avais ka trouver comment mettre des propreties
-		int temp = 0;
-		for(int i = 0; i < n; i++) {
-			if(pos.x>=(int)((8.5)*scale*64f) )
-			{
-				temp=1;			
-			} 
-			if(pos.y<=(int)((7.5)*scale*64f))
-			{
-				temp=2;			
-			}
-	
 			
-			switch (temp) {
-			
-			case 0:
-				pos.x=(pos.x+speed);
-					
-						
-				break;
-				
-			case 1:
-				pos.y=(pos.y-speed);		
-						
-				break;
-	
-			case 2:
-				
-				pos.x=(int) (pos.x+speed);
-						
-				break;
-	
-			default:
-				break;
-			}
-		}
-		
 		return pos;
 	}
 	
