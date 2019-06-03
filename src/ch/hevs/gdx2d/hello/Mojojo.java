@@ -11,25 +11,23 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 
 public class Mojojo extends Ennemi {
 
-	BitmapImage base;
+	private BitmapImage base;
 	
-	int speed=2;
-		
-	TiledMapTileLayer tiledLayer;
+	private float scale, angle=0;
 	
-	int progress=0;
-		
-	TiledMap map;
+	private int directionSave;
 	
-	float scale;
+	public int speed=2;
 	
-	int directionSave;
+	private boolean changeDir=false;
 	
-	boolean changeDir=false;
-
-	float angle = 0;
 	
-	Point posOld;
+	private Point posOld;
+	
+	private TiledMap map;
+	
+	private TiledMapTileLayer tiledLayer;
+	
 	
 	public Mojojo(float scale, BitmapImage base, TiledMap map, int hp, int reward) {
 				
@@ -38,33 +36,59 @@ public class Mojojo extends Ennemi {
 		this.base = base;
 		this.scale = scale;
 		this.map=map;
-		goStart();
+		pos=goStart();
  
-		directionSave= (int) Utils.getTile(new Point((int) (pos.x/scale),(int) (pos.y/scale)), (TiledMapTileLayer) (map.getLayers().get(0)) ).getProperties().get("direction");		changeSpeedForScale();
+		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x/scale),(int) (pos.y/scale)), null, "direction", map);		
+		
+		speed = changeSpeedForScale(speed);	
+		
 	}
 	
-	private void changeSpeedForScale()
+	/**
+	 * exemple : changeSpeedForScale(speed) return temp with the scale 
+	 *
+	 * @param temp
+	 *            to be scaled
+	 * @return scaled temp
+	 */
+	private int changeSpeedForScale(int temp)
 	{
-		speed = (int) (speed/scale);
+		return (int) (temp/scale);
 	}
 	
-	public void goStart()
+	/**
+	 * exemple : goStart() return the position of the start
+	 *
+	 * @return The start position 
+	 */
+	private Point goStart()
 	{
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
 				if((Utils.returnStateForBool(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), null, "start", map)))
 				{	
-					pos = new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f));
-			  		return;
+					return new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f));
+			  		
 					
 				}
 			} 
 			
 		}
+		
+		return new Point(0,0);
 	
 	}
 	
-	public Point goNextPosition(int direction, Point position)
+	/**
+	 * exemple : goNextPosition(direction,pos) return new position 
+	 *
+	 * @param direction
+	 *            the direction of the tile
+	 * @param position
+	 *            the actual position.
+	 * @return The next positon 
+	 */
+	private Point goNextPosition(int direction, Point position)
 	{
 		switch (direction) {
 		case 1:
@@ -89,6 +113,11 @@ public class Mojojo extends Ennemi {
 		
 	}
 
+	/**
+	 * Func for the state of the ennmi
+	 *
+	 * @return true is ennemi is alive, false if not
+	 */
 	public boolean checkDeath()
 	{
 		if(hp>0)
@@ -99,6 +128,15 @@ public class Mojojo extends Ennemi {
 		return false;
 	}
 	
+	/**
+	 * exemple : getOffset(direction,pos) get postion with an offset
+	 *
+	 * @param direction
+	 *            the direction of the tile
+	 * @param position
+	 *            the actual position.
+	 * @return The position with the offset
+	 */
 	private Point getOffset(int direction, Point position)
 	{
 		switch (direction) {
@@ -118,6 +156,13 @@ public class Mojojo extends Ennemi {
 		return position;
 	}
 	
+	/**
+	 * exemple : prediction(x) get the position in x update
+	 *
+	 * @param updateInFutur
+	 *            The number of update for the prediction
+	 * @return The predicted position
+	 */
 	public Point prediction(int updateInFutur)
 	{
 		Point output = pos;
@@ -149,7 +194,6 @@ public class Mojojo extends Ennemi {
 
 	@Override
 	public boolean update(GdxGraphics g) {
-		
 		
 		if(checkDeath())
 		{		

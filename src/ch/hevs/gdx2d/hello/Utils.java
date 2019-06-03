@@ -22,7 +22,7 @@ public class Utils {
 	}
 	
 	/**
-	 * Func for return the proprety on a position or a tile
+	 * Func for return the boolean proprety on a position or a tile
 	 *
 	 * @param Pos
 	 *            Position of the proprety
@@ -31,8 +31,8 @@ public class Utils {
 	 * @param proprety
 	 *            name of the proprety
 	 * @param map
-	 * 			 
-	 * @return True if the ennemi is alive, , false otherwise
+	 * 			  
+	 * @return True/false if the proprety is true/flase, false if the tile, proprety doesnt exist
 	 */
 	public static boolean returnStateForBool(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
@@ -55,6 +55,20 @@ public class Utils {
 		}
 		return false;			
 	}
+	
+	/**
+	 * Func for return the integer proprety on a position or a tile
+	 *
+	 * @param Pos
+	 *            Position of the proprety
+	 * @param tile
+	 *            Tile of the proprety (null if you would give the position)
+	 * @param proprety
+	 *            name of the proprety
+	 * @param map
+	 * 			  
+	 * @return True/false if the proprety is true/flase, false if the tile, proprety doesnt exist
+	 */
 	public static int returnStateForInt(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
 		
@@ -74,9 +88,23 @@ public class Utils {
 				return (int) tpe;						
 			}
 		}
+		
 		return 0;			
 	}
 	
+	/**
+	 * Func for return the string proprety on a position or a tile
+	 *
+	 * @param Pos
+	 *            Position of the proprety
+	 * @param tile
+	 *            Tile of the proprety (null if you would give the position)
+	 * @param proprety
+	 *            name of the proprety
+	 * @param map
+	 * 			  
+	 * @return True/false if the proprety is true/flase, false if the tile, proprety doesnt exist
+	 */
 	public static String returnStateForString(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
 		

@@ -10,31 +10,41 @@ public abstract class Ennemi implements DrawableObject {
 
 	Point pos;
 	
-	int progress;
+	protected int progress;
 	
-	int hp;
+	protected int hp;
 	
-	int reward;	
+	private int reward;	
 	
-	boolean alive = true;
+	private boolean alive = true;
 	
 	public Ennemi(int hp, int reward) {
 		this.hp = hp;
 		this.reward=reward;
 	}
 	
+	/**
+	 * Func for return ennemi's reward
+	 *
+	 * @return reward of the ennmi
+	 */
 	public int getReward()
 	{
 		return reward;
 	}
 
+	/**
+	 * Func for return ennemi's progress
+	 *
+	 * @return progress on the map of the ennemi
+	 */
 	public int getProgress()
 	{
 		return progress;
 	}
 	
 	/**
-	 * Func for give damage at the ennemi
+	 * Func for return ennemis'hp
 	 *
 	 * @return HP of the ennemi
 	 */
