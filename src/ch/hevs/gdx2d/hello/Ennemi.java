@@ -75,4 +75,8 @@ public abstract class Ennemi implements DrawableObject {
 
 	public abstract boolean update(GdxGraphics g);
 
+
+
+
+
 }

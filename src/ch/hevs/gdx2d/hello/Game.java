@@ -42,7 +42,9 @@ public class Game extends PortableApplication {
 	Vector<Defense> defense = new Vector<Defense>();
 	Vector<Dragable> dragable = new Vector<Dragable>();
 	Vector<Projectile> projectile = new Vector<Projectile>();
-
+	Vector<PlayButton> autoPlacer = new Vector<PlayButton>();
+	
+	
 	static TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
 	static float tileSize;
@@ -103,7 +105,7 @@ public class Game extends PortableApplication {
 		pickGui = new PickDefenseGUI(dragable);
 		defenseGui = new OverviewGUI();
 		money = new MoneyCounter(START_MONEY);
-		playButton = new PlayButton();
+		playButton = new PlayButton(ennemi);
 
 
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
@@ -194,7 +196,13 @@ public class Game extends PortableApplication {
 		for (Dragable obj : dragable) {
 			((DrawableObject) obj).draw(g);
 		}
-
+		
+/*
+		for (PlayButton obj : autoPlacer) {
+			((DrawableObject) obj).draw(g);
+		}
+*/
+		
 		preview.draw(g);
 
 		// Draw everything
