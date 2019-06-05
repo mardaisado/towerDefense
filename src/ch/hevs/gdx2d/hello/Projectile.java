@@ -2,6 +2,9 @@ package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
@@ -21,7 +24,7 @@ public class Projectile implements DrawableObject {
 	float angle;
 	Ennemi target;
 	int power;
-
+	Sound sound;
 	public Projectile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,Ennemi target) {
 		this.pos = startPoint;
 		this.endPoint = endPoint;
@@ -36,6 +39,8 @@ public class Projectile implements DrawableObject {
 			offsetY = (endPoint.y-pos.y)/steps;
 		}
 
+		sound = Gdx.audio.newSound(Gdx.files.internal("data/sound/chop.ogg"));
+		
 	    angle = (float) Math.toDegrees(Math.atan2(endPoint.y - pos.y, endPoint.x - pos.x))-90;
 
 	    if(angle < 0){
@@ -56,7 +61,10 @@ public class Projectile implements DrawableObject {
 			//System.out.println("shooted ");
 			//System.out.println(target.getHP());
 			target.giveDamage(power);
-
+			
+			sound.play(1.0f);
+	
+			
 			return true;
 		}
 		index++;
