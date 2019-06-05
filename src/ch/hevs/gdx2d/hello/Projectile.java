@@ -24,7 +24,8 @@ public class Projectile implements DrawableObject {
 	float angle;
 	Ennemi target;
 	int power;
-	Sound sound;
+	Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop.ogg"));
+	
 	public Projectile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,Ennemi target) {
 		this.pos = startPoint;
 		this.endPoint = endPoint;
@@ -38,8 +39,6 @@ public class Projectile implements DrawableObject {
 			offsetX = (endPoint.x-pos.x)/steps;
 			offsetY = (endPoint.y-pos.y)/steps;
 		}
-
-		sound = Gdx.audio.newSound(Gdx.files.internal("data/sound/chop.ogg"));
 		
 	    angle = (float) Math.toDegrees(Math.atan2(endPoint.y - pos.y, endPoint.x - pos.x))-90;
 
