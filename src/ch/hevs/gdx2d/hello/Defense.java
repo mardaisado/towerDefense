@@ -18,6 +18,8 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	String defenseName;
 	int price;
 	
+	int radiusCollision = 30;
+	
 	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Projectile> projectile,String defenseName,int price) {
 		this.pos = pos;
 		this.ennemi = ennemi;
@@ -35,6 +37,15 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 			Game.money.takeOffMoneyCount(nextUpgradePrice());
 			level++;
 		}
+	}
+	
+	public boolean checkCollision(int x,int y,int radius) {
+		
+		if (pos.distance(x, y)< ((radius + radiusCollision)*Game.tileSize)) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	@Override

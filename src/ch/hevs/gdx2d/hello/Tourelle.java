@@ -15,8 +15,8 @@ public class Tourelle extends Defense {
 	float scale;
 	
 	static final float RADIUS = 200;
-	float rangeSq = 100; // => range de 1000
-	float radius = 100;
+	float rangeSq;
+	float radius;
 	float cooldown = 1;
 	BitmapImage[] assets;
 	float dt = 0;

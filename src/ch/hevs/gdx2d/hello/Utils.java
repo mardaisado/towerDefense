@@ -156,4 +156,13 @@ public class Utils {
 		}
 		return null;
 	}
+	
+	public static boolean checkDefenseCollision(Vector<Defense> defense,int x,int y,int radius) {
+		for (int i = 0; i < defense.size(); i++) {
+			if (defense.elementAt(i).checkCollision(x, y, radius)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
