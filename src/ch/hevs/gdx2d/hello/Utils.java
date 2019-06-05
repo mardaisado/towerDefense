@@ -1,6 +1,8 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Vector;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -164,5 +166,40 @@ public class Utils {
 			}
 		}
 		return false;
+	}
+	
+	
+	public static Defense createDefense(String url,Point p,Vector<Ennemi> ennemi,Vector<Projectile> projectile) {
+		//Class<?> c = Class.forName("ch.hevs.gdx2d.hello.Tourelle2");
+		Defense s = null;
+		try {
+			Class<?> c = Class.forName(url);
+			Constructor<?> cons = c.getConstructor( Point.class,Vector.class,Vector.class); // the args here are the expected types for the constructor that you require on the class
+			s = (Defense) cons.newInstance(p,ennemi,projectile);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return s;
 	}
 }

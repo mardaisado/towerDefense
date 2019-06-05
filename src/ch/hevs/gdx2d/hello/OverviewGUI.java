@@ -73,7 +73,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	public void setDefense(Defense def) {
 		this.defense = def;
 		upgradeButton.setDefense(def);
-		circleScale = 2*((Tourelle)def).radius*Game.tileSize/ringGrey.getImage().getHeight();
+		circleScale = 2*def.radius*Game.tileSize/ringGrey.getImage().getHeight();
 	}
 	
 	@Override

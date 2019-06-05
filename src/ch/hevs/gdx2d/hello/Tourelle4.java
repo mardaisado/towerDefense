@@ -3,11 +3,10 @@ package ch.hevs.gdx2d.hello;
 import java.awt.Point;
 import java.util.Vector;
 
-import com.badlogic.gdx.Gdx;
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 
-public class Tourelle extends Defense {
+public class Tourelle4 extends Defense{
 
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle très jolie";
@@ -26,7 +25,7 @@ public class Tourelle extends Defense {
 	
 	float angle;
 	
-	public Tourelle(Point pos,Vector<Ennemi> ennemi,Vector<Projectile> projectile) {
+	public Tourelle4(Point pos,Vector<Ennemi> ennemi,Vector<Projectile> projectile) {
 		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN);
 		
 		//SET IMAGE
