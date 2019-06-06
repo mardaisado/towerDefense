@@ -1,7 +1,10 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
+
 import java.awt.Toolkit;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -28,14 +31,7 @@ public class Game extends PortableApplication {
 
 	private BitmapImage[] assets;
 
-	final double FRAME_TIME = 0.015; // Duration of each frame
-
-	int[][][] map = {
-			{{1,0},{1,1},{1,2},{1,3},{1,0}},
-			{{2,0},{2,1},{2,2},{2,3},{2,0}},
-			{{3,0},{3,1},{3,2},{3,3},{3,0}},
-			{{4,0},{4,1},{4,2},{4,3},{4,0}}
-	};
+	static final double FRAME_TIME = 0.015; // Duration of each frame
 
 	Vector<Object> toDraw = new Vector<Object>();
 	Vector<Ennemi> ennemi = new Vector<Ennemi>();
@@ -55,9 +51,13 @@ public class Game extends PortableApplication {
 	PlayButton playButton;
 
 	TiledMapTileLayer tiledLayer;
+	
+	Dragable nowDragable;
 
 	int map0x;
 	int map0y;
+	
+	int defSelec = 0;
 
 	float dt = 0;
 
@@ -68,15 +68,15 @@ public class Game extends PortableApplication {
 	final static int START_MONEY = 1000;
 
 	// { pick image, dragable image, radius}
-	Object[][] defenseChoice = {
-			{"data/images/t1.png","data/images/t1_p.png",200f},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",300f},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",400f},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",500f},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",600f},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f}
+	 final static Object[][] defenseChoice = {
+			{"data/images/t1.png","data/images/t1_p.png",200f,"ch.hevs.gdx2d.hello.Tourelle",100},
+			{"data/images/t2.png","data/images/t2_p.png",250f,"ch.hevs.gdx2d.hello.Tourelle2",150},
+			{"data/images/t3.png","data/images/t3_p.png",300f,"ch.hevs.gdx2d.hello.Tourelle3",300},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",300f,"ch.hevs.gdx2d.hello.Tourelle4",100},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",400f,"ch.hevs.gdx2d.hello.Tourelle2",100},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",500f,"ch.hevs.gdx2d.hello.Tourelle2",100},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",600f,"ch.hevs.gdx2d.hello.Tourelle2",100},
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f,"ch.hevs.gdx2d.hello.Tourelle2",100}
 	};	
 	public Game() {
 		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
@@ -123,7 +123,7 @@ public class Game extends PortableApplication {
 		toDraw.add(playButton);
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
-		//toDraw.add(new Tourelle((new Point((int)((1-0.5)*tileSize*64f),(int)((1-0.5)*tileSize*64f))),tileSize,assets[180],assets[249],assets,ennemis,projectile));
+		//toDraw.add(new Tourelle3((new Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 	}
 
@@ -216,14 +216,16 @@ public class Game extends PortableApplication {
 	@Override
 	public void onClick(int x, int y, int button) {
 		super.onClick(x, y, button);
-		//toDraw.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemis,projectile));
 		lastClick = new Point(x-map0x, y-map0y);
+		
 		//find overview
 		if (defenseGui.getVisible()) {
 			defenseGui.clicked(x-map0x, y-map0y);
 		}
 		
+		//play button test
 		playButton.clicked(x-map0x, y-map0y);
+		
 		
 		Defense def = Utils.getDefenseClicked(defense,x-map0x, y-map0y);
 		if (def != null) {
@@ -246,11 +248,16 @@ public class Game extends PortableApplication {
 		if (preview.getVisible()) {
 			preview.setVisible(false);
 			
-			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true)
+			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
 			{
-				if(money.getMoneyCount()>= Tourelle.PRICE) {
-					defense.add(new Tourelle(new Point(x-map0x,y-map0y),tileSize,assets[180],assets[249],assets,ennemi,projectile));
-					money.takeOffMoneyCount(Tourelle.PRICE);
+				if(money.getMoneyCount()>= (int)nowDragable.defense[4]) {
+					//defense.add(new Tourelle(new Point(x-map0x,y-map0y),ennemi,projectile));
+					Defense d = Utils.createDefense((String)nowDragable.defense[3],new Point(x-map0x,y-map0y),ennemi,projectile);
+					if (d != null) {
+						defense.add(d);
+					}
+					System.out.println((String)nowDragable.defense[3]);
+					money.takeOffMoneyCount((int)nowDragable.defense[4]);
 				}
 			}
 
@@ -263,7 +270,7 @@ public class Game extends PortableApplication {
 public void onKeyUp(int keycode) {
 	super.onKeyUp(keycode);
 
-	ennemi.add(new Mojojo(tileSize,assets[299],tiledMap,100,100));
+	ennemi.add(new Mojojo(tileSize,assets[299],tiledMap,30,100));
 }
 
 
@@ -274,26 +281,28 @@ public void onDrag(int x, int y) {
 		boolean h = ((Dragable) obj).check(lastClick.x,lastClick.y);
 		if(h == true) {
 			//print preview
-			//((Dragable) obj).
+			nowDragable  = obj;
 
 			if (!preview.getVisible()) {
 				preview.setVisible(true);
 				preview.setRadius((float)obj.defense[2]);
-				preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
+				preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);           
+				//System.out.println((obj.defense[3]));
 			}
-			if((Utils.returnStateForBool(new Point((int)((x-map0x)/tileSize),(int)((y-map0y)/tileSize)),null,"posable",tiledMap)) == true)
+
+			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
 			{
 				preview.setPlaceable(true);
 			}
 			else {
 				preview.setPlaceable(false);
 			}
-
+			System.out.println("moi" + Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30));
+			System.out.println("jeremy"+ Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap));
 			preview.move(x-map0x, y-map0y);
 
 		}
 	}
-	//System.out.println(x +" / "+y);
 }
 
 
