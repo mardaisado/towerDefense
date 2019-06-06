@@ -70,7 +70,7 @@ public class Game extends PortableApplication {
 			{"data/images/t1.png","data/images/t1_p.png",200f,"ch.hevs.gdx2d.hello.Tourelle",100},
 			{"data/images/t2.png","data/images/t2_p.png",250f,"ch.hevs.gdx2d.hello.Tourelle2",150},
 			{"data/images/t3.png","data/images/t3_p.png",300f,"ch.hevs.gdx2d.hello.Tourelle3",300},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",300f,"ch.hevs.gdx2d.hello.Tourelle4",100},
+			{"data/images/t4.png","data/images/t4_p.png",200f,"ch.hevs.gdx2d.hello.Tourelle4",400},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",400f,"ch.hevs.gdx2d.hello.Tourelle2",100},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",500f,"ch.hevs.gdx2d.hello.Tourelle2",100},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",600f,"ch.hevs.gdx2d.hello.Tourelle2",100},
@@ -121,7 +121,7 @@ public class Game extends PortableApplication {
 		toDraw.add(playButton);
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
-		//toDraw.add(new Tourelle3((new Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
+		//toDraw.add(new Tourelle4((new Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 	}
 
