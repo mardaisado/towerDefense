@@ -48,7 +48,7 @@ public class PlayButton implements DrawableObject,UpdateObject{
 	int timeDelta=0;
 
 	double frame_time;
-	public PlayButton(Vector<Ennemi> ennemi,double frame_time) {
+	public PlayButton(Vector<Ennemi> ennemi) {
 		// TODO Auto-generated constructor stub
 		x = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		y = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
@@ -56,7 +56,7 @@ public class PlayButton implements DrawableObject,UpdateObject{
 		playButton = new BitmapImage("data/images/playButton.png");
 		fastButton = new BitmapImage("data/images/fastButton.png");
 		fastButtonClicked = new BitmapImage("data/images/fastButtonClicked.png");
-		this.frame_time=frame_time;
+		this.frame_time=Game.FRAME_TIME;
 		this.ennemi=ennemi;
 		listOfEnnemi=GetTable(1); // Parse JSON file for find the first round
 		scale =  0.1f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f))/playButton.getImage().getHeight();
