@@ -41,10 +41,10 @@ public class Utils {
 		
 		//	float screenHeigth = Gdx.graphics.getHeight();
 		//	float tileSize = (((int)(screenHeigth/(map.getProperties().get("width",Integer.class)))/64f));
-		if(tile==null)
+		if(tile==null )
 		{
 			tile = getTile(new Point((int) (pos.x),(int) ((pos.y))),(TiledMapTileLayer) map.getLayers().get(0));
-		}
+		} 
 		
 		if(tile!=null)
 		{

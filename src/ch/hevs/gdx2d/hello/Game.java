@@ -21,7 +21,7 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
 /**
- * The Tower Defense 
+ * The Tower Defense
  *
  * @author Mardaisado (Aurélien Héritier)
  * @author Limace (Jérémy Merle)
@@ -49,12 +49,12 @@ public class Game extends PortableApplication {
 	PlayButton playButton;
 
 	TiledMapTileLayer tiledLayer;
-	
+
 	Dragable nowDragable;
 
 	int map0x;
 	int map0y;
-	
+
 	int defSelec = 0;
 
 	float dt = 0;
@@ -75,7 +75,7 @@ public class Game extends PortableApplication {
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",500f,"ch.hevs.gdx2d.hello.Tourelle2",100},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",600f,"ch.hevs.gdx2d.hello.Tourelle2",100},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",80f,"ch.hevs.gdx2d.hello.Tourelle2",100}
-	};	
+	};
 	public Game() {
 		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
 	}
@@ -93,7 +93,7 @@ public class Game extends PortableApplication {
 		float screenHeigth = Gdx.graphics.getHeight();
 		tileSize = (((int)(screenHeigth/(tiledMap.getProperties().get("width",Integer.class)))/64f));
 
-		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);	
+		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);
 		tiledLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
 
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
@@ -209,16 +209,16 @@ public class Game extends PortableApplication {
 	public void onClick(int x, int y, int button) {
 		super.onClick(x, y, button);
 		lastClick = new Point(x-map0x, y-map0y);
-		
+
 		//find overview
 		if (defenseGui.getVisible()) {
 			defenseGui.clicked(x-map0x, y-map0y);
 		}
-		
+
 		//play button test
 		playButton.clicked(x-map0x, y-map0y);
-		
-		
+
+
 		Defense def = Utils.getDefenseClicked(defense,x-map0x, y-map0y);
 		if (def != null) {
 			defenseGui.setVisible(true);
@@ -239,7 +239,7 @@ public class Game extends PortableApplication {
 		super.onRelease(x, y, button);
 		if (preview.getVisible()) {
 			preview.setVisible(false);
-			
+
 			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
 			{
 				if(money.getMoneyCount()>= (int)nowDragable.defense[4]) {
@@ -278,7 +278,7 @@ public void onDrag(int x, int y) {
 			if (!preview.getVisible()) {
 				preview.setVisible(true);
 				preview.setRadius((float)obj.defense[2]);
-				preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);           
+				preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
 				//System.out.println((obj.defense[3]));
 			}
 			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
