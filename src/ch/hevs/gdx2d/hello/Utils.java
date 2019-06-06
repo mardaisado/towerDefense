@@ -169,7 +169,7 @@ public class Utils {
 	}
 	
 	
-	public static Defense createDefense(String url,Point p,Vector<Ennemi> ennemi,Vector<Projectile> projectile) {
+	public static Defense createDefense(String url,Point p,Vector<Ennemi> ennemi,Vector<Object> projectile) {
 		//Class<?> c = Class.forName("ch.hevs.gdx2d.hello.Tourelle2");
 		Defense s = null;
 		try {

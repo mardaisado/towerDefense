@@ -1,12 +1,13 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
+import java.util.Vector;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-public class Projectile implements DrawableObject,DeleteObject {
+public class Missile implements DrawableObject,DeleteObject {
 
 	Point endPoint;
 	Point pos;
@@ -19,16 +20,18 @@ public class Projectile implements DrawableObject,DeleteObject {
 	int index = 0;
 	boolean delete = false;
 	float angle;
-	Ennemi target;
+	Vector<Ennemi> ennemi;
 	int power;
+	float radiusSq;
 
-	public Projectile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,Ennemi target) {
+	public Missile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,float radius,Vector<Ennemi> ennemi) {
 		this.pos = startPoint;
 		this.endPoint = endPoint;
 		this.scale = scale;
 		this.image = image;
-		this.target=target;
+		this.ennemi=ennemi;
 		this.power=power;
+		this.radiusSq = radius*radius*Game.tileSize*Game.tileSize;
 		steps = (int) (startPoint.distance(endPoint)/(Game.tileSize*32f));
 		//System.out.println("steps : "+steps);
 		if(steps > 0) {
@@ -42,21 +45,33 @@ public class Projectile implements DrawableObject,DeleteObject {
 	        angle += 360;
 	    }
 	}
+	
+	
+	public void zoneDamage() {
+		for (int i = 0; i < ennemi.size(); i++) {
+			Ennemi target = ennemi.elementAt(i);
+			if (pos.distanceSq(target.pos) < radiusSq) {
+				target.giveDamage(power);
+			}
+		}
+	}
+	
 
 	public boolean update(GdxGraphics g) {
 		if (index < steps) {
 			pos.translate(offsetX, offsetY);
 		}
 		else if(index < steps+anim){
+			if (index == steps) {
+				// explosion degats
+				zoneDamage();
+			}
+			
 			//animation
 			image = new BitmapImage("data/assets/tank/PNG/Retina/explosion"+(index-steps+1)+".png");
 
 		}
 		else {
-			//System.out.println("shooted ");
-			//System.out.println(target.getHP());
-			target.giveDamage(power);
-
 			return true;
 		}
 		index++;

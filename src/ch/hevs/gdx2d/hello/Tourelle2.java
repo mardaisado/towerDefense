@@ -25,7 +25,7 @@ public class Tourelle2 extends Defense{
 	
 	float angle;
 	
-	public Tourelle2(Point pos,Vector<Ennemi> ennemi,Vector<Projectile> projectile) {
+	public Tourelle2(Point pos,Vector<Ennemi> ennemi,Vector<Object> projectile) {
 		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN);
 		base = new BitmapImage(BASE_URL);
 		movingPart = new BitmapImage(MOVINGPART_URL);
@@ -54,7 +54,8 @@ public class Tourelle2 extends Defense{
 				dt = 0;
 				
 				// SHOOT !!!
-				projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,(Mojojo)(target)));
+				projectile.add(new Missile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,80,ennemi));
+				//projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,(Mojojo)(target)));
 				nbHits++;
 			}
 		}

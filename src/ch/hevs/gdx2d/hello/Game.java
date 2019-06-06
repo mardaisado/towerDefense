@@ -37,7 +37,7 @@ public class Game extends PortableApplication {
 	Vector<Ennemi> ennemi = new Vector<Ennemi>();
 	Vector<Defense> defense = new Vector<Defense>();
 	Vector<Dragable> dragable = new Vector<Dragable>();
-	Vector<Projectile> projectile = new Vector<Projectile>();
+	Vector<Object> projectile = new Vector<Object>();
 
 	static TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
@@ -74,7 +74,7 @@ public class Game extends PortableApplication {
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",400f,"ch.hevs.gdx2d.hello.Tourelle2",100},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",500f,"ch.hevs.gdx2d.hello.Tourelle2",100},
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",600f,"ch.hevs.gdx2d.hello.Tourelle2",100},
-			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",100f,"ch.hevs.gdx2d.hello.Tourelle2",100}
+			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",80f,"ch.hevs.gdx2d.hello.Tourelle2",100}
 	};	
 	public Game() {
 		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
@@ -154,11 +154,11 @@ public class Game extends PortableApplication {
 			}
 
 
-			Iterator<Projectile> p = projectile.iterator();
+			Iterator<Object> p = projectile.iterator();
 			while(p.hasNext()) {
-				Projectile obj;
+				Object obj;
 				obj = p.next();
-				if (((Projectile) obj).update(g)) {
+				if (((DeleteObject) obj).update(g)) {
 					p.remove();
 				}
 			}
@@ -183,7 +183,7 @@ public class Game extends PortableApplication {
 		for (Ennemi obj : ennemi) {
 			((DrawableObject) obj).draw(g);
 		}
-		for (Projectile obj : projectile) {
+		for (Object obj : projectile) {
 			((DrawableObject) obj).draw(g);
 		}
 
@@ -248,7 +248,7 @@ public class Game extends PortableApplication {
 					if (d != null) {
 						defense.add(d);
 					}
-					System.out.println((String)nowDragable.defense[3]);
+					//System.out.println((String)nowDragable.defense[3]);
 					money.takeOffMoneyCount((int)nowDragable.defense[4]);
 				}
 			}
@@ -288,8 +288,8 @@ public void onDrag(int x, int y) {
 			else {
 				preview.setPlaceable(false);
 			}
-			System.out.println("moi" + Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30));
-			System.out.println("jeremy"+ Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap));
+//			System.out.println("moi" + Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30));
+//			System.out.println("jeremy"+ Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap));
 			preview.move(x-map0x, y-map0y);
 
 		}

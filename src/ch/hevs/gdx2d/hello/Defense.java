@@ -11,7 +11,7 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 
 	Point pos;
 	Vector<Ennemi> ennemi;
-	Vector<Projectile> projectile;
+	Vector<Object> projectile;
 	int level = 1;
 	int[] cost= {1000,2000,3000};
 	int nbHits = 0;
@@ -26,7 +26,7 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	
 	int radiusCollision = 30;
 	
-	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Projectile> projectile,String defenseName,int price,float radius,float cooldown) {
+	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Object> projectile,String defenseName,int price,float radius,float cooldown) {
 		this.pos = pos;
 		this.ennemi = ennemi;
 		this.projectile = projectile;

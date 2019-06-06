@@ -26,7 +26,8 @@ public class Tourelle extends Defense {
 	
 	float angle;
 	
-	public Tourelle(Point pos,Vector<Ennemi> ennemi,Vector<Projectile> projectile) {
+	public Tourelle(Point pos,Vector<Ennemi> ennemi,Vector<Object
+			> projectile) {
 		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN);
 		
 		//SET IMAGE
