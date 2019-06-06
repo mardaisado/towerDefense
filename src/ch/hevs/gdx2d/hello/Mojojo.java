@@ -36,7 +36,7 @@ public class Mojojo extends Ennemi {
 		this.scale = scale;
 		this.map=map;
 		pos=goStart();
-		this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
+		//this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
  
 		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x/scale),(int) (pos.y/scale)), null, "direction", map);		
 		

@@ -64,13 +64,10 @@ public class PlayButton implements DrawableObject,UpdateObject{
 
 	@Override
 	public void update(GdxGraphics g) {
-		System.out.println(timeDelta);
-		System.out.println(listOfEnnemi);
 		if(searchTime(timeDelta))
 		{
 			ennemi.add(new Mojojo(Game.tileSize,assets[299],Game.tiledMap,100,100));
-		}
-		
+		}	
 		
 		timeDelta++;
 
@@ -78,14 +75,12 @@ public class PlayButton implements DrawableObject,UpdateObject{
 	
 	private boolean searchTime(int timeToFound)
 	{
-		System.out.println("search mode");
 		for (int i = 0; i < listOfEnnemi.size(); i++) {
 			if( (long) (((JSONObject) listOfEnnemi.get(i) ).get("delay")) == (long)timeToFound)
 			{
 				listOfEnnemi.remove(i);
 				return true;
-			}
-			
+			}			
 		}
 		
 		return false;
