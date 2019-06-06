@@ -1,6 +1,7 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
+import java.util.Random;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -21,13 +22,11 @@ public class Mojojo extends Ennemi {
 	
 	private boolean changeDir=false;
 	
-	
 	private Point posOld;
 	
 	private TiledMap map;
 	
 	private TiledMapTileLayer tiledLayer;
-	
 	
 	public Mojojo(float scale, BitmapImage base, TiledMap map, int hp, int reward) {
 				
@@ -37,11 +36,22 @@ public class Mojojo extends Ennemi {
 		this.scale = scale;
 		this.map=map;
 		pos=goStart();
+		//this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
  
 		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x/scale),(int) (pos.y/scale)), null, "direction", map);		
 		
 		speed = changeSpeedForScale(speed);	
 		
+	}
+	
+	public static BitmapImage[] loadAssets() {
+		BitmapImage[] tmp = new BitmapImage[27];
+		String tmp2 = "";
+		for (int i = 0; i < tmp.length; i++) {
+			tmp2 = String.format("%03d", i);
+			tmp[i] = new BitmapImage("data/assets/PNG/ANIMAL/" + i + ".png");
+		}
+		return tmp;
 	}
 	
 	/**
