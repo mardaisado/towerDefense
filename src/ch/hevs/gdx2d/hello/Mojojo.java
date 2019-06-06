@@ -32,11 +32,11 @@ public class Mojojo extends Ennemi {
 				
 		super(hp, reward);
 		this.tiledLayer=(TiledMapTileLayer) map.getLayers().get(0);
-		//this.base = base;
+		this.base = base;
 		this.scale = scale;
 		this.map=map;
 		pos=goStart();
-		this.base = loadAssets()[new Random().nextInt(27)];
+		this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
  
 		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x/scale),(int) (pos.y/scale)), null, "direction", map);		
 		

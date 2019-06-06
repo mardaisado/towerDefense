@@ -13,6 +13,14 @@
 		ANT build script for "${ant.project.name}".
 	</description>
 
+	<!-- https://mvnrepository.com/artifact/org.json/json -->
+	<dependency>
+	    <groupId>org.json</groupId>
+	    <artifactId>json</artifactId>
+	    <version>20180813</version>
+	</dependency>
+
+	
 	<!-- Folders input locations -->
 	<property name="src.dir" location="src" />
 	<property name="data.dir" location="data" />

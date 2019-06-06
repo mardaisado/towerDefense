@@ -105,7 +105,7 @@ public class Game extends PortableApplication {
 		pickGui = new PickDefenseGUI(dragable);
 		defenseGui = new OverviewGUI();
 		money = new MoneyCounter(START_MONEY);
-		playButton = new PlayButton(ennemi);
+		playButton = new PlayButton(ennemi,FRAME_TIME);
 
 
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
