@@ -38,7 +38,8 @@ public class Game extends PortableApplication {
 	Vector<Defense> defense = new Vector<Defense>();
 	Vector<Dragable> dragable = new Vector<Dragable>();
 	Vector<Object> projectile = new Vector<Object>();
-
+	Vector<Object> roundManager = new Vector<Object>();
+	
 	static TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
 	static float tileSize;
@@ -105,7 +106,7 @@ public class Game extends PortableApplication {
 		money = new MoneyCounter(START_MONEY);
 		playButton = new PlayButton(ennemi);
 
-
+		
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
 			for (int j = 0; j < 2; j++) {
 				if(i*2+j < defenseChoice.length) {
@@ -119,6 +120,7 @@ public class Game extends PortableApplication {
 		toDraw.add(pickGui);
 		toDraw.add(money);
 		toDraw.add(playButton);
+		toDraw.add(roundManager);
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		//toDraw.add(new Tourelle4((new Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
@@ -143,7 +145,7 @@ public class Game extends PortableApplication {
 			for (Defense obj : defense) {
 				((UpdateObject) obj).update(g);
 			}
-
+			
 			Iterator<Ennemi> q = ennemi.iterator();
 			while(q.hasNext()) {
 				Ennemi obj;
@@ -177,6 +179,10 @@ public class Game extends PortableApplication {
 		// draw object
 
 		for (Defense obj : defense) {
+			((DrawableObject) obj).draw(g);
+		}
+		
+		for (Object obj : roundManager) {
 			((DrawableObject) obj).draw(g);
 		}
 
@@ -288,8 +294,7 @@ public void onDrag(int x, int y) {
 			else {
 				preview.setPlaceable(false);
 			}
-//			System.out.println("moi" + Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30));
-//			System.out.println("jeremy"+ Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap));
+
 			preview.move(x-map0x, y-map0y);
 
 		}

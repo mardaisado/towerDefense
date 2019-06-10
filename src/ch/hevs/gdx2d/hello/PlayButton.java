@@ -13,9 +13,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class PlayButton implements DrawableObject,UpdateObject{
+public class PlayButton implements DrawableObject, UpdateObject{
 
-	BitmapImage playButton;
+	BitmapImage playButton,pauseButton;
 	BitmapImage fastButton;
 	BitmapImage fastButtonClicked;
 
@@ -44,102 +44,21 @@ public class PlayButton implements DrawableObject,UpdateObject{
 		x = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		y = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		assets = Utils.loadAssets();
-		playButton = new BitmapImage("data/images/playButton.png");
+		playButton = new BitmapImage("data/images/play.png");
 		fastButton = new BitmapImage("data/images/fastButton.png");
+		pauseButton = new BitmapImage("data/images/pause.png");
 		fastButtonClicked = new BitmapImage("data/images/fastButtonClicked.png");
 		this.frame_time=Game.FRAME_TIME;
 		this.ennemi=ennemi;
-		listOfEnnemi=GetTable(1); // Parse JSON file for find the first round
 		scale =  0.1f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f))/playButton.getImage().getHeight();
-	}
-
-	@Override
-	public void update(GdxGraphics g) {
-		if(searchTime(timeDelta))
-		{
-			ennemi.add(new Mojojo(assets[299],Game.tiledMap,100,100));
-		}	
-		
-		timeDelta++;
-
-	}
-	
-	private boolean searchTime(int timeToFound)
-	{
-		for (int i = 0; i < listOfEnnemi.size(); i++) {
-			if( (long) (((JSONObject) listOfEnnemi.get(i) ).get("delay")) == (long)timeToFound)
-			{
-				listOfEnnemi.remove(i);
-				return true;
-			}			
-		}
-		
-		return false;
-		
-	}
-	
-	public JSONArray GetTable(int round)
-	{
-        Object obj=null;
-        
-		try {
-			obj = new JSONParser().parse(new FileReader("data/txt/test.json"));
-		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        if(obj != null)
-        {
-            JSONObject jo = (JSONObject) obj; 
-    		return (JSONArray) jo.get(round+"");
-        }
-
-        return null;
-        // typecasting obj to JSONObject 
-
-	}
-
-	public void onTable()
-	{
-		int[] array = null;
-/*
-
-		BufferedInputStream bis;        
-		try {
-			bis = new BufferedInputStream(new FileInputStream(new File("data/txt/test.txt")));
-			byte[] buf = new byte[8];
-
-		
-
-			while(bis.read(buf) != -1);
-
-
-			bis.close();
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}     	
-
-
-		//return array;
-*/
 	}
 
 	public void clicked(int x,int y) {
 		if(x >= this.y-scale*playButton.getImage().getHeight()/2 && x <= this.y+scale*playButton.getImage().getHeight()/2  && y >= this.x-scale*playButton.getImage().getHeight()/2  && y <= this.x+scale*playButton.getImage().getHeight()/2 ) {
-			if (play) {
-				if (fast) {
-					fast = false;
-				}
-				else {
-					fast = true;
-				}
-			}
-			else {
+	
+			if (!play) {
 				play = true;
-				// start wave
+				new RoundManager(ennemi,this);
 			}
 		}
 	}
@@ -148,15 +67,16 @@ public class PlayButton implements DrawableObject,UpdateObject{
 	public void draw(GdxGraphics g) {
 		// TODO Auto-generated method stub
 		if (play) {
-			if (fast) {
-				g.drawTransformedPicture(y, x, 0,scale, fastButtonClicked);
-			}
-			else {
-				g.drawTransformedPicture(y, x, 0,scale, fastButton);
-			}
+			g.drawTransformedPicture(y, x, 0,scale, pauseButton);
 		}
 		else {
 			g.drawTransformedPicture(y, x, 0,scale, playButton);
 		}
+	}
+
+	@Override
+	public void update(GdxGraphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 }

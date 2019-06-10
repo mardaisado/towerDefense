@@ -24,7 +24,7 @@ public class Projectile implements DrawableObject,DeleteObject {
 	float angle;
 	Ennemi target;
 	int power;
-	Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop.ogg"));
+	Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop2.mp3"));
 	
 	public Projectile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,Ennemi target) {
 		this.pos = startPoint;
