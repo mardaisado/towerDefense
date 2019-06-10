@@ -24,17 +24,17 @@ public class Utils {
 	}
 	
 	/**
-	 * Func for return the boolean proprety on a position or a tile
+	 * Func for return the boolean property on a position or a tile
 	 *
 	 * @param Pos
-	 *            Position of the proprety
+	 *            Position of the property
 	 * @param tile
-	 *            Tile of the proprety (null if you would give the position)
+	 *            Tile of the property (null if you would give the position)
 	 * @param proprety
-	 *            name of the proprety
+	 *            name of the property
 	 * @param map
 	 * 			  
-	 * @return True/false if the proprety is true/flase, false if the tile, proprety doesnt exist
+	 * @return True/false if the property is true/false, false if the tile, property doesn't exist
 	 */
 	public static boolean returnStateForBool(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
@@ -59,17 +59,17 @@ public class Utils {
 	}
 	
 	/**
-	 * Func for return the integer proprety on a position or a tile
+	 * Func for return the integer property on a position or a tile
 	 *
 	 * @param Pos
-	 *            Position of the proprety
+	 *            Position of the property
 	 * @param tile
-	 *            Tile of the proprety (null if you would give the position)
+	 *            Tile of the property (null if you would give the position)
 	 * @param proprety
-	 *            name of the proprety
+	 *            name of the property
 	 * @param map
 	 * 			  
-	 * @return True/false if the proprety is true/flase, false if the tile, proprety doesnt exist
+	 * @return True/false if the property is true/false, false if the tile, property doesn't exist
 	 */
 	public static int returnStateForInt(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{
@@ -95,17 +95,17 @@ public class Utils {
 	}
 	
 	/**
-	 * Func for return the string proprety on a position or a tile
+	 * Func for return the string property on a position or a tile
 	 *
 	 * @param Pos
-	 *            Position of the proprety
+	 *            Position of the property
 	 * @param tile
-	 *            Tile of the proprety (null if you would give the position)
+	 *            Tile of the property (null if you would give the position)
 	 * @param proprety
-	 *            name of the proprety
+	 *            name of the property
 	 * @param map
 	 * 			  
-	 * @return True/false if the proprety is true/flase, false if the tile, proprety doesnt exist
+	 * @return True/false if the property is true/false, false if the tile, property doesn't exist
 	 */
 	public static String returnStateForString(Point pos,TiledMapTile tile, String proprety, TiledMap map)
 	{

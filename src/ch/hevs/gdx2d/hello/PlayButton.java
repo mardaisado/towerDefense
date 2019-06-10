@@ -4,21 +4,12 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-import java.io.FileReader; 
-import java.util.Iterator; 
-import java.util.Map; 
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -66,7 +57,7 @@ public class PlayButton implements DrawableObject,UpdateObject{
 	public void update(GdxGraphics g) {
 		if(searchTime(timeDelta))
 		{
-			ennemi.add(new Mojojo(Game.tileSize,assets[299],Game.tiledMap,100,100));
+			ennemi.add(new Mojojo(assets[299],Game.tiledMap,100,100));
 		}	
 		
 		timeDelta++;

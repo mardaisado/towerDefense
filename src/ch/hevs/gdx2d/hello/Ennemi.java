@@ -8,7 +8,7 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
 public abstract class Ennemi implements DrawableObject {
 
-	Point pos;
+	protected Point pos;
 	
 	protected int progress;
 	
@@ -50,6 +50,24 @@ public abstract class Ennemi implements DrawableObject {
 	 */
 	public int getHP() {
 		return hp;
+	}
+	
+	/**
+	 * Func for return ennemis'position
+	 *
+	 * @return position of the ennemi with scale
+	 */
+	public Point getPos() {
+		return new Point((int)(pos.x*Game.tileSize),(int)(pos.y*Game.tileSize));
+	}
+	
+	/**
+	 * Func for return ennemis'position
+	 *
+	 * @return position of the ennemi without scale
+	 */
+	public Point getPosNoScale() {
+		return pos;
 	}
 	
 	/**

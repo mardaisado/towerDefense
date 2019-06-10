@@ -19,29 +19,24 @@ public class Mojojo extends Ennemi {
 	private int directionSave;
 	
 	public int speed=2;
-	
-	private boolean changeDir=false;
-	
-	private Point posOld;
-	
+		
 	private TiledMap map;
 	
 	private TiledMapTileLayer tiledLayer;
 	
-	public Mojojo(float scale, BitmapImage base, TiledMap map, int hp, int reward) {
+	public Mojojo(BitmapImage base, TiledMap map, int hp, int reward) {
 				
 		super(hp, reward);
 		this.tiledLayer=(TiledMapTileLayer) map.getLayers().get(0);
 		this.base = base;
-		this.scale = scale;
+		this.scale = Game.tileSize;
 		this.map=map;
 		pos=goStart();
 		//this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
  
-		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x/scale),(int) (pos.y/scale)), null, "direction", map);		
+		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x),(int) (pos.y)), null, "direction", map);		
 		
-		speed = changeSpeedForScale(speed);	
-		
+		speed = changeSpeedForScale(speed);		
 	}
 	
 	public static BitmapImage[] loadAssets() {
@@ -55,7 +50,7 @@ public class Mojojo extends Ennemi {
 	}
 	
 	/**
-	 * exemple : changeSpeedForScale(speed) return temp with the scale 
+	 * Example : changeSpeedForScale(speed) return temp with the scale 
 	 *
 	 * @param temp
 	 *            to be scaled
@@ -67,7 +62,7 @@ public class Mojojo extends Ennemi {
 	}
 	
 	/**
-	 * exemple : goStart() return the position of the start
+	 * Example : goStart() return the position of the start
 	 *
 	 * @return The start position 
 	 */
@@ -77,20 +72,16 @@ public class Mojojo extends Ennemi {
 			for (int j = 0; j < 20; j++) {
 				if((Utils.returnStateForBool(new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f)), null, "start", map)))
 				{	
-					return new Point((int)((i+0.5)*scale*64f),(int)((j+0.5)*scale*64f));
-			  		
-					
+					return new Point((int)((i+0.5)*64f),(int)((j+0.5)*64f));					
 				}
-			} 
-			
+			} 		
 		}
 		
-		return new Point(0,0);
-	
+		return new Point(0,0);	
 	}
 	
 	/**
-	 * exemple : goNextPosition(direction,pos) return new position 
+	 * Example : goNextPosition(direction,pos) return new position 
 	 *
 	 * @param direction
 	 *            the direction of the tile
@@ -103,19 +94,19 @@ public class Mojojo extends Ennemi {
 		switch (direction) {
 		case 1:
 				angle=90;
-				return new Point(position.x + ((int)((0)*scale*speed)), position.y + ((int)((1)*scale*speed)) );
+				return new Point(position.x + ((int)((0)*speed)), position.y + ((int)((1)*speed)) );
 				
 		case 2:
 				angle=180;
-				return new Point(position.x + ((int)((0)*scale*speed)), position.y + ((int)((-1)*scale*speed)) );
+				return new Point(position.x + ((int)((0)*speed)), position.y + ((int)((-1)*speed)) );
 				
 		case 3:
 				angle=270;
-				return new Point(position.x + ((int)((1)*scale*speed)), position.y + ((int)((0)*scale*speed)) );
+				return new Point(position.x + ((int)((1)*speed)), position.y + ((int)((0)*speed)) );
 					
 		case 4:
 				angle=360;
-				return new Point(position.x + ((int)((-1)*scale*speed)), position.y + ((int)((0)*scale*speed)) );
+				return new Point(position.x + ((int)((-1)*speed)), position.y + ((int)((0)*speed)) );
 					
 		default:
 			return position;
@@ -124,7 +115,7 @@ public class Mojojo extends Ennemi {
 	}
 
 	/**
-	 * Func for the state of the ennmi
+	 * Func for the state of the ennemi
 	 *
 	 * @return true is ennemi is alive, false if not
 	 */
@@ -139,7 +130,7 @@ public class Mojojo extends Ennemi {
 	}
 	
 	/**
-	 * exemple : getOffset(direction,pos) get postion with an offset
+	 * Example : getOffset(direction,pos) get position with an offset
 	 *
 	 * @param direction
 	 *            the direction of the tile
@@ -151,16 +142,16 @@ public class Mojojo extends Ennemi {
 	{
 		switch (direction) {
 		case 1:
-				return new Point( (int) (position.x + (0.5 * scale * 64f)) , position.y);
+				return new Point( (int) (position.x + (0.5 * 64f)) , position.y);
 				
 		case 2:
-				return new Point( (position.x ) ,(int) (position.y + (0.5 * scale * 64f)));
+				return new Point( (position.x ) ,(int) (position.y + (0.5  * 64f)));
 		
 		case 3:
-				return new Point( (int) (position.x - (0.5 * scale * 64f)) , position.y);
+				return new Point( (int) (position.x - (0.5  * 64f)) , position.y);
 
 		case 4:
-				return new Point( position.x  ,(int) (position.y - (0.5 * scale * 64f)));
+				return new Point( position.x  ,(int) (position.y - (0.5 * 64f)));
 		}
 		
 		return position;
@@ -184,7 +175,7 @@ public class Mojojo extends Ennemi {
 		
 		for(int i=0;i<	updateInFutur;i++)
 		{
-			currentCell = Utils.getTile(new Point( (int)(getOffset(directionSaveTemp,output).x/scale) ,(int) (getOffset(directionSaveTemp,output).y/scale) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
+			currentCell = Utils.getTile(new Point( (int)(getOffset(directionSaveTemp,output).x) ,(int) (getOffset(directionSaveTemp,output).y) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
 						
 			direction = Utils.returnStateForInt(null,currentCell, "direction", map);
 			
@@ -193,12 +184,12 @@ public class Mojojo extends Ennemi {
 			output=goNextPosition(direction,output);	
 		}
 		
-		return output ;
+		return new Point((int)(output.x*scale),(int)(output.y*scale)) ;
 	}
 
 	@Override
 	public void draw(GdxGraphics g) {
-		g.drawTransformedPicture(pos.x, pos.y, angle-270, scale/2, base);
+		g.drawTransformedPicture(pos.x*scale, pos.y*scale, angle-270, scale/2, base);
 		
 	}
 
@@ -206,11 +197,10 @@ public class Mojojo extends Ennemi {
 	public boolean update(GdxGraphics g) {
 		
 		if(checkDeath())
-		{		
-			
+		{					
 			int direction = 0;
 
-			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave,pos).x/scale) ,(int) (getOffset(directionSave,pos).y/scale) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
+			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave,pos).x) ,(int) (getOffset(directionSave,pos).y) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
 						
 			direction = Utils.returnStateForInt(null,currentCell, "direction", map);
 			

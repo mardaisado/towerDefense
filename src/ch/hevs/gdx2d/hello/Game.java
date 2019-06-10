@@ -62,7 +62,7 @@ public class Game extends PortableApplication {
 	static MoneyCounter money = null;
 
 	final static double PERCENTAGEOFSCREEN =1.5;
-	final static boolean FULLSCREEN = false;
+	final static boolean FULLSCREEN = true;
 	final static int START_MONEY = 1000;
 
 	// { pick image, dragable image, radius}
@@ -240,7 +240,7 @@ public class Game extends PortableApplication {
 		if (preview.getVisible()) {
 			preview.setVisible(false);
 
-			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
+			if((Utils.returnStateForBool(new Point((int) ((x-map0x)/tileSize),(int) ((y-map0y)/tileSize)),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
 			{
 				if(money.getMoneyCount()>= (int)nowDragable.defense[4]) {
 					//defense.add(new Tourelle(new Point(x-map0x,y-map0y),ennemi,projectile));
@@ -262,7 +262,7 @@ public class Game extends PortableApplication {
 public void onKeyUp(int keycode) {
 	super.onKeyUp(keycode);
 
-	ennemi.add(new Mojojo(tileSize,assets[299],tiledMap,30,100));
+	ennemi.add(new Mojojo(assets[299],tiledMap,30,100));
 }
 
 
@@ -281,7 +281,7 @@ public void onDrag(int x, int y) {
 				preview.setImage(new BitmapImage((String)obj.defense[1]), tileSize);
 				//System.out.println((obj.defense[3]));
 			}
-			if((Utils.returnStateForBool(new Point((int)x-map0x,(int)y-map0y),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
+			if((Utils.returnStateForBool(new Point((int) ((x-map0x)/Game.tileSize),(int)((y-map0y)/Game.tileSize)),null,"posable",tiledMap)) == true && Utils.checkDefenseCollision(defense, (int)x-map0x,(int)y-map0y, 30) == false)
 			{
 				preview.setPlaceable(true);
 			}

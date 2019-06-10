@@ -31,7 +31,7 @@ public class Missile implements DrawableObject,DeleteObject {
 		this.image = image;
 		this.ennemi=ennemi;
 		this.power=power;
-		this.radiusSq = radius*radius*Game.tileSize*Game.tileSize;
+		this.radiusSq = radius*radius;
 		steps = (int) (startPoint.distance(endPoint)/(Game.tileSize*32f));
 		//System.out.println("steps : "+steps);
 		if(steps > 0) {
@@ -50,7 +50,7 @@ public class Missile implements DrawableObject,DeleteObject {
 	public void zoneDamage() {
 		for (int i = 0; i < ennemi.size(); i++) {
 			Ennemi target = ennemi.elementAt(i);
-			if (pos.distanceSq(target.pos) < radiusSq) {
+			if (pos.distanceSq(target.getPos()) < radiusSq) {
 				target.giveDamage(power);
 			}
 		}

@@ -10,7 +10,7 @@ public class Tourelle4 extends Defense{
 
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle qui tire beaucoup";
-	final static int PRICE = 400;
+	final static int PRICE = 1000;
 	final static int DAMAGE = 20;
 	final static float RADIUS = 200;
 	final static float COOLDOWN = 0.3f;
@@ -38,15 +38,15 @@ public class Tourelle4 extends Defense{
 		Ennemi target = null;
 		Ennemi tmp = null;
 		for (int i = 0; i < ennemi.size(); i++) {
-			if(pos.distanceSq(ennemi.get(i).pos) <= rangeSq) {
+			if(pos.distanceSq(ennemi.get(i).getPos()) <= rangeSq) {
 				tmp = ennemi.get(i);
 				if(target == null) {
 					target = tmp;
-					angle = getAngle(target.pos);
+					angle = getAngle(target.getPos());
 				}
 				if(((Mojojo)tmp).getProgress() > ((Mojojo)target).getProgress()) {
 					target = tmp;
-					angle = getAngle(target.pos);
+					angle = getAngle(target.getPos());
 				}
 			}
 		}
@@ -75,6 +75,11 @@ public class Tourelle4 extends Defense{
 				dt = 0;
 				
 				// SHOOT !!!
+				for (int i = 0; i < 360; i=i+45) {
+					projectile.add(new RangeProjectile(new Point(pos.x, pos.y), i, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
+					
+				}
+				/*
 				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 0, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
 				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 45, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
 				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 90, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
@@ -84,6 +89,7 @@ public class Tourelle4 extends Defense{
 				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 270, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
 				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 315, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
 				//projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,(Mojojo)(target)));
+				*/
 				nbHits++;
 			}
 		}

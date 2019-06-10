@@ -49,7 +49,7 @@ public class RangeProjectile implements DrawableObject,DeleteObject{
 	public void checkDamage() {
 		for (int i = 0; i < ennemi.size(); i++) {
 			Ennemi target = ennemi.elementAt(i);
-			if (pos.distanceSq(target.pos) < radiusSq) {
+			if (pos.distanceSq(target.getPos()) < radiusSq) {
 				target.giveDamage(power);
 			}
 		}
