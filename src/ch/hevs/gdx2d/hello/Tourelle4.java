@@ -79,17 +79,7 @@ public class Tourelle4 extends Defense{
 					projectile.add(new RangeProjectile(new Point(pos.x, pos.y), i, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
 					
 				}
-				/*
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 0, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 45, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 90, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 135, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 180, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 225, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 270, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				projectile.add(new RangeProjectile(new Point(pos.x, pos.y), 315, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
-				//projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,(Mojojo)(target)));
-				*/
+
 				nbHits++;
 			}
 		}

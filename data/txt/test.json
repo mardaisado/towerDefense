@@ -1,5 +1,4 @@
-{
-  "1": [
+  {"1": [
     {
       "type": "Moj",
       "delay": 30
@@ -16,5 +15,56 @@
       "type": "Moj",
       "delay": 110
     }
+  ],"2": [
+    {
+      "type": "Moj",
+      "delay": 30
+    },
+    {
+      "type": "Moj",
+      "delay": 60
+    },
+    {
+      "type": "Moj",
+      "delay": 90
+    },
+    {
+      "type": "Moj",
+      "delay": 150
+    }
+  ],"3": [
+    {
+      "type": "Moj",
+      "delay": 30
+    },
+    {
+      "type": "Moj",
+      "delay": 60
+    },
+    {
+      "type": "Moj",
+      "delay": 90
+    },
+    {
+      "type": "Moj",
+      "delay": 110
+    }
+  ],"4": [
+    {
+      "type": "Moj",
+      "delay": 30
+    },
+    {
+      "type": "Moj",
+      "delay": 60
+    },
+    {
+      "type": "Moj",
+      "delay": 90
+    },
+    {
+      "type": "Moj",
+      "delay": 150
+    }
   ]
-}
+  }

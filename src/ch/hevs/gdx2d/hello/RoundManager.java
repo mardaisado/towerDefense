@@ -24,12 +24,13 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	
 	PlayButton playButton;
 	boolean play_state = false;
+	int round=1;
 	
 	public RoundManager(Vector<Ennemi> ennemi, PlayButton playButton) {
 		
 		this.ennemi=ennemi;
 		this.playButton=playButton;
-		listOfEnnemi=GetTable(1); // Parse JSON file for find the first round
+		
 	}
 	
 	private boolean searchTime(int timeToFound)
@@ -47,6 +48,9 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	
 	public void play() {
 		play_state = true;
+		timeDelta=0;
+		listOfEnnemi=GetTable(round); // Parse JSON file for find the first round
+		
 	}
 	
 	public JSONArray GetTable(int round)
@@ -83,7 +87,13 @@ public class RoundManager implements UpdateObject, DrawableObject{
 				
 			if(listOfEnnemi.size()==0)
 			{
-				playButton.play=true;
+				if(round<4)
+				{
+					round++;
+				}
+				
+				play_state=false;
+				playButton.play=false;
 			}
 		}
 	}
