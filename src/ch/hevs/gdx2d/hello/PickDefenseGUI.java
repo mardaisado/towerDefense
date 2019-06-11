@@ -7,14 +7,14 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
 public class PickDefenseGUI implements DrawableObject,UpdateObject{
 
-	BitmapImage[] assets;
+
 	BitmapImage image;
 	float x;
 	float y;
 	float facteur;
 	
 	public PickDefenseGUI(Vector<Dragable> dragable) {
-		this.assets = assets;
+
 		image = new BitmapImage("data/images/backDefense.png");
 		x = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		y = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f)*image.getImage().getWidth()/image.getImage().getHeight());
