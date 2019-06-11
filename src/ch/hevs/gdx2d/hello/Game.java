@@ -223,8 +223,8 @@ public class Game extends PortableApplication {
 
 		Defense def = Utils.getDefenseClicked(defense,x-map0x, y-map0y);
 		if (def != null) {
-			defenseGui.setVisible(true);
 			defenseGui.setDefense(def);
+			defenseGui.setVisible(true);
 		}
 		//		System.out.println((int)((x-map0x)/(tileSize*64f)));
 		//		System.out.println((int)((y-map0y)/(tileSize*64f)));
