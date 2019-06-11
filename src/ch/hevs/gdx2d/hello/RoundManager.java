@@ -123,7 +123,7 @@ public class RoundManager implements UpdateObject, DrawableObject{
 
 			timeDelta++;
 
-			if(listOfEnnemi.size()==0)
+			if(listOfEnnemi.size()==0 && ennemi.size() == 0)
 			{
 				if(round<maxRound)
 				{
