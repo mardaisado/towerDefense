@@ -117,11 +117,11 @@ public class Game extends PortableApplication {
 		}
 
 		//preview.setImage(assets[271], tileSize);
+		toDraw.add(roundManager);
 		toDraw.add(defenseGui);
 		toDraw.add(pickGui);
 		toDraw.add(money);
 		toDraw.add(playButton);
-		toDraw.add(roundManager);
 		//toDraw.add(preview);
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		//toDraw.add(new Tourelle4((new Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
