@@ -23,14 +23,34 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	PlayButton playButton;
 	boolean play_state = false;
 	int round=1;
+	int maxRound=0;
+	
+	JSONObject roundScript;
 	
 	public RoundManager(Vector<Ennemi> ennemi, PlayButton playButton) {
 		
 		this.ennemi=ennemi;
 		this.playButton=playButton;
 		
+		roundScript = chargeObj("data/txt/test.json");
+		
+		maxRound=defineMax(roundScript);
+		
 	}
 	
+	private JSONObject chargeObj(String path)
+	{
+		JSONObject obj;
+		
+		try {
+			obj = (JSONObject) (new JSONParser().parse(new FileReader(path)));
+		} catch (IOException | ParseException e) {
+			obj=null;
+			e.printStackTrace();
+		} 
+		
+		return obj;
+	}
 	private boolean searchTime(int timeToFound)
 	{
 		for (int i = 0; i < listOfEnnemi.size(); i++) {
@@ -43,23 +63,24 @@ public class RoundManager implements UpdateObject, DrawableObject{
 		return false;
 	}
 	
+	private int defineMax(Object obj)
+	{
+		if(obj!=null)
+		{
+            JSONObject jo = (JSONObject) obj; 
+    		return jo.size();
+		}
+		return 0;
+	}
 	public void play() {
 		play_state = true;
 		timeDelta=0;
-		listOfEnnemi=getTable(round); // Parse JSON file for find the first round
-		
+		listOfEnnemi=getTable(round,roundScript); 	
 	}
 	
-	public JSONArray getTable(int round)
+	public JSONArray getTable(int round, Object obj)
 	{
-        Object obj=null;
-        
-		try {
-			obj = new JSONParser().parse(new FileReader("data/txt/test.json"));
-		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+
         if(obj != null)
         {
             JSONObject jo = (JSONObject) obj; 
@@ -82,7 +103,7 @@ public class RoundManager implements UpdateObject, DrawableObject{
 				
 			if(listOfEnnemi.size()==0)
 			{
-				if(round<4)
+				if(round<maxRound)
 				{
 					round++;
 				}
