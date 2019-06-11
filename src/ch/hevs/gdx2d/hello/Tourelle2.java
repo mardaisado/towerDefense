@@ -11,12 +11,13 @@ public class Tourelle2 extends Defense{
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle moins jolie";
 	final static int PRICE = 150;
-	final static int DAMAGE = 30;
+	final static int DAMAGE = 10;
 	final static float RADIUS = 250;
 	final static float COOLDOWN = 0.6f;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile182.png";
 	final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile250.png";
 	final static String PROJECTILE_URL = "data/assets/PNG/Retina/towerDefense_tile300.png";
+	final static int[] UPGRADE_COST= {1000,2000,3000};
 	
 	// VARIABLES OF THIS DEFENSE
 	BitmapImage base;
@@ -26,7 +27,7 @@ public class Tourelle2 extends Defense{
 	float angle;
 	
 	public Tourelle2(Point pos,Vector<Ennemi> ennemi,Vector<Object> projectile) {
-		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN);
+		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN,UPGRADE_COST,DAMAGE);
 		base = new BitmapImage(BASE_URL);
 		movingPart = new BitmapImage(MOVINGPART_URL);
 		projectileBtp = new BitmapImage(PROJECTILE_URL);
@@ -54,7 +55,7 @@ public class Tourelle2 extends Defense{
 				dt = 0;
 				
 				// SHOOT !!!
-				projectile.add(new Missile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,80,ennemi));
+				projectile.add(new Missile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,damage,80,ennemi));
 				//projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,(Mojojo)(target)));
 				nbHits++;
 			}
@@ -78,5 +79,28 @@ public class Tourelle2 extends Defense{
 			}
 		}
 		return target;
+	}
+
+	@Override
+	public void upgradeAction(int level) {
+		switch (level) {
+		//LEVEL 2
+		case 2:
+			radius = radius*1.2f;
+			rangeSq = rangeSq*1.2f*1.2f;
+			damage = (int)(damage * 1.2f);
+			cooldown = cooldown*0.7f;
+			break;
+		//LEVEL 3
+		case 3:
+			radius = radius*1.2f;
+			rangeSq = rangeSq*1.2f*1.2f;
+			damage = (int)(damage * 1.2f);
+			cooldown = cooldown*0.7f;
+			break;
+
+		default:
+			break;
+		}
 	}
 }

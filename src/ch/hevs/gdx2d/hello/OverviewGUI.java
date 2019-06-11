@@ -73,13 +73,15 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	public void setDefense(Defense def) {
 		this.defense = def;
 		upgradeButton.setDefense(def);
-		circleScale = 2*def.radius*Game.tileSize/ringGrey.getImage().getHeight();
 	}
 	
 	@Override
 	public void update(GdxGraphics g) {
 		// TODO Auto-generated method stub
 		upgradeButton.update(g);
+		if (defense != null) {
+			circleScale = 2*defense.radius*Game.tileSize/ringGrey.getImage().getHeight();
+		}
 	}
 
 	@Override

@@ -13,10 +13,11 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	Vector<Ennemi> ennemi;
 	Vector<Object> projectile;
 	int level = 1;
-	int[] cost= {1000,2000,3000};
+	int[] cost;
 	int nbHits = 0;
 	String defenseName;
 	int price;
+	int damage;
 	
 	float rangeSq;
 	float radius;
@@ -26,7 +27,7 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	
 	int radiusCollision = 30;
 	
-	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Object> projectile,String defenseName,int price,float radius,float cooldown) {
+	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Object> projectile,String defenseName,int price,float radius,float cooldown,int[] cost,int damage) {
 		this.pos = pos;
 		this.ennemi = ennemi;
 		this.projectile = projectile;
@@ -35,6 +36,8 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 		this.radius = radius;
 		this.rangeSq = radius*radius*Game.tileSize*Game.tileSize;
 		this.cooldown = cooldown;
+		this.cost = cost;
+		this.damage = damage;
 	}
 
 	public int nextUpgradePrice() {
@@ -45,6 +48,7 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 		if(level<3) {
 			Game.money.takeOffMoneyCount(nextUpgradePrice());
 			level++;
+			upgradeAction(level);
 		}
 	}
 	
@@ -68,6 +72,8 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 
 	    return angle;
 	}
+	
+	public abstract void upgradeAction(int level);
 	
 	@Override
 	public abstract void draw(GdxGraphics g);

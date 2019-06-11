@@ -11,12 +11,13 @@ public class Tourelle4 extends Defense{
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle qui tire beaucoup";
 	final static int PRICE = 1000;
-	final static int DAMAGE = 20;
+	final static int DAMAGE = 10;
 	final static float RADIUS = 200;
 	final static float COOLDOWN = 0.3f;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile180.png";
 	//final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile249.png";
 	final static String PROJECTILE_URL = "data/assets/PNG/Retina/towerDefense_tile273.png";
+	final static int[] UPGRADE_COST= {1000,2000,3000};
 	
 	// VARIABLES OF THIS DEFENSE
 	BitmapImage base;
@@ -26,7 +27,7 @@ public class Tourelle4 extends Defense{
 	float angle;
 	
 	public Tourelle4(Point pos,Vector<Ennemi> ennemi,Vector<Object> projectile) {
-		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN);
+		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN,UPGRADE_COST,DAMAGE);
 		
 		//SET IMAGE
 		base = new BitmapImage(BASE_URL);
@@ -76,7 +77,7 @@ public class Tourelle4 extends Defense{
 				
 				// SHOOT !!!
 				for (int i = 0; i < 360; i=i+45) {
-					projectile.add(new RangeProjectile(new Point(pos.x, pos.y), i, Game.tileSize, projectileBtp,10,RADIUS,ennemi));
+					projectile.add(new RangeProjectile(new Point(pos.x, pos.y), i, Game.tileSize, projectileBtp,damage,RADIUS,ennemi));
 					
 				}
 				/*
@@ -92,6 +93,29 @@ public class Tourelle4 extends Defense{
 				*/
 				nbHits++;
 			}
+		}
+	}
+
+	@Override
+	public void upgradeAction(int level) {
+		switch (level) {
+		//LEVEL 2
+		case 2:
+			radius = radius*1.2f;
+			rangeSq = rangeSq*1.2f*1.2f;
+			damage = (int)(damage * 1.2f);
+			cooldown = cooldown*0.7f;
+			break;
+		//LEVEL 3
+		case 3:
+			radius = radius*1.2f;
+			rangeSq = rangeSq*1.2f*1.2f;
+			damage = (int)(damage * 1.2f);
+			cooldown = cooldown*0.7f;
+			break;
+
+		default:
+			break;
 		}
 	}
 }

@@ -12,12 +12,13 @@ public class Tourelle extends Defense {
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle très jolie";
 	final static int PRICE = 100;
-	final static int DAMAGE = 20;
+	final static int DAMAGE = 30;
 	final static float RADIUS = 200;
 	final static float COOLDOWN = 1;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile180.png";
 	final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile249.png";
 	final static String PROJECTILE_URL = "data/assets/PNG/Retina/towerDefense_tile251.png";
+	final static int[] UPGRADE_COST= {PRICE,2000,3000};
 	
 	// VARIABLES OF THIS DEFENSE
 	BitmapImage base;
@@ -26,9 +27,8 @@ public class Tourelle extends Defense {
 	
 	float angle;
 	
-	public Tourelle(Point pos,Vector<Ennemi> ennemi,Vector<Object
-			> projectile) {
-		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN);
+	public Tourelle(Point pos,Vector<Ennemi> ennemi,Vector<Object> projectile) {
+		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN,UPGRADE_COST,DAMAGE);
 		
 		//SET IMAGE
 		base = new BitmapImage(BASE_URL);
@@ -77,9 +77,32 @@ public class Tourelle extends Defense {
 				dt = 0;
 				
 				// SHOOT !!!
-				projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,(Mojojo)(target)));
+				projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,damage,(Mojojo)(target)));
 				nbHits++;
 			}
+		}
+	}
+
+	@Override
+	public void upgradeAction(int level) {
+		switch (level) {
+		//LEVEL 2
+		case 2:
+			radius = radius*1.2f;
+			rangeSq = rangeSq*1.2f*1.2f;
+			damage = (int)(damage * 1.2f);
+			cooldown = cooldown*0.7f;
+			break;
+		//LEVEL 3
+		case 3:
+			radius = radius*1.2f;
+			rangeSq = rangeSq*1.2f*1.2f;
+			damage = (int)(damage * 1.2f);
+			cooldown = cooldown*0.7f;
+			break;
+
+		default:
+			break;
 		}
 	}
 }

@@ -52,7 +52,7 @@ public class UpgradeButton implements DrawableObject,UpdateObject{
 	}
 	
 	public void clicked(int x,int y) {
-		if ((x >= (0.92f*overviewY-2*this.y) && x <= (0.92f*overviewY) && y >= overviewX/2-this.x && y <= overviewX/2+this.x)) {
+		if ((x >= (0.92f*overviewY-2*this.y) && x <= (0.92f*overviewY) && y >= overviewX/2-this.x && y <= overviewX/2+this.x)&&!notClickable) {
 			defense.upgrade();
 		}
 	}
