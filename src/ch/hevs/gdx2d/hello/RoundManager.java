@@ -91,7 +91,6 @@ public class RoundManager implements UpdateObject, DrawableObject{
 				{
 					round++;
 				}
-				
 				play_state=false;
 				playButton.play=false;
 			}

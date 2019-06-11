@@ -45,7 +45,7 @@ public class PlayButton implements DrawableObject, UpdateObject{
 		assets = Utils.loadAssets();
 		playButton = new BitmapImage("data/images/play.png");
 		fastButton = new BitmapImage("data/images/fastButton.png");
-		pauseButton = new BitmapImage("data/images/pause.png");
+		pauseButton = new BitmapImage("data/images/blank.png");
 		fastButtonClicked = new BitmapImage("data/images/fastButtonClicked.png");
 		this.frame_time=Game.FRAME_TIME;
 		this.ennemi=ennemi;
