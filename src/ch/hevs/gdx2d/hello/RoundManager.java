@@ -12,6 +12,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+
 public class RoundManager implements UpdateObject, DrawableObject{
 	
 	JSONArray listOfEnnemi;
@@ -24,11 +31,27 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	boolean play_state = false;
 	int round=1;
 	
+	float x;
+	float y;
+	
+	BitmapFont font;
+	
 	public RoundManager(Vector<Ennemi> ennemi, PlayButton playButton) {
 		
 		this.ennemi=ennemi;
 		this.playButton=playButton;
 		
+		
+		x = 0.06f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
+		y = 0.02f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
+		
+		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
+		
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(optimusF);
+		parameter.size = generator.scaleForPixelHeight((int) ((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f)/20.0));
+		parameter.color = Color.WHITE;
+		font = generator.generateFont(parameter);
 	}
 	
 	private boolean searchTime(int timeToFound)
@@ -93,9 +116,8 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	}
 
 	@Override
-	public void draw(GdxGraphics arg0) {
-		// TODO Auto-generated method stub
-		
+	public void draw(GdxGraphics g) {
+		g.drawString(y, x,"ROUND "+round, font);
 	}
 
 
