@@ -1,6 +1,5 @@
 package ch.hevs.gdx2d.hello;
 
-import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -14,8 +13,6 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
 public class OverviewGUI implements DrawableObject,UpdateObject {
-
-	BitmapImage[] assets;
 	BitmapImage image;
 	BitmapImage ringGrey;
 	float x;
