@@ -14,7 +14,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class RoundManager implements UpdateObject, DrawableObject{
-
 	
 	JSONArray listOfEnnemi;
 	
@@ -39,7 +38,6 @@ public class RoundManager implements UpdateObject, DrawableObject{
 			if( (long) (((JSONObject) listOfEnnemi.get(i) ).get("delay")) == (long)timeToFound)
 			{
 				listOfEnnemi.remove(i);
-				System.out.println(listOfEnnemi);
 				return true;
 			}			
 		}		
@@ -78,8 +76,6 @@ public class RoundManager implements UpdateObject, DrawableObject{
 		if (play_state) {
 			if(searchTime(timeDelta))
 			{
-				System.out.println("added done");
-	
 				ennemi.add(new Mojojo(Game.assets[299],Game.tiledMap,100,100));
 			}	
 			
