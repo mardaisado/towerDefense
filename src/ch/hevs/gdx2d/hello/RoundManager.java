@@ -48,11 +48,11 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	public void play() {
 		play_state = true;
 		timeDelta=0;
-		listOfEnnemi=GetTable(round); // Parse JSON file for find the first round
+		listOfEnnemi=getTable(round); // Parse JSON file for find the first round
 		
 	}
 	
-	public JSONArray GetTable(int round)
+	public JSONArray getTable(int round)
 	{
         Object obj=null;
         

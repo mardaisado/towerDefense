@@ -28,7 +28,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	
 	UpgradeButton upgradeButton;
 	
-	public OverviewGUI() {
+	public OverviewGUI() { 
 		//this.assets = assets;
 		image = new BitmapImage("data/images/backGUI.png");
 //		x = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));

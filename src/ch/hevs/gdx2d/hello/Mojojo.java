@@ -165,7 +165,7 @@ public class Mojojo extends Ennemi {
 		
 		for(int i=0;i<	updateInFutur;i++)
 		{
-			currentCell = Utils.getTile(new Point( (int)(getOffset(directionSaveTemp,output).x) ,(int) (getOffset(directionSaveTemp,output).y) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
+			currentCell = Utils.getTile(new Point( (int)(getOffset(directionSaveTemp,output).x) ,(int) (getOffset(directionSaveTemp,output).y) ),tiledLayer );
 						
 			direction = Utils.returnStateForInt(null,currentCell, "direction", map);
 			
@@ -189,7 +189,7 @@ public class Mojojo extends Ennemi {
 		{					
 			int direction = 0;
 
-			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave,pos).x) ,(int) (getOffset(directionSave,pos).y) ), (TiledMapTileLayer) (map.getLayers().get(0)) );
+			TiledMapTile currentCell = Utils.getTile(new Point( (int)(getOffset(directionSave,pos).x) ,(int) (getOffset(directionSave,pos).y) ), tiledLayer );
 						
 			direction = Utils.returnStateForInt(null,currentCell, "direction", map);
 			
