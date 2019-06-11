@@ -18,13 +18,12 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	
 	JSONArray listOfEnnemi;
 	
-	private BitmapImage[] assets;
-	
 	Vector<Ennemi> ennemi;
 	
 	int timeDelta=0;
 	
 	PlayButton playButton;
+	boolean play_state = false;
 	
 	public RoundManager(Vector<Ennemi> ennemi, PlayButton playButton) {
 		
@@ -39,10 +38,15 @@ public class RoundManager implements UpdateObject, DrawableObject{
 			if( (long) (((JSONObject) listOfEnnemi.get(i) ).get("delay")) == (long)timeToFound)
 			{
 				listOfEnnemi.remove(i);
+				System.out.println(listOfEnnemi);
 				return true;
 			}			
 		}		
 		return false;
+	}
+	
+	public void play() {
+		play_state = true;
 	}
 	
 	public JSONArray GetTable(int round)
@@ -67,21 +71,21 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	
 	@Override
 	public void update(GdxGraphics g) {
-		
-		System.out.println("added try");
-		if(searchTime(timeDelta))
-		{
-			System.out.println("added done");
-			ennemi.add(new Mojojo(assets[299],Game.tiledMap,100,100));
-		}	
-		
-		timeDelta++;
-		
-		if(listOfEnnemi.size()==0)
-		{
-			playButton.play=true;
+		if (play_state) {
+			if(searchTime(timeDelta))
+			{
+				System.out.println("added done");
+	
+				ennemi.add(new Mojojo(Game.assets[299],Game.tiledMap,100,100));
+			}	
+			
+			timeDelta++;
+				
+			if(listOfEnnemi.size()==0)
+			{
+				playButton.play=true;
+			}
 		}
-
 	}
 
 	@Override

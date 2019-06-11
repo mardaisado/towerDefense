@@ -29,7 +29,7 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
  */
 public class Game extends PortableApplication {
 
-	private BitmapImage[] assets;
+	static BitmapImage[] assets;
 
 	static final double FRAME_TIME = 0.015; // Duration of each frame
 
@@ -38,7 +38,6 @@ public class Game extends PortableApplication {
 	Vector<Defense> defense = new Vector<Defense>();
 	Vector<Dragable> dragable = new Vector<Dragable>();
 	Vector<Object> projectile = new Vector<Object>();
-	Vector<Object> roundManager = new Vector<Object>();
 	
 	static TiledMap tiledMap;
 	TiledMapRenderer tiledMapRenderer;
@@ -48,6 +47,7 @@ public class Game extends PortableApplication {
 	PickDefenseGUI pickGui;
 	OverviewGUI defenseGui;
 	PlayButton playButton;
+	RoundManager roundManager;
 
 	TiledMapTileLayer tiledLayer;
 
@@ -105,7 +105,8 @@ public class Game extends PortableApplication {
 		defenseGui = new OverviewGUI();
 		money = new MoneyCounter(START_MONEY);
 		playButton = new PlayButton(ennemi);
-
+		roundManager = new RoundManager(ennemi,playButton);
+		
 		
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
 			for (int j = 0; j < 2; j++) {
@@ -181,11 +182,6 @@ public class Game extends PortableApplication {
 		for (Defense obj : defense) {
 			((DrawableObject) obj).draw(g);
 		}
-		
-		for (Object obj : roundManager) {
-			((DrawableObject) obj).draw(g);
-		}
-
 		for (Ennemi obj : ennemi) {
 			((DrawableObject) obj).draw(g);
 		}
@@ -222,7 +218,7 @@ public class Game extends PortableApplication {
 		}
 
 		//play button test
-		playButton.clicked(x-map0x, y-map0y);
+		playButton.clicked(x-map0x, y-map0y,roundManager);
 
 
 		Defense def = Utils.getDefenseClicked(defense,x-map0x, y-map0y);

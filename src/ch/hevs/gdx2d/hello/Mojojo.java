@@ -32,7 +32,7 @@ public class Mojojo extends Ennemi {
 		this.scale = Game.tileSize;
 		this.map=map;
 		pos=goStart();
-		this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
+		//this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
  
 		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x),(int) (pos.y)), null, "direction", map);		
 		
@@ -58,7 +58,7 @@ public class Mojojo extends Ennemi {
 	 */
 	private int changeSpeedForScale(int temp)
 	{
-		return (int) (temp/scale);
+		return (int) (temp);
 	}
 	
 	/**
@@ -190,7 +190,6 @@ public class Mojojo extends Ennemi {
 	@Override
 	public void draw(GdxGraphics g) {
 		g.drawTransformedPicture(pos.x*scale, pos.y*scale, angle-270, scale/2, base);
-		
 	}
 
 	@Override

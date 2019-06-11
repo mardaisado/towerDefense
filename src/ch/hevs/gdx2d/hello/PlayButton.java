@@ -37,7 +37,6 @@ public class PlayButton implements DrawableObject, UpdateObject{
 	
 	JSONArray listOfEnnemi;
 	int timeDelta=0;
-
 	double frame_time;
 	public PlayButton(Vector<Ennemi> ennemi) {
 		// TODO Auto-generated constructor stub
@@ -53,12 +52,12 @@ public class PlayButton implements DrawableObject, UpdateObject{
 		scale =  0.1f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f))/playButton.getImage().getHeight();
 	}
 
-	public void clicked(int x,int y) {
+	public void clicked(int x,int y,RoundManager roundManager) {
 		if(x >= this.y-scale*playButton.getImage().getHeight()/2 && x <= this.y+scale*playButton.getImage().getHeight()/2  && y >= this.x-scale*playButton.getImage().getHeight()/2  && y <= this.x+scale*playButton.getImage().getHeight()/2 ) {
 	
 			if (!play) {
 				play = true;
-				new RoundManager(ennemi,this);
+				roundManager.play();
 			}
 		}
 	}
