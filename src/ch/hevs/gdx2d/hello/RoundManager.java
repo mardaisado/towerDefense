@@ -118,7 +118,7 @@ public class RoundManager implements UpdateObject, DrawableObject{
 		if (play_state) {
 			if(searchTime(timeDelta))
 			{
-				ennemi.add(new Mojojo(Game.assets[299],Game.tiledMap,100,100));
+				ennemi.add(new Mojojo(Game.tiledMap,100,100));
 			}
 
 			timeDelta++;
@@ -137,7 +137,7 @@ public class RoundManager implements UpdateObject, DrawableObject{
 
 	@Override
 	public void draw(GdxGraphics g) {
-		g.drawString(y, x,"ROUND "+round, font);
+		g.drawString(y, x,"ROUND "+round+"/"+maxRound, font);
 	}
 
 

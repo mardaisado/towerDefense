@@ -4,7 +4,6 @@ import java.awt.Point;
 
 
 import java.awt.Toolkit;
-import java.time.Instant;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -29,8 +28,6 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  * @version 0.3
  */
 public class Game extends PortableApplication {
-
-	static BitmapImage[] assets;
 
 	static final double FRAME_TIME = 0.015; // Duration of each frame
 
@@ -87,8 +84,6 @@ public class Game extends PortableApplication {
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
 		setTitle("Best Tower Defense Game you've ever seen");
 
-		// Load assets
-		assets = Utils.loadAssets();
 		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
 
 		float screenHeigth = Gdx.graphics.getHeight();
@@ -237,7 +232,7 @@ public class Game extends PortableApplication {
 
 	@Override
 	public void onRelease(int x, int y, int button) {
-		// TODO Auto-generated method stub
+
 		super.onRelease(x, y, button);
 		if (preview.getVisible()) {
 			preview.setVisible(false);
@@ -262,7 +257,7 @@ public class Game extends PortableApplication {
 public void onKeyUp(int keycode) {
 	super.onKeyUp(keycode);
 
-	ennemi.add(new Mojojo(assets[299],tiledMap,30,100));
+	ennemi.add(new Mojojo(tiledMap,30,100));
 }
 
 
