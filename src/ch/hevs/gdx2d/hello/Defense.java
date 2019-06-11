@@ -64,7 +64,7 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	public float getAngle(Point target) {
 	    float angle = (float) Math.toDegrees(Math.atan2(target.y - pos.y, target.x - pos.x));
 
-	    angle -= 90; //offset i dont know why :)
+	    angle -= 90; //offset i don't know why :)
 	    
 	    if(angle < 0){
 	        angle += 360;

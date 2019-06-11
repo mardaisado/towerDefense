@@ -97,10 +97,10 @@ public class RoundManager implements UpdateObject, DrawableObject{
 	public void play() {
 		play_state = true;
 		timeDelta=0;
-		listOfEnnemi=getTable(round,roundScript);
+		listOfEnnemi=getRoundList(round,roundScript);
 	}
 
-	public JSONArray getTable(int round, Object obj)
+	public JSONArray getRoundList(int round, Object obj)
 	{
 
         if(obj != null)
