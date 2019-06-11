@@ -45,7 +45,7 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	}
 	
 	public void upgrade() {
-		if(level<3) {
+		if(level<Game.MAX_LEVEL) {
 			Game.money.takeOffMoneyCount(nextUpgradePrice());
 			level++;
 			upgradeAction(level);
