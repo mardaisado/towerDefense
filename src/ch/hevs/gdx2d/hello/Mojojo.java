@@ -1,7 +1,6 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
-import java.util.Random;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -39,15 +38,6 @@ public class Mojojo extends Ennemi {
 		speed = changeSpeedForScale(speed);		
 	}
 	
-	public static BitmapImage[] loadAssets() {
-		BitmapImage[] tmp = new BitmapImage[27];
-		String tmp2 = "";
-		for (int i = 0; i < tmp.length; i++) {
-			tmp2 = String.format("%03d", i);
-			tmp[i] = new BitmapImage("data/assets/PNG/ANIMAL/" + i + ".png");
-		}
-		return tmp;
-	}
 	
 	/**
 	 * Example : changeSpeedForScale(speed) return temp with the scale 

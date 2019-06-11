@@ -12,7 +12,7 @@ public class PickDefenseGUI implements DrawableObject,UpdateObject{
 	float x;
 	float y;
 	float facteur;
-	
+
 	public PickDefenseGUI(Vector<Dragable> dragable) {
 
 		image = new BitmapImage("data/images/backDefense.png");
@@ -20,7 +20,7 @@ public class PickDefenseGUI implements DrawableObject,UpdateObject{
 		y = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f)*image.getImage().getWidth()/image.getImage().getHeight());
 		facteur = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f))/(float)image.getImage().getHeight();
 	}
-	
+
 	@Override
 	public void draw(GdxGraphics g) {
 		g.drawTransformedPicture(x+y/2, x/2 ,0,y/2, x/2, image);
@@ -28,8 +28,8 @@ public class PickDefenseGUI implements DrawableObject,UpdateObject{
 
 	@Override
 	public void update(GdxGraphics g) {
-		
-		
+
+
 	}
 
 }

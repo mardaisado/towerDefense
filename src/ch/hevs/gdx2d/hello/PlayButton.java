@@ -1,17 +1,13 @@
 package ch.hevs.gdx2d.hello;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
+
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class PlayButton implements DrawableObject, UpdateObject{
 
@@ -22,7 +18,6 @@ public class PlayButton implements DrawableObject, UpdateObject{
 	boolean play = false;
 
 	boolean fast = false;
-	private BitmapImage[] assets;
 
 
 	float x;
@@ -42,7 +37,6 @@ public class PlayButton implements DrawableObject, UpdateObject{
 		// TODO Auto-generated constructor stub
 		x = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		y = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
-		assets = Utils.loadAssets();
 		playButton = new BitmapImage("data/images/play.png");
 		fastButton = new BitmapImage("data/images/fastButton.png");
 		pauseButton = new BitmapImage("data/images/blank.png");

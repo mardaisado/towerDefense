@@ -4,9 +4,7 @@ import ch.hevs.gdx2d.desktop.PortableApplication;
 
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.ScreenManager;
-import ch.hevs.gdx2d.lib.utils.Logger;
 import java.awt.Toolkit;
-import com.badlogic.gdx.Input;
 
 /**
  * Show how to add multiple screen and switch between them with different transitions.
