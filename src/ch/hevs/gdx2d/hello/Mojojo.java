@@ -11,45 +11,32 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 
 public class Mojojo extends Ennemi {
 
+	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile299.png";
+	
 	private BitmapImage base;
 	
 	private float scale, angle=0;
 	
 	private int directionSave;
 	
-	public int speed=2;
+	private int speed=2;
 		
 	private TiledMap map;
 	
 	private TiledMapTileLayer tiledLayer;
 	
-	public Mojojo(BitmapImage base, TiledMap map, int hp, int reward) {
+	public Mojojo(TiledMap map, int hp, int reward) {
 				
 		super(hp, reward);
 		this.tiledLayer=(TiledMapTileLayer) map.getLayers().get(0);
-		this.base = base;
+		this.base = new BitmapImage(BASE_URL);
 		this.scale = Game.tileSize;
 		this.map=map;
-		pos=goStart();
-		//this.base =new BitmapImage("data/assets/PNG/ANIMAL/" + new Random().nextInt(27) + ".png");
- 
-		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x),(int) (pos.y)), null, "direction", map);		
 		
-		speed = changeSpeedForScale(speed);		
-	}
-	
-	
-	/**
-	 * Example : changeSpeedForScale(speed) return temp with the scale 
-	 *
-	 * @param temp
-	 *            to be scaled
-	 * @return scaled temp
-	 */
-	private int changeSpeedForScale(int temp)
-	{
-		return (int) (temp);
-	}
+		pos=goStart();
+		
+		directionSave= (int) Utils.returnStateForInt(new Point((int) (pos.x),(int) (pos.y)), null, "direction", map);		
+	}		
 	
 	/**
 	 * Example : goStart() return the position of the start

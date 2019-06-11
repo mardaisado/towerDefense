@@ -3,7 +3,6 @@ package ch.hevs.gdx2d.hello;
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.ScreenManager;
-import ch.hevs.gdx2d.lib.physics.PhysicsWorld;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
 import com.badlogic.gdx.Gdx;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 

@@ -15,11 +15,9 @@ import java.awt.Toolkit;
 public class ScreensManager extends PortableApplication {
 
     private ScreenManager s = new ScreenManager();
-    private int transactionTypeId;
     
     final static double PERCENTAGEOFSCREEN =0.5;
     public ScreensManager() {
-		// TODO Auto-generated constructor stub
     	super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),false);
 	}
 
