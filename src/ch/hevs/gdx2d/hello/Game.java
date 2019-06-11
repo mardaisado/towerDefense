@@ -84,7 +84,7 @@ public class Game extends PortableApplication {
 
 	@Override
 	public void onInit() {
-		Logger.dbg("a"+ Instant.now());
+		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
 		setTitle("Best Tower Defense Game you've ever seen");
 
 		// Load assets
@@ -93,7 +93,6 @@ public class Game extends PortableApplication {
 
 		float screenHeigth = Gdx.graphics.getHeight();
 		tileSize = (((int)(screenHeigth/(tiledMap.getProperties().get("width",Integer.class)))/64f));
-		Logger.dbg("B"+ Instant.now());
 
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap,tileSize);
 		tiledLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
@@ -101,7 +100,6 @@ public class Game extends PortableApplication {
 		map0x = (int)((Gdx.graphics.getWidth()-(tiledMap.getProperties().get("width",Integer.class)*tileSize*64f))/2f);
 		map0y = (int)((Gdx.graphics.getHeight()-(tiledMap.getProperties().get("height",Integer.class)*tileSize*64f))/2f);
 
-		Logger.dbg("C"+ Instant.now());
 		preview = new Preview();
 		pickGui = new PickDefenseGUI(dragable);
 		defenseGui = new OverviewGUI();
@@ -109,7 +107,6 @@ public class Game extends PortableApplication {
 		playButton = new PlayButton(ennemi);
 		roundManager = new RoundManager(ennemi,playButton);
 		
-		Logger.dbg("D"+ Instant.now());
 		
 		for (int i = 0; i < (defenseChoice.length/2+defenseChoice.length%2); i++) {
 			for (int j = 0; j < 2; j++) {
@@ -129,7 +126,6 @@ public class Game extends PortableApplication {
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		//toDraw.add(new Tourelle4((new Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
-		Logger.dbg("Finish init "+ Instant.now());
 	}
 
 	@Override
