@@ -254,9 +254,7 @@ public class Game extends PortableApplication {
 					money.takeOffMoneyCount((int)nowDragable.defense[4]);
 				}
 			}
-
 		}
-
 	}
 
 

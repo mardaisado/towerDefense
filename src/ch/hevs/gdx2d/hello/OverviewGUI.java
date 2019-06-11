@@ -91,7 +91,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 			g.drawAlphaPicture(defense.pos.x,  defense.pos.y, 0, circleScale, 0.4f, ringGrey);
 			//g.drawFilledCircle(defense.pos.x, defense.pos.y, ((Tourelle)defense).radius*Game.tileSize , ringGrey);
 			g.drawTransformedPicture(y/2, x/2 ,0,y/2, x/2, image);
-			g.drawString(0.05f*y, 0.8f*x, defense.defenseName+"\n\n"+"Level : "+defense.level +"\nHits : "+defense.nbHits,font);
+			g.drawString(0.05f*y, 0.8f*x, defense.defenseName+"\n\n"+"Level : "+defense.level +"\nHits : "+defense.nbHits+"\nDamage : "+ defense.damage,font);
 			upgradeButton.draw(g);
 		}
 	}
