@@ -27,12 +27,12 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	
 	int radiusCollision = 30;
 	
-	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Object> projectile,String defenseName,int price,float radius,float cooldown,int[] cost,int damage) {
+	public Defense(Point pos, Vector<Ennemi> ennemi,Vector<Object> projectile,String defenseName,float radius,float cooldown,int[] cost,int damage) {
 		this.pos = pos;
 		this.ennemi = ennemi;
 		this.projectile = projectile;
 		this.defenseName = defenseName;
-		this.price = price;
+		this.price = cost[0];
 		this.radius = radius;
 		this.rangeSq = radius*radius*Game.tileSize*Game.tileSize;
 		this.cooldown = cooldown;

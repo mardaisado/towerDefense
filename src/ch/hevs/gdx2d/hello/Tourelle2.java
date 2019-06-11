@@ -17,7 +17,7 @@ public class Tourelle2 extends Defense{
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile182.png";
 	final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile250.png";
 	final static String PROJECTILE_URL = "data/assets/PNG/Retina/towerDefense_tile300.png";
-	final static int[] UPGRADE_COST= {1000,2000,3000};
+	final static int[] UPGRADE_COST= {PRICE,2000,3000};
 	
 	// VARIABLES OF THIS DEFENSE
 	BitmapImage base;
@@ -27,7 +27,7 @@ public class Tourelle2 extends Defense{
 	float angle;
 	
 	public Tourelle2(Point pos,Vector<Ennemi> ennemi,Vector<Object> projectile) {
-		super(pos,ennemi,projectile,DEFENSE_NAME,PRICE,RADIUS,COOLDOWN,UPGRADE_COST,DAMAGE);
+		super(pos,ennemi,projectile,DEFENSE_NAME,RADIUS,COOLDOWN,UPGRADE_COST,DAMAGE);
 		base = new BitmapImage(BASE_URL);
 		movingPart = new BitmapImage(MOVINGPART_URL);
 		projectileBtp = new BitmapImage(PROJECTILE_URL);
