@@ -49,7 +49,6 @@ public class SettingGUI extends RenderingScreen {
 			public boolean keyDown(int keyCode) {
 
 		        if (keyCode == Input.Keys.ESCAPE) {
-		        	System.out.println("pressed");
 		        	DemoScreen.transition(0);
 		        }
 				return super.keyDown(keyCode);
@@ -94,24 +93,7 @@ public class SettingGUI extends RenderingScreen {
 		});		
 		
 	}
-	/*
-	@Override
-	public void onKeyDown(int keycode) {
-		super.onKeyDown(keycode);
 
-		System.out.println("test");
-	}
-
-	 @Override
-	public void onKeyUp(int keycode) {
-	        super.onKeyUp(keycode);
-
-	        System.out.println("presseddd");
-	        if (keycode == Input.Keys.ESCAPE) {
-	        	System.out.println("pressed");
-	        	DemoScreen.transition(0);
-	        }
-	    }*/
 	
 	@Override
 	public void onGraphicRender(GdxGraphics g) {

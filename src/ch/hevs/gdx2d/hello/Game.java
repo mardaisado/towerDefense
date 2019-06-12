@@ -56,7 +56,7 @@ public class Game extends RenderingScreen {
 
 	static MoneyCounter money = null;
 	
-	Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/soundtrack.mp3"));
+	static Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/soundtrack.wav"));
 	
 	final static double PERCENTAGEOFSCREEN = 1.5;
 	final static boolean FULLSCREEN = false;
@@ -84,7 +84,6 @@ public class Game extends RenderingScreen {
 
 	@Override
 	public void onInit() {
-		Logger.dbg("" + Instant.now());
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
 
 		// setTitle("Best Tower Defense Game you've ever seen");
@@ -109,21 +108,21 @@ public class Game extends RenderingScreen {
 		playButton = new PlayButton(ennemi);
 		roundManager = new RoundManager(ennemi, playButton);
 
-//		for (int i = 0; i < (defenseChoice.length / 2 + defenseChoice.length % 2); i++) {
-//			for (int j = 0; j < 2; j++) {
-//				if (i * 2 + j < defenseChoice.length) {
-//					dragable.add(new Dragable(defenseChoice[i * 2 + j], pickGui.x + (95 + 110 * j) * pickGui.facteur,
-//							pickGui.x - (95 + 110 * i) * pickGui.facteur, 90 * pickGui.facteur / 2));
-//				}
-//			}
-//		}
-//
-//		// preview.setImage(assets[271], tileSize);
-//		toDraw.add(roundManager);
-//		toDraw.add(defenseGui);
-//		toDraw.add(pickGui);
-//		toDraw.add(money);
-//		toDraw.add(playButton);
+		for (int i = 0; i < (defenseChoice.length / 2 + defenseChoice.length % 2); i++) {
+			for (int j = 0; j < 2; j++) {
+				if (i * 2 + j < defenseChoice.length) {
+					dragable.add(new Dragable(defenseChoice[i * 2 + j], pickGui.x + (95 + 110 * j) * pickGui.facteur,
+							pickGui.x - (95 + 110 * i) * pickGui.facteur, 90 * pickGui.facteur / 2));
+				}
+			}
+		}
+
+		// preview.setImage(assets[271], tileSize);
+		toDraw.add(roundManager);
+		toDraw.add(defenseGui);
+		toDraw.add(pickGui);
+		toDraw.add(money);
+		toDraw.add(playButton);
 		// toDraw.add(preview);
 		// projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize,
 		// assets[180]));
@@ -131,8 +130,8 @@ public class Game extends RenderingScreen {
 		// Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
 		// ennemis.add(new Mojojo((new
 		// Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
-	
 		sound.play();
+		sound.loop();
 		
 		
 	}
