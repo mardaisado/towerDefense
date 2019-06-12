@@ -27,6 +27,8 @@ public class DemoScreen extends PortableApplication {
     private ScreenManager s = new ScreenManager();
     private int transactionTypeId;
 
+    int test=0;
+    
 	public DemoScreen() {
 		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
 	
@@ -36,10 +38,13 @@ public class DemoScreen extends PortableApplication {
     public void onInit() {
     	
     	
-        setTitle("Multiple screens and transitions");
-        Logger.log("Press enter/space to show the next screen, 1/2/3 to transition to them");
-        s.registerScreen(Game.class);
+    	setTitle("Best Tower Defense Game you've ever seen");
+    	Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
+    	s.registerScreen(DemoGUI.class);
+    	s.registerScreen(Game.class);
         s.registerScreen(CreditsScreen.class);
+        
+        
 
     }
 
@@ -58,7 +63,7 @@ public class DemoScreen extends PortableApplication {
             s.transitionTo(1, ScreenManager.TransactionType.SLICE); // s.activateScreen(0);
 
         if (keycode == Input.Keys.NUM_2)
-            s.transitionTo(0, ScreenManager.TransactionType.SLIDE); // s.activateScreen(1);
+            s.transitionTo(2, ScreenManager.TransactionType.SLIDE); // s.activateScreen(1);
 
     }
     
