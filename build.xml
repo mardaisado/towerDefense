@@ -13,12 +13,6 @@
 		ANT build script for "${ant.project.name}".
 	</description>
 
-	<!-- https://mvnrepository.com/artifact/org.json/json -->
-	<dependency>
-	    <groupId>org.json</groupId>
-	    <artifactId>json</artifactId>
-	    <version>20180813</version>
-	</dependency>
 
 	
 	<!-- Folders input locations -->
@@ -84,6 +78,7 @@
 			<!-- Include all sources in the Jar file, to correct the project ;) -->
 			<fileset dir="${src.dir}" includes="**/*.java" />
 			<zipfileset excludes="META-INF/*.SF" src="${libs.dir}/gdx2d-desktop-${gdx2d.version}.jar" />
+			<zipfileset excludes="META-INF/*.SF" src="${libs.dir}/json-simple-1.1.1.jar" />
 
 			<manifest>
 				<attribute name="Main-Class" value="${jar.main}" />

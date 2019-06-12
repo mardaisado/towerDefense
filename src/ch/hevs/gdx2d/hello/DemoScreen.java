@@ -7,8 +7,6 @@ import ch.hevs.gdx2d.lib.utils.Logger;
 
 import java.awt.Toolkit;
 
-import com.badlogic.gdx.Input;
-
 /**
  * Show how to add multiple screen and switch between them with different transitions.
  *
@@ -38,9 +36,10 @@ public class DemoScreen extends PortableApplication {
     	setTitle("Best Tower Defense Game you've ever seen");
     	Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
     	
-    	s.registerScreen(DemoGUI.class);
-    	s.registerScreen(Game.class);
-        s.registerScreen(CreditsScreen.class);
+    	s.registerScreen(DemoGUI.class); // 0
+    	s.registerScreen(Game.class); // 1
+        s.registerScreen(CreditsScreen.class); // 2
+        s.registerScreen(SettingGUI.class); // 3
         
         
     }
@@ -56,9 +55,16 @@ public class DemoScreen extends PortableApplication {
 
         s.getActiveScreen().onKeyUp(keycode);
 
-
     }
 
+
+    @Override
+    public void onKeyDown(int keycode) {
+        super.onKeyDown(keycode);
+
+        s.getActiveScreen().onKeyDown(keycode);
+
+    }
     @Override
     public void onClick(int x, int y, int button) {
         // Delegate the click to the child class
