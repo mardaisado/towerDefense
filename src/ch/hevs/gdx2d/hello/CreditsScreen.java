@@ -15,7 +15,7 @@ public class CreditsScreen extends RenderingScreen {
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.DARK_GRAY);
-		g.drawStringCentered(g.getScreenHeight()/2, "Merci d'avoir joué les bros.");
+		g.drawStringCentered(g.getScreenHeight()/2, "Merci d'avoir jouÃ© les bros.");
 	}
 
 	@Override

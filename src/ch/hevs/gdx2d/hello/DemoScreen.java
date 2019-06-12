@@ -19,8 +19,8 @@ import com.badlogic.gdx.Input;
 
 public class DemoScreen extends PortableApplication {
 
-	final static double PERCENTAGEOFSCREEN =1.5;
-	final static boolean FULLSCREEN = false;
+	final static double PERCENTAGEOFSCREEN = 1.5;
+	final static boolean FULLSCREEN = true;
 
     static ScreenManager s = new ScreenManager();
     
@@ -79,7 +79,7 @@ public class DemoScreen extends PortableApplication {
 
     static public void transition(int screen)
     {
-    	s.transitionTo(screen, ScreenManager.TransactionType.SLIDE);
+    	s.transitionTo(screen, ScreenManager.TransactionType.SMOOTH);
     }
 
 

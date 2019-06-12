@@ -2,14 +2,16 @@ package ch.hevs.gdx2d.hello;
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
-import ch.hevs.gdx2d.lib.utils.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -20,6 +22,9 @@ public class DemoGUI extends RenderingScreen {
 	Skin skin;
 	Stage stage;
 	TextButton newGameButton, quitGameButton;
+
+	TextureAtlas buttonAtlas;
+	
 	InputProcessor lastInputProcessor;
 	
 	@Override
@@ -27,7 +32,6 @@ public class DemoGUI extends RenderingScreen {
 		int buttonWidth = (int) (180);
 		int buttonHeight = (int) (30);
 
-		System.out.println("test");
 		stage = new Stage();
 		lastInputProcessor = Gdx.input.getInputProcessor();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
@@ -35,13 +39,11 @@ public class DemoGUI extends RenderingScreen {
 		// Load the default skin (which can be configured in the JSON file)
 		//skin = new Skin(Gdx.files.internal("data/images/flat-earth/flat-earth-ui.json"));
 		skin = new Skin(Gdx.files.internal("data/images/uiskin.json"));
-		
 
 		newGameButton = new TextButton("Play", skin); // Use the initialized skin
 		newGameButton.setWidth(buttonWidth);
 		newGameButton.setHeight(buttonHeight);
-
-
+		
 		quitGameButton = new TextButton("Quit", skin); // Use the initialized skin
 		quitGameButton.setWidth(buttonWidth);
 		quitGameButton.setHeight(buttonHeight);
@@ -65,10 +67,8 @@ public class DemoGUI extends RenderingScreen {
 				super.clicked(event, x, y);
 
 				if (newGameButton.isChecked()) {
-					Logger.log("Button is checked");
 					DemoScreen.transition(1);
-				}
-				
+				}			
 					
 			}
 		});
@@ -81,9 +81,6 @@ public class DemoGUI extends RenderingScreen {
 		// This is required for having the GUI work properly
 		stage.act();
 		stage.draw();
-
-		g.drawSchoolLogo();
-		g.drawFPS();
 	}
 
 	@Override
