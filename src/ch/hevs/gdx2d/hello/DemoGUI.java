@@ -31,11 +31,7 @@ public class DemoGUI extends RenderingScreen {
 	ImageButton newGameButton, quitGameButton, settingGameButton;
 
 	BitmapFont font;
-	
 	TextureAtlas buttonAtlas;
-	
-
-	
 	InputProcessor lastInputProcessor;
 	
 	@Override
@@ -48,7 +44,6 @@ public class DemoGUI extends RenderingScreen {
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
 
 		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
-		
 		
 		newGameButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown_pressed.png")))));
 		newGameButton.setWidth(buttonWidth);

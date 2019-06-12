@@ -1,8 +1,7 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
-
-import java.awt.Toolkit;
+import java.time.Instant;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -16,9 +15,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
-import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
-import ch.hevs.gdx2d.lib.ScreenManager;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
@@ -30,7 +27,6 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  * @version 0.3
  */
 public class Game extends RenderingScreen {
-
 	static final double FRAME_TIME = 0.015; // Duration of each frame
 
 	Vector<Object> toDraw = new Vector<Object>();
@@ -48,9 +44,7 @@ public class Game extends RenderingScreen {
 	OverviewGUI defenseGui;
 	PlayButton playButton;
 	RoundManager roundManager;
-
 	TiledMapTileLayer tiledLayer;
-
 	Dragable nowDragable;
 
 	int map0x;
@@ -86,11 +80,11 @@ public class Game extends RenderingScreen {
 
 	public Game() {
 		// super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
-
 	}
 
 	@Override
 	public void onInit() {
+		Logger.dbg("" + Instant.now());
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
 
 		// setTitle("Best Tower Defense Game you've ever seen");
@@ -115,21 +109,21 @@ public class Game extends RenderingScreen {
 		playButton = new PlayButton(ennemi);
 		roundManager = new RoundManager(ennemi, playButton);
 
-		for (int i = 0; i < (defenseChoice.length / 2 + defenseChoice.length % 2); i++) {
-			for (int j = 0; j < 2; j++) {
-				if (i * 2 + j < defenseChoice.length) {
-					dragable.add(new Dragable(defenseChoice[i * 2 + j], pickGui.x + (95 + 110 * j) * pickGui.facteur,
-							pickGui.x - (95 + 110 * i) * pickGui.facteur, 90 * pickGui.facteur / 2));
-				}
-			}
-		}
-
-		// preview.setImage(assets[271], tileSize);
-		toDraw.add(roundManager);
-		toDraw.add(defenseGui);
-		toDraw.add(pickGui);
-		toDraw.add(money);
-		toDraw.add(playButton);
+//		for (int i = 0; i < (defenseChoice.length / 2 + defenseChoice.length % 2); i++) {
+//			for (int j = 0; j < 2; j++) {
+//				if (i * 2 + j < defenseChoice.length) {
+//					dragable.add(new Dragable(defenseChoice[i * 2 + j], pickGui.x + (95 + 110 * j) * pickGui.facteur,
+//							pickGui.x - (95 + 110 * i) * pickGui.facteur, 90 * pickGui.facteur / 2));
+//				}
+//			}
+//		}
+//
+//		// preview.setImage(assets[271], tileSize);
+//		toDraw.add(roundManager);
+//		toDraw.add(defenseGui);
+//		toDraw.add(pickGui);
+//		toDraw.add(money);
+//		toDraw.add(playButton);
 		// toDraw.add(preview);
 		// projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize,
 		// assets[180]));
@@ -139,6 +133,7 @@ public class Game extends RenderingScreen {
 		// Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
 	
 		sound.play();
+		
 		
 	}
 

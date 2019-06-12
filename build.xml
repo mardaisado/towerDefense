@@ -38,8 +38,8 @@
 	</tstamp>
 
 	<!-- Force Java 6 -->
-	<property name="ant.build.javac.source" value="1.6" />
-	<property name="ant.build.javac.target" value="1.6" />
+	<property name="ant.build.javac.source" value="1.8" />
+	<property name="ant.build.javac.target" value="1.8" />
 
 	<!-- Include the 'gdx2d-desktop' library -->
 	<path id="project-classpath">
@@ -71,7 +71,7 @@
 		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="project-classpath" includeantruntime="false" />
 	</target>
 
-	<!-- The same Jar is used to run the demos and to include in a new project. -->
+	<!-- The same Jar is used to run the demos and to include in a new preoject. -->
 	<target name="jar" depends="compile" description="Export the project as a runnable jar.">
 		<jar destfile="${dist.dir}/${jar.file}.jar" update="true" basedir="${build.dir}">
 

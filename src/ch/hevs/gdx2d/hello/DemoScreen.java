@@ -6,6 +6,7 @@ import ch.hevs.gdx2d.lib.ScreenManager;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
 import java.awt.Toolkit;
+import java.time.Instant;
 
 /**
  * Show how to add multiple screen and switch between them with different transitions.
@@ -18,7 +19,7 @@ import java.awt.Toolkit;
 public class DemoScreen extends PortableApplication {
 
 	final static double PERCENTAGEOFSCREEN = 1.5;
-	final static boolean FULLSCREEN = true;
+	final static boolean FULLSCREEN = false;
 
     static ScreenManager s = new ScreenManager();
     
@@ -31,17 +32,12 @@ public class DemoScreen extends PortableApplication {
 
     @Override
     public void onInit() {
-
-
     	setTitle("Best Tower Defense Game you've ever seen");
     	Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
-    	
     	s.registerScreen(DemoGUI.class); // 0
     	s.registerScreen(Game.class); // 1
         s.registerScreen(CreditsScreen.class); // 2
         s.registerScreen(SettingGUI.class); // 3
-        
-        
     }
 
     @Override
@@ -54,7 +50,6 @@ public class DemoScreen extends PortableApplication {
         super.onKeyUp(keycode);
 
         s.getActiveScreen().onKeyUp(keycode);
-
     }
 
 
@@ -73,23 +68,24 @@ public class DemoScreen extends PortableApplication {
 
     @Override
     public void onDrag(int x, int y) {
-    	// TODO Auto-generated method stub
     	s.getActiveScreen().onDrag(x, y);
     }
 
     @Override
     public void onRelease(int x, int y, int button) {
-    	// TODO Auto-generated method stub
     	s.getActiveScreen().onRelease(x, y, button);
     }
 
     static public void transition(int screen)
     {
-    	s.transitionTo(screen, ScreenManager.TransactionType.SMOOTH);
+		Logger.dbg("" + Instant.now());
+		s.activateNextScreen();
+//    	s.transitionTo(screen, ScreenManager.TransactionType.SMOOTH);
     }
 
 
     public static void main(String[] args) {
+    	
         new DemoScreen();
     }
 }

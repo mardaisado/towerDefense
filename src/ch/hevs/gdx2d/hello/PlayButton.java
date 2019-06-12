@@ -16,9 +16,7 @@ public class PlayButton implements DrawableObject, UpdateObject{
 	BitmapImage fastButtonClicked;
 
 	boolean play = false;
-
 	boolean fast = false;
-
 
 	float x;
 	float y;
