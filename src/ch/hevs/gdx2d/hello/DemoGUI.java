@@ -5,6 +5,7 @@ import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.utils.Logger;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -24,6 +25,7 @@ public class DemoGUI extends RenderingScreen {
 	Skin skin;
 	Stage stage;
 	TextButton newGameButton, quitGameButton;
+	InputProcessor lastInputProcessor;
 
 	
 	public static void main(String[] args) {
@@ -41,6 +43,7 @@ public class DemoGUI extends RenderingScreen {
 
 		System.out.println("test");
 		stage = new Stage();
+		lastInputProcessor = Gdx.input.getInputProcessor();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
 
 		// Load the default skin (which can be configured in the JSON file)
@@ -99,6 +102,7 @@ public class DemoGUI extends RenderingScreen {
 	@Override
 	public void dispose() {
 		super.dispose();
+		Gdx.input.setInputProcessor(lastInputProcessor);
 		stage.dispose();
 		skin.dispose();
 	}
