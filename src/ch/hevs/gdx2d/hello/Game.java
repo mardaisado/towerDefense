@@ -18,6 +18,7 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
+import ch.hevs.gdx2d.lib.ScreenManager;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
@@ -243,6 +244,7 @@ public class Game extends RenderingScreen {
 	public void onRelease(int x, int y, int button) {
 
 		super.onRelease(x, y, button);
+		DemoScreen.transition(1);
 		if (preview.getVisible()) {
 			preview.setVisible(false);
 
