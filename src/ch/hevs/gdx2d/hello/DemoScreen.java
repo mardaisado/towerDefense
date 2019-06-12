@@ -24,7 +24,7 @@ public class DemoScreen extends PortableApplication {
 	final static double PERCENTAGEOFSCREEN =1.5;
 	final static boolean FULLSCREEN = false;
 	
-    private ScreenManager s = new ScreenManager();
+    static ScreenManager s = new ScreenManager();
     private int transactionTypeId;
 
 	public DemoScreen() {
@@ -40,7 +40,6 @@ public class DemoScreen extends PortableApplication {
         Logger.log("Press enter/space to show the next screen, 1/2/3 to transition to them");
         s.registerScreen(Game.class);
         s.registerScreen(CreditsScreen.class);
-
     }
 
     @Override
@@ -80,10 +79,9 @@ public class DemoScreen extends PortableApplication {
     	s.getActiveScreen().onRelease(x, y, button);
     }
     
-    
-    public void endGame()
+    static public void transition(int screen)
     {
-    	s.transitionToNext(ScreenManager.TransactionType.values()[transactionTypeId]);
+    	s.transitionTo(screen, ScreenManager.TransactionType.SLIDE);
     }            
 
 
