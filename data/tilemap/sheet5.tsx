@@ -450,7 +450,7 @@
  <tile id="88">
   <properties>
    <property name="end" type="bool" value="true"/>
-   <property name="posable" type="bool" value="true"/>
+   <property name="posable" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="89">

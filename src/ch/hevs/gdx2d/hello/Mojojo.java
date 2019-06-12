@@ -163,6 +163,13 @@ public class Mojojo extends Ennemi {
 		
 		return new Point((int)(output.x*scale),(int)(output.y*scale)) ;
 	}
+	
+	private void checkEnd(TiledMapTile test)
+	{
+		if(Utils.returnStateForBool(null, test, "end", map))
+		{
+		}
+	}
 
 	@Override
 	public void draw(GdxGraphics g) {
@@ -185,6 +192,8 @@ public class Mojojo extends Ennemi {
 			directionSave=direction;
 			
 			pos=goNextPosition(direction,pos);	
+			
+			checkEnd(currentCell);
 			
 			return false;
 			
