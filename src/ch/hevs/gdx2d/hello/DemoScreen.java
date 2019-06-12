@@ -19,14 +19,11 @@ import com.badlogic.gdx.Input;
 
 public class DemoScreen extends PortableApplication {
 
-
-
 	final static double PERCENTAGEOFSCREEN =1.5;
 	final static boolean FULLSCREEN = false;
 
     static ScreenManager s = new ScreenManager();
-    private int transactionTypeId;
-
+    
     int test=0;
 
 	public DemoScreen() {

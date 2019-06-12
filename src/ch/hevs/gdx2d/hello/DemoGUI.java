@@ -1,7 +1,6 @@
 package ch.hevs.gdx2d.hello;
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
-import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.utils.Logger;
 import com.badlogic.gdx.Gdx;
@@ -11,35 +10,22 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
- * Very simple UI demonstration
+ * Menu for "The Tower Defense"
  *
- * @author Pierre-André Mudry (mui)
- * @version 1.1
  */
 public class DemoGUI extends RenderingScreen {
 	Skin skin;
 	Stage stage;
 	TextButton newGameButton, quitGameButton;
 	InputProcessor lastInputProcessor;
-
 	
-	public static void main(String[] args) {
-		
-	}
-	public DemoGUI()
-	{
-		
-	}
-
 	@Override
 	public void onInit() {
-		int buttonWidth = 180;
-		int buttonHeight = 30;
+		int buttonWidth = (int) (180);
+		int buttonHeight = (int) (30);
 
 		System.out.println("test");
 		stage = new Stage();
@@ -47,7 +33,9 @@ public class DemoGUI extends RenderingScreen {
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
 
 		// Load the default skin (which can be configured in the JSON file)
+		//skin = new Skin(Gdx.files.internal("data/images/flat-earth/flat-earth-ui.json"));
 		skin = new Skin(Gdx.files.internal("data/images/uiskin.json"));
+		
 
 		newGameButton = new TextButton("Play", skin); // Use the initialized skin
 		newGameButton.setWidth(buttonWidth);
@@ -58,8 +46,8 @@ public class DemoGUI extends RenderingScreen {
 		quitGameButton.setWidth(buttonWidth);
 		quitGameButton.setHeight(buttonHeight);
 
-		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .6));
-		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));
+		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));
+		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .6));
 
 		
 		/**
@@ -81,8 +69,7 @@ public class DemoGUI extends RenderingScreen {
 					DemoScreen.transition(1);
 				}
 				
-				if(quitGameButton.isChecked())
-					Gdx.app.exit();
+					
 			}
 		});
 	}
