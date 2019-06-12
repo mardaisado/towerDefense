@@ -168,6 +168,7 @@ public class Mojojo extends Ennemi {
 	{
 		if(Utils.returnStateForBool(null, test, "end", map))
 		{
+			
 		}
 	}
 

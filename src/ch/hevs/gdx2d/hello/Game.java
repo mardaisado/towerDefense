@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
+import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.desktop.PortableApplication;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
@@ -27,7 +28,7 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  * @author Limace (Jérémy Merle)
  * @version 0.3
  */
-public class Game extends PortableApplication {
+public class Game extends RenderingScreen {
 
 	static final double FRAME_TIME = 0.015; // Duration of each frame
 
@@ -77,13 +78,15 @@ public class Game extends PortableApplication {
 			{"data/images/t1.png","data/assets/PNG/Retina/towerDefense_tile271.png",80f,"ch.hevs.gdx2d.hello.Tourelle2",100}
 	};
 	public Game() {
-		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
+	//	super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
+	
 	}
 
 	@Override
 	public void onInit() {
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
-		setTitle("Best Tower Defense Game you've ever seen");
+		
+		//setTitle("Best Tower Defense Game you've ever seen");
 
 		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
 
@@ -122,6 +125,11 @@ public class Game extends PortableApplication {
 		//projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize, assets[180]));
 		//toDraw.add(new Tourelle4((new Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
 		//ennemis.add(new Mojojo((new Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
 	}
 
 	@Override
