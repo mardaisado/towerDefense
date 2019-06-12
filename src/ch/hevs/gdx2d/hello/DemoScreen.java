@@ -40,9 +40,12 @@ public class DemoScreen extends PortableApplication {
 
     	setTitle("Best Tower Defense Game you've ever seen");
     	Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
+    	
     	s.registerScreen(DemoGUI.class);
     	s.registerScreen(Game.class);
         s.registerScreen(CreditsScreen.class);
+        
+        
     }
 
     @Override
@@ -56,11 +59,6 @@ public class DemoScreen extends PortableApplication {
 
         s.getActiveScreen().onKeyUp(keycode);
 
-        if (keycode == Input.Keys.NUM_1)
-            s.transitionTo(1, ScreenManager.TransactionType.SLICE); // s.activateScreen(0);
-
-        if (keycode == Input.Keys.NUM_2)
-            s.transitionTo(2, ScreenManager.TransactionType.SLIDE); // s.activateScreen(1);
 
     }
 

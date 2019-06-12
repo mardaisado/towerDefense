@@ -244,7 +244,7 @@ public class Game extends RenderingScreen {
 	public void onRelease(int x, int y, int button) {
 
 		super.onRelease(x, y, button);
-		DemoScreen.transition(1);
+		
 		if (preview.getVisible()) {
 			preview.setVisible(false);
 

@@ -24,7 +24,6 @@ public class DemoGUI extends RenderingScreen {
 	Skin skin;
 	Stage stage;
 	TextButton newGameButton, quitGameButton;
-	TextField textArea;
 
 	
 	public static void main(String[] args) {
@@ -40,6 +39,7 @@ public class DemoGUI extends RenderingScreen {
 		int buttonWidth = 180;
 		int buttonHeight = 30;
 
+		System.out.println("test");
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
 
@@ -51,33 +51,19 @@ public class DemoGUI extends RenderingScreen {
 		newGameButton.setHeight(buttonHeight);
 
 
-		quitGameButton = new TextButton("Settings", skin); // Use the initialized skin
+		quitGameButton = new TextButton("Quit", skin); // Use the initialized skin
 		quitGameButton.setWidth(buttonWidth);
 		quitGameButton.setHeight(buttonHeight);
 
 		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .6));
 		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));
 
-		textArea = new TextField("Enter some text...", skin);
-		textArea.setWidth(buttonWidth);
-		textArea.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .4));
-
-		textArea.setTextFieldListener(new TextFieldListener() {
-			public void keyTyped(TextField textField, char key) {
-				textArea.setSelection(0, 0);
-
-				// When you press 'enter', do something
-				if (key == 13)
-					Logger.log("You have typed " + textArea.getText());
-			}
-		});
-
+		
 		/**
 		 * Adds the buttons to the stage
 		 */
 		stage.addActor(newGameButton);
 		stage.addActor(quitGameButton);
-		stage.addActor(textArea);
 
 		/**
 		 * Register listener
@@ -89,8 +75,11 @@ public class DemoGUI extends RenderingScreen {
 
 				if (newGameButton.isChecked()) {
 					Logger.log("Button is checked");
-			
+					DemoScreen.transition(1);
 				}
+				
+				if(quitGameButton.isChecked())
+					Gdx.app.exit();
 			}
 		});
 	}
