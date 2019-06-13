@@ -19,6 +19,8 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	int price;
 	int damage;
 	
+	boolean selled = false;
+	
 	float rangeSq;
 	float radius;
 	
@@ -50,6 +52,11 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 			level++;
 			upgradeAction(level);
 		}
+	}
+	
+	public void sell() {
+		Game.money.addMoneyCount((int) (price*Game.PERCENTAGEOFREWARD));
+		selled = true;
 	}
 	
 	public boolean checkCollision(int x,int y,int radius) {

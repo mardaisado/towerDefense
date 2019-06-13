@@ -11,10 +11,10 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-public class UpgradeButton implements DrawableObject,UpdateObject{
+public class SellButton implements DrawableObject,UpdateObject{
 
 	BitmapImage greyButton;
-	BitmapImage greenButton;
+	BitmapImage redButton;
 	BitmapImage button;
 	
 	BitmapFont font;
@@ -29,11 +29,11 @@ public class UpgradeButton implements DrawableObject,UpdateObject{
 	boolean notClickable = false;
 	
 	final float X = 0.92f;
-	final float Y = 0.7f;
+	final float Y = 0.3f;
 	
-	public UpgradeButton(float x, float y) {
+	public SellButton(float x, float y) {
 		greyButton = new BitmapImage("data/images/upgradeButtonGrey.png");
-		greenButton = new BitmapImage("data/images/upgradeButtonGreen.png");
+		redButton = new BitmapImage("data/images/sellButtonRed.png");
 		this.overviewX = x;
 		this.overviewY = y;
 		
@@ -45,7 +45,7 @@ public class UpgradeButton implements DrawableObject,UpdateObject{
 		parameter.color = Color.WHITE;
 		font = generator.generateFont(parameter);
 		
-		this.x = x*0.2f*greenButton.getImage().getHeight()/greenButton.getImage().getWidth();
+		this.x = x*0.2f*redButton.getImage().getHeight()/redButton.getImage().getWidth();
 		this.y = x*0.4f;
 		
 	}
@@ -56,40 +56,22 @@ public class UpgradeButton implements DrawableObject,UpdateObject{
 	
 	public void clicked(int x,int y) {
 		if ((x >= (X*overviewY-2*this.y) && x <= (X*overviewY) && y >= overviewX*Y-this.x && y <= overviewX*Y+this.x)&&!notClickable) {
-			defense.upgrade();
+			if (defense != null) {
+				defense.sell();
+			}
 		}
 	}
 
 	@Override
 	public void draw(GdxGraphics g) {
-		if (defense.level >= 3) {
-			g.drawTransformedPicture((X*overviewY-y),overviewX*Y,0,y,x, button);
-			g.drawString((X*overviewY-y),overviewX*Y+overviewX/20,"max",font,1);
-		}
-		else {
-			g.drawTransformedPicture((X*overviewY-y),overviewX*Y ,0,y,x, button);
-			g.drawString((X*overviewY-y),overviewX*Y+overviewX/20,defense.nextUpgradePrice()+"$" ,font,1);
-		}
-		
-		
+
+		g.drawTransformedPicture((X*overviewY-y),overviewX*Y,0,y,x, redButton);
+		g.drawString((X*overviewY-y),overviewX*Y+overviewX/20,"sell",font,1);
+
 	}
 
 	@Override
 	public void update(GdxGraphics g) {
 		// TODO Auto-generated method stub
-		if(defense != null) {
-			if (defense.level >= Game.MAX_LEVEL) {
-				notClickable = true;
-				button = greyButton;
-			}
-			else if(Game.money.getMoneyCount() < defense.nextUpgradePrice()) {
-				notClickable = true;
-				button = greyButton;
-			}
-			else {
-				notClickable = false;
-				button = greenButton;
-			}
-		}
 	}
 }

@@ -27,6 +27,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 	BitmapFont font;
 	
 	UpgradeButton upgradeButton;
+	SellButton sellButton;
 	
 	public OverviewGUI() { 
 		//this.assets = assets;
@@ -49,6 +50,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 		ringGrey = new BitmapImage("data/images/greyCircle.png");
 		
 		upgradeButton = new UpgradeButton(x,y);
+		sellButton = new SellButton(x,y);
 		
 	}
 	
@@ -65,17 +67,20 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 			setVisible(false);
 		}
 		upgradeButton.clicked(x, y);
+		sellButton.clicked(x, y);
 	}
 	
 	public void setDefense(Defense def) {
 		this.defense = def;
 		upgradeButton.setDefense(def);
+		sellButton.setDefense(def);
 	}
 	
 	@Override
 	public void update(GdxGraphics g) {
 		// TODO Auto-generated method stub
 		upgradeButton.update(g);
+		sellButton.update(g);
 		if (defense != null) {
 			circleScale = 2*defense.radius*Game.tileSize/ringGrey.getImage().getHeight();
 		}
@@ -90,6 +95,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 			g.drawTransformedPicture(y/2, x/2 ,0,y/2, x/2, image);
 			g.drawString(0.05f*y, 0.8f*x, defense.defenseName+"\n\n"+"Level : "+defense.level +"\nHits : "+defense.nbHits+"\nDamage : "+ defense.damage,font);
 			upgradeButton.draw(g);
+			sellButton.draw(g);
 		}
 	}
 

@@ -63,6 +63,7 @@ public class Game extends RenderingScreen {
 	final static boolean FULLSCREEN = false;
 	final static int START_MONEY = 1000;
 	final static int MAX_LEVEL = 3;
+	final static float PERCENTAGEOFREWARD = 0.5f;
 
 	// { pick image, dragable image, radius, class, price}
 	static DefenseProperties[] defenseProperties = {
