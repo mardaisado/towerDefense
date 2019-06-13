@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 public class DemoScreen extends PortableApplication {
 
 	final static double PERCENTAGEOFSCREEN = 1.5;
-	final static boolean FULLSCREEN = false;
+	final static boolean FULLSCREEN = true;
 
     static ScreenManager s = new ScreenManager();
     
@@ -40,10 +40,10 @@ public class DemoScreen extends PortableApplication {
     	setTitle("Best Tower Defense Game you've ever seen");
     	Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
     	s.registerScreen(DemoGUI.class); // 0
-    	s.registerScreen(MapSelector.class); //  
-    	s.registerScreen(Game.class); // 1
-        s.registerScreen(CreditsScreen.class); // 2
-        s.registerScreen(SettingGUI.class); // 3
+    	s.registerScreen(MapSelector.class); // 1
+    	s.registerScreen(Game.class); // 2
+        s.registerScreen(CreditsScreen.class); // 3
+        s.registerScreen(SettingGUI.class); // 4
     }
 
     @Override

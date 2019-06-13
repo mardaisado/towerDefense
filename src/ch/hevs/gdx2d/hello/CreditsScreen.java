@@ -17,9 +17,12 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 
 /**
  * Created by Pierre-AndrÃ© Mudry on 07.05.2015.
@@ -27,7 +30,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
  */
 public class CreditsScreen extends RenderingScreen {
 	
-	ImageButton menuGameButton;
+	TextButton menuGameButton;
+	Label lblMessage;
 	
 	Skin skin;
 	Stage stage;
@@ -40,8 +44,8 @@ public class CreditsScreen extends RenderingScreen {
 	
 	@Override
 	public void onInit() {
-		int buttonWidth = (int) (250 );
-		int buttonHeight = (int) (40);
+		int buttonWidth = Gdx.graphics.getWidth()/5;
+		int buttonHeight = Gdx.graphics.getHeight()/15;
 
 		stage = new Stage() {
 			@Override
@@ -56,14 +60,25 @@ public class CreditsScreen extends RenderingScreen {
 		lastInputProcessor = Gdx.input.getInputProcessor();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
 
+		skin = new Skin(Gdx.files.internal("data/ui/flat-earth/skin/flat-earth-ui.json"));
+		
 		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
 		
+		lblMessage = new Label("oui bravo tu as perdu !!!", skin);
+		lblMessage.setPosition(Gdx.graphics.getWidth() / 2 , (int) (Gdx.graphics.getHeight() * .5));
+		lblMessage.setAlignment(Align.center, Align.center);
+		lblMessage.setAlignment(Align.center);
+		lblMessage.setFontScale(Gdx.graphics.getWidth()/1200);
 		
-		menuGameButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown_pressed.png")))));
+		
+		menuGameButton = new TextButton("MENU", skin); // Use the initialized skin
+		//settingGameButton.setColor(Color.ORANGE);
 		menuGameButton.setWidth(buttonWidth);
 		menuGameButton.setHeight(buttonHeight);
-
-		menuGameButton.setPosition((Gdx.graphics.getWidth()/2 - 250/2), (int) (Gdx.graphics.getHeight() * .5));
+		menuGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
+		
+		
+		menuGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3));
 
 		
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -75,6 +90,7 @@ public class CreditsScreen extends RenderingScreen {
 		 * Adds the buttons to the stage
 		 */
 		stage.addActor(menuGameButton);
+		stage.addActor(lblMessage);
 
 		/**
 		 * Register listener
@@ -95,17 +111,14 @@ public class CreditsScreen extends RenderingScreen {
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.DARK_GRAY);
-		g.drawStringCentered(g.getScreenHeight()/2, "Merci d'avoir joué les bros.");
 		
 		stage.act();
-		stage.draw();
-		
-		g.drawString(Gdx.graphics.getWidth() / 2  , (int) (Gdx.graphics.getHeight() * .5 + menuGameButton.getHeight() /2), "Menu" ,font,1);
+		stage.draw();		
 	}
 
 	@Override
 	public void dispose() {
-
+		Gdx.input.setInputProcessor(lastInputProcessor);
 		super.dispose();
 	}
 }

@@ -28,7 +28,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class DemoGUI extends RenderingScreen {
 	Skin skin;
 	Stage stage;
-	ImageButton newGameButton, quitGameButton, settingGameButton;
+	TextButton newGameButton;
+	TextButton quitGameButton;
+	TextButton settingGameButton;
 
 	BitmapFont font;
 	TextureAtlas buttonAtlas;
@@ -36,31 +38,42 @@ public class DemoGUI extends RenderingScreen {
 	
 	@Override
 	public void onInit() {
-		int buttonWidth = (int) (250 );
-		int buttonHeight = (int) (40);
+		int buttonWidth = Gdx.graphics.getWidth()/5;
+		int buttonHeight = Gdx.graphics.getHeight()/15;
+//		0.984, 0.721, 0.074
+//		1f,0.58f,0.04f
 
 		stage = new Stage();
 		lastInputProcessor = Gdx.input.getInputProcessor();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
+		
+		skin = new Skin(Gdx.files.internal("data/ui/flat-earth/skin/flat-earth-ui.json"));
+		//skin = new Skin(new TextureAtlas(Gdx.files.internal("data/ui/kenney-atlas/skin/ui-blue.atlas")));
 
 		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
 		
-		newGameButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown_pressed.png")))));
+		newGameButton = new TextButton("PLAY", skin); // Use the initialized skin
+		//newGameButton.setColor(buttonColor);
 		newGameButton.setWidth(buttonWidth);
 		newGameButton.setHeight(buttonHeight);
-		
-		settingGameButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown_pressed.png")))));
-		settingGameButton.setWidth(buttonWidth);
-		settingGameButton.setHeight(buttonHeight);
+		newGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
+	
 
-		quitGameButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/ui/buttonLong_brown_pressed.png")))));
+		quitGameButton = new TextButton("EXIT", skin); // Use the initialized skin
+		//quitGameButton.setColor(buttonColor);
 		quitGameButton.setWidth(buttonWidth);
 		quitGameButton.setHeight(buttonHeight);
+		quitGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
+		
+		settingGameButton = new TextButton("SETTINGS", skin); // Use the initialized skin
+		//settingGameButton.setColor(Color.ORANGE);
+		settingGameButton.setWidth(buttonWidth);
+		settingGameButton.setHeight(buttonHeight);
+		settingGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
 
-		newGameButton.setPosition((Gdx.graphics.getWidth()/2 - 250/2), (int) (Gdx.graphics.getHeight() * .7));
-		settingGameButton.setPosition((Gdx.graphics.getWidth()/2- 250/2), (int) (Gdx.graphics.getHeight() * .6));
-		quitGameButton.setPosition((Gdx.graphics.getWidth()/2 - 250/2), (int) (Gdx.graphics.getHeight() * .5));
-
+		newGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .7));	
+		settingGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .5));
+		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3));
 		
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(optimusF);
@@ -96,7 +109,7 @@ public class DemoGUI extends RenderingScreen {
 				super.clicked(event, x, y);
 
 				if (settingGameButton.isChecked()) {
-					DemoScreen.transition(3);
+					DemoScreen.transition(4);
 				}			
 					
 			}
@@ -118,17 +131,12 @@ public class DemoGUI extends RenderingScreen {
 
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
-		g.clear(Color.BLACK);
+		g.clear(Color.DARK_GRAY);
 		
 		
 		// This is required for having the GUI work properly
 		stage.act();
 		stage.draw();
-		
-		g.drawString(Gdx.graphics.getWidth() / 2  , (int) (Gdx.graphics.getHeight() * .7 + newGameButton.getHeight() /2), "Play" ,font,1);
-		g.drawString(Gdx.graphics.getWidth() / 2  , (int) (Gdx.graphics.getHeight() * .6 + settingGameButton.getHeight() /2), "Settings" ,font,1);
-		g.drawString(Gdx.graphics.getWidth() / 2  , (int) (Gdx.graphics.getHeight() * .5 + quitGameButton.getHeight() /2), "Quit" ,font,1);
-
 	}
 
 	@Override
