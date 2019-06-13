@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -77,17 +78,15 @@ public class Game extends RenderingScreen {
 					"ch.hevs.gdx2d.hello.Tourelle2", 100 },
 			{ "data/images/t1.png", "data/assets/PNG/Retina/towerDefense_tile271.png", 80f,
 					"ch.hevs.gdx2d.hello.Tourelle2", 100 } };
-
-	public Game() {
-		// super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
-	}
-
 	@Override
 	public void onInit() {
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
 
 		// setTitle("Best Tower Defense Game you've ever seen");
-
+/*
+		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/cursor.png"));
+		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));*/
+		
 		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
 
 		float screenHeigth = Gdx.graphics.getHeight();

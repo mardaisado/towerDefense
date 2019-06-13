@@ -8,6 +8,9 @@ import ch.hevs.gdx2d.lib.utils.Logger;
 import java.awt.Toolkit;
 import java.time.Instant;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
+
 /**
  * Show how to add multiple screen and switch between them with different transitions.
  *
@@ -23,11 +26,13 @@ public class DemoScreen extends PortableApplication {
 
     static ScreenManager s = new ScreenManager();
     
-    int test=0;
+    static int mapSelector=0;
 
 	public DemoScreen() {
+
 		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
 
+	
 	}
 
     @Override
