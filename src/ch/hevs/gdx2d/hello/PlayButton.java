@@ -35,7 +35,7 @@ public class PlayButton implements DrawableObject, UpdateObject{
 		// TODO Auto-generated constructor stub
 		x = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		y = 0.92f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
-		playButton = new BitmapImage("data/images/play2.png");
+		playButton = new BitmapImage("data/images/play2_white.png");
 		fastButton = new BitmapImage("data/images/fastButton.png");
 		pauseButton = new BitmapImage("data/images/blank.png");
 		fastButtonClicked = new BitmapImage("data/images/fastButtonClicked.png");
