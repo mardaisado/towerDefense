@@ -150,8 +150,14 @@ public class Game extends RenderingScreen {
 			for (Object obj : toDraw) {
 				((UpdateObject) obj).update(g);
 			}
-			for (Defense obj : defense) {
-				((UpdateObject) obj).update(g);
+			
+			Iterator<Defense> f = defense.iterator();
+			while (f.hasNext()) {
+				Defense obj;
+				obj = f.next();
+				if (((Defense) obj).update(g)) {
+					f.remove();
+				}
 			}
 
 			Iterator<Ennemi> q = ennemi.iterator();

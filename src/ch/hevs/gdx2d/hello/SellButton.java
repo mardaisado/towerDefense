@@ -31,7 +31,10 @@ public class SellButton implements DrawableObject,UpdateObject{
 	final float X = 0.92f;
 	final float Y = 0.3f;
 	
-	public SellButton(float x, float y) {
+	OverviewGUI overview;
+	
+	public SellButton(float x, float y,OverviewGUI overview) {
+		this.overview = overview;
 		greyButton = new BitmapImage("data/images/upgradeButtonGrey.png");
 		redButton = new BitmapImage("data/images/sellButtonRed.png");
 		this.overviewX = x;
@@ -58,6 +61,7 @@ public class SellButton implements DrawableObject,UpdateObject{
 		if ((x >= (X*overviewY-2*this.y) && x <= (X*overviewY) && y >= overviewX*Y-this.x && y <= overviewX*Y+this.x)&&!notClickable) {
 			if (defense != null) {
 				defense.sell();
+				overview.setVisible(false);
 			}
 		}
 	}
