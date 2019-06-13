@@ -71,7 +71,7 @@ public class Mojojo extends Ennemi {
 		switch (direction) {
 		case 1:
 			angle=90;
-			return new Point(position.x + ((int)((0)*speed)), position.y + ((int)((1)*speed)) );
+			return new Point(position.x + ((int)((-1)*speed)), position.y + ((int)((0)*speed)) );
 
 		case 2:
 			angle=180;
@@ -83,7 +83,7 @@ public class Mojojo extends Ennemi {
 
 		case 4:
 			angle=360;
-			return new Point(position.x + ((int)((-1)*speed)), position.y + ((int)((0)*speed)) );
+			return new Point(position.x + ((int)((0)*speed)), position.y + ((int)((1)*speed)) );
 
 		default:
 			return position;

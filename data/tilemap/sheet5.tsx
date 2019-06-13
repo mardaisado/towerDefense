@@ -1217,7 +1217,7 @@
  </tile>
  <tile id="241" terrain="1,1,1,1">
   <properties>
-   <property name="posable" type="bool" value="false"/>
+   <property name="posable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="242" terrain="1,2,1,2">
