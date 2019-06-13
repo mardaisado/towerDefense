@@ -64,7 +64,7 @@ public class Tourelle extends Defense {
 	}
 
 	@Override
-	public void update(GdxGraphics g) {
+	public boolean update(GdxGraphics g) {
 		// scan
 		Ennemi target = findEnnemi();
 		
@@ -80,6 +80,10 @@ public class Tourelle extends Defense {
 				nbHits++;
 			}
 		}
+		if (selled) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

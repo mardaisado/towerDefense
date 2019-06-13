@@ -7,7 +7,7 @@ import java.util.Vector;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
-public abstract class Defense implements DrawableObject,UpdateObject {
+public abstract class Defense implements DrawableObject,DeleteObject {
 
 	Point pos;
 	Vector<Ennemi> ennemi;
@@ -86,5 +86,5 @@ public abstract class Defense implements DrawableObject,UpdateObject {
 	public abstract void draw(GdxGraphics g);
 
 	@Override
-	public abstract void update(GdxGraphics g);
+	public abstract boolean update(GdxGraphics g);
 }

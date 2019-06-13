@@ -50,7 +50,7 @@ public class OverviewGUI implements DrawableObject,UpdateObject {
 		ringGrey = new BitmapImage("data/images/greyCircle.png");
 		
 		upgradeButton = new UpgradeButton(x,y);
-		sellButton = new SellButton(x,y);
+		sellButton = new SellButton(x,y,this);
 		
 	}
 	
