@@ -3,6 +3,9 @@ package ch.hevs.gdx2d.hello;
 import java.awt.Point;
 import java.util.Vector;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
@@ -24,6 +27,8 @@ public class Missile implements DrawableObject,DeleteObject {
 	int power;
 	float radiusSq;
 
+	Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop2.mp3"));
+	
 	public Missile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,float radius,Vector<Ennemi> ennemi) {
 		this.pos = startPoint;
 		this.endPoint = endPoint;
@@ -52,6 +57,7 @@ public class Missile implements DrawableObject,DeleteObject {
 			Ennemi target = ennemi.elementAt(i);
 			if (pos.distanceSq(target.getPos()) < radiusSq) {
 				target.giveDamage(power);
+				sound.play(1.0f);
 			}
 		}
 	}
