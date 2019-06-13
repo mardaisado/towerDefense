@@ -125,24 +125,24 @@ public class MapSelector extends RenderingScreen {
 		int baseHeight=(Gdx.graphics.getHeight()-(3*50)-(3*75))/2;
 		for (int i = 0; i < map.size(); i++) {
 			
-			map.get(0).setHeight(150);
-			map.get(0).setWidth(150);
-			map.get(0).setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+//			map.get(0).setHeight(150);
+//			map.get(0).setWidth(150);
+//			map.get(0).setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 	
 			
 			// A FAIRE 
-//			map.get(i).setHeight(BUTTONHEIGHT);
-//			map.get(i).setWidth(BUTTONWIDTH);
-//			if(i>=0 && i<=2)
-//			{
-//				map.get(i).setPosition(baseWidth+i*(3*50+3*75),120);
-//			} else if(i>=3 && i<=5)
-//			{
-//				map.get(i).setPosition(baseWidth+i*(3*50+3*75),240);
-//			} else
-//			{
-//				map.get(i).setPosition(baseWidth+i*(3*50+3*75),360);
-//			}
+			map.get(i).setHeight(BUTTONHEIGHT);
+			map.get(i).setWidth(BUTTONWIDTH);
+			if(i>=0 && i<=2)
+			{
+				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.7f);
+			} else if(i>=3 && i<=5)
+			{
+				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.5f);
+			} else
+			{
+				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.3f);
+			}
 
 		}		
 
