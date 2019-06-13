@@ -10,9 +10,9 @@ public class Tourelle extends Defense {
 
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle très jolie";
-	final static int PRICE = 100;
+	final static int PRICE = Game.defenseProperties[0].price;
 	final static int DAMAGE = 30;
-	final static float RADIUS = 200;
+	final static float RADIUS = Game.defenseProperties[0].radius;
 	final static float COOLDOWN = 1;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile180.png";
 	final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile249.png";

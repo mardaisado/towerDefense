@@ -10,11 +10,11 @@ public class Dragable implements DrawableObject {
 	float posX;
 	float posY;
 	float width;
-	Object[] defense;
+	DefenseProperties properties;
 	
-	public Dragable(Object[] defense,float posX,float posY,float width) {
-		this.defense = defense;
-		image = new BitmapImage((String)defense[0]);
+	public Dragable(DefenseProperties properties,float posX,float posY,float width) {
+		this.properties = properties;
+		image = new BitmapImage(properties.pickImage);
 		this.posX = posX;
 		this.posY = posY;
 		this.width = width;

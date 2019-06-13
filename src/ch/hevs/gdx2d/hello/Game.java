@@ -64,20 +64,14 @@ public class Game extends RenderingScreen {
 	final static int START_MONEY = 1000;
 	final static int MAX_LEVEL = 3;
 
-	// { pick image, dragable image, radius}
-	final static Object[][] defenseChoice = {
-			{ "data/images/t1.png", "data/images/t1_p.png", 200f, "ch.hevs.gdx2d.hello.Tourelle", 100 },
-			{ "data/images/t2.png", "data/images/t2_p.png", 250f, "ch.hevs.gdx2d.hello.Tourelle2", 150 },
-			{ "data/images/t3.png", "data/images/t3_p.png", 300f, "ch.hevs.gdx2d.hello.Tourelle3", 300 },
-			{ "data/images/t4.png", "data/images/t4_p.png", 200f, "ch.hevs.gdx2d.hello.Tourelle4", 400 },
-			{ "data/images/t1.png", "data/assets/PNG/Retina/towerDefense_tile271.png", 400f,
-					"ch.hevs.gdx2d.hello.Tourelle2", 100 },
-			{ "data/images/t1.png", "data/assets/PNG/Retina/towerDefense_tile271.png", 500f,
-					"ch.hevs.gdx2d.hello.Tourelle2", 100 },
-			{ "data/images/t1.png", "data/assets/PNG/Retina/towerDefense_tile271.png", 600f,
-					"ch.hevs.gdx2d.hello.Tourelle2", 100 },
-			{ "data/images/t1.png", "data/assets/PNG/Retina/towerDefense_tile271.png", 80f,
-					"ch.hevs.gdx2d.hello.Tourelle2", 100 } };
+	// { pick image, dragable image, radius, class, price}
+	static DefenseProperties[] defenseProperties = {
+			new DefenseProperties("data/images/t1.png", "data/images/t1_p.png", 200f, "ch.hevs.gdx2d.hello.Tourelle", 100),
+			new DefenseProperties("data/images/t2.png", "data/images/t2_p.png", 250f, "ch.hevs.gdx2d.hello.Tourelle2", 150),
+			new DefenseProperties("data/images/t3.png", "data/images/t3_p.png", 300f, "ch.hevs.gdx2d.hello.Tourelle3", 300),
+			new DefenseProperties("data/images/t4.png", "data/images/t4_p.png", 200f, "ch.hevs.gdx2d.hello.Tourelle4", 1000)
+	};
+	
 	@Override
 	public void onInit() {
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
@@ -87,7 +81,7 @@ public class Game extends RenderingScreen {
 //		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/crosshair123.png"));
 //		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
 		
-		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
+		tiledMap = new TmxMapLoader().load("data/tilemap/0.tmx");
 
 		float screenHeigth = Gdx.graphics.getHeight();
 		tileSize = (((int) (screenHeigth / (tiledMap.getProperties().get("width", Integer.class))) / 64f));
@@ -107,10 +101,10 @@ public class Game extends RenderingScreen {
 		playButton = new PlayButton(ennemi);
 		roundManager = new RoundManager(ennemi, playButton);
 
-		for (int i = 0; i < (defenseChoice.length / 2 + defenseChoice.length % 2); i++) {
+		for (int i = 0; i < (defenseProperties.length / 2 + defenseProperties.length % 2); i++) {
 			for (int j = 0; j < 2; j++) {
-				if (i * 2 + j < defenseChoice.length) {
-					dragable.add(new Dragable(defenseChoice[i * 2 + j], pickGui.x + (95 + 110 * j) * pickGui.facteur,
+				if (i * 2 + j < defenseProperties.length) {
+					dragable.add(new Dragable(defenseProperties[i * 2 + j], pickGui.x + (95 + 110 * j) * pickGui.facteur,
 							pickGui.x - (95 + 110 * i) * pickGui.facteur, 90 * pickGui.facteur / 2));
 				}
 			}
@@ -259,15 +253,15 @@ public class Game extends RenderingScreen {
 			if ((Utils.returnStateForBool(new Point((int) ((x - map0x) / tileSize), (int) ((y - map0y) / tileSize)),
 					null, "posable", tiledMap)) == true
 					&& Utils.checkDefenseCollision(defense, (int) x - map0x, (int) y - map0y, 30) == false) {
-				if (money.getMoneyCount() >= (int) nowDragable.defense[4]) {
+				if (money.getMoneyCount() >= (int) nowDragable.properties.price) {
 					// defense.add(new Tourelle(new Point(x-map0x,y-map0y),ennemi,projectile));
-					Defense d = Utils.createDefense((String) nowDragable.defense[3], new Point(x - map0x, y - map0y),
+					Defense d = Utils.createDefense((String) nowDragable.properties.classDefense, new Point(x - map0x, y - map0y),
 							ennemi, projectile);
 					if (d != null) {
 						defense.add(d);
 					}
 					// System.out.println((String)nowDragable.defense[3]);
-					money.takeOffMoneyCount((int) nowDragable.defense[4]);
+					money.takeOffMoneyCount((int) nowDragable.properties.price);
 				}
 			}
 		}
@@ -291,8 +285,8 @@ public class Game extends RenderingScreen {
 
 				if (!preview.getVisible()) {
 					preview.setVisible(true);
-					preview.setRadius((float) obj.defense[2]);
-					preview.setImage(new BitmapImage((String) obj.defense[1]), tileSize);
+					preview.setRadius((float) obj.properties.radius);
+					preview.setImage(new BitmapImage((String) obj.properties.previewImage), tileSize);
 					// System.out.println((obj.defense[3]));
 				}
 				if ((Utils.returnStateForBool(

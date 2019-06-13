@@ -9,9 +9,9 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 public class Tourelle3 extends Defense{
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle qui tire loin";
-	final static int PRICE = 300;
+	final static int PRICE = Game.defenseProperties[2].price;
 	final static int DAMAGE = 10;
-	final static float RADIUS = 300;
+	final static float RADIUS = Game.defenseProperties[2].radius;
 	final static float COOLDOWN = 0.4f;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile181.png";
 	final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile203.png";
