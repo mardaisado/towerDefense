@@ -64,10 +64,10 @@ public class CreditsScreen extends RenderingScreen {
 		
 		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
 		
-		lblMessage = new Label("oui bravo tu as perdu !!!", skin);
-		lblMessage.setPosition(Gdx.graphics.getWidth() / 2 , (int) (Gdx.graphics.getHeight() * .5));
-		lblMessage.setAlignment(Align.center, Align.center);
-		lblMessage.setAlignment(Align.center);
+		lblMessage = new Label("Dommage ! Mais tu peux rejouer ! (Bientot tu pouras regarder une pub pour continuer) ", skin);
+		lblMessage.setPosition(Gdx.graphics.getWidth() / 2 - lblMessage.getWidth()/2 , (int) (Gdx.graphics.getHeight() * .5 - lblMessage.getHeight()/2));
+//		lblMessage.setAlignment(Align.center, Align.center);
+//		lblMessage.setAlignment(Align.center);
 		lblMessage.setFontScale(Gdx.graphics.getWidth()/1200);
 		
 		
@@ -78,7 +78,7 @@ public class CreditsScreen extends RenderingScreen {
 		menuGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
 		
 		
-		menuGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3));
+		menuGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3 - buttonHeight/2));
 
 		
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();

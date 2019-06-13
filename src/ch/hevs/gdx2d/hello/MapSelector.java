@@ -112,7 +112,7 @@ public class MapSelector extends RenderingScreen {
 	{
 		for (int i = map.size(); i < map.capacity(); i++) {
 
-			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png"))))));
+			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/998.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/998.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png"))))));
 			map.get(i).setName("0");
 		}		
 
@@ -130,7 +130,7 @@ public class MapSelector extends RenderingScreen {
 //			map.get(0).setWidth(150);
 //			map.get(0).setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 	
-			map.get(i).getImage().setScale(Gdx.graphics.getWidth()/700);
+			map.get(i).getImage().setScale(Gdx.graphics.getWidth()/500);
 			
 			// A FAIRE 
 			map.get(i).setHeight(BUTTONHEIGHT);
