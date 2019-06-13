@@ -41,7 +41,7 @@ public class MapSelector extends RenderingScreen {
 	TextureAtlas buttonAtlas;
 
 	InputProcessor lastInputProcessor;
-	
+
 	final static int BUTTONWIDTH = 50 ;
 
 	final static int BUTTONHEIGHT = 50;
@@ -66,7 +66,7 @@ public class MapSelector extends RenderingScreen {
 		loadMapButton(mapButton,"data/tilemap");
 
 		fillVector(mapButton);
-		
+
 		setPosition(mapButton);
 
 		/**
@@ -75,23 +75,11 @@ public class MapSelector extends RenderingScreen {
 		for (int i = 0; i < mapButton.size(); i++) {
 			stage.addActor(mapButton.get(i));
 		}
-		
-		mapButton.get(0).addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-				if (mapButton.get(0).isChecked()) {
-					DemoScreen.mapSelector=0;
-					System.out.println("GOOO");
-					DemoScreen.transition(2);
-				}	
-					
-			}
-		});
+
+		checkClick(mapButton);
+
 
 	}
-
-
 
 	Vector<ImageButton> loadMapButton(Vector<ImageButton> map,String path)
 	{
@@ -122,40 +110,75 @@ public class MapSelector extends RenderingScreen {
 	Vector<ImageButton> fillVector(Vector<ImageButton> map)
 	{
 		for (int i = map.size(); i < map.capacity(); i++) {
-			
-			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png"))))));
 
+			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png"))))));
+			map.get(i).setName("SOon");
 		}		
-		
+
 		return map;
 	}
 
 	Vector<ImageButton> setPosition(Vector<ImageButton> map)
 	{
+		int baseWidth=(Gdx.graphics.getWidth()-(3*50)-(3*75))/2;
+	
+		int baseHeight=(Gdx.graphics.getHeight()-(3*50)-(3*75))/2;
 		for (int i = 0; i < map.size(); i++) {
-			map.get(i).setHeight(BUTTONHEIGHT);
-			map.get(i).setWidth(BUTTONWIDTH);
-			map.get(i).setPosition((float) (Gdx.graphics.getWidth()*0.1*i),(int) (Gdx.graphics.getHeight() * .5));
+			
+			map.get(0).setHeight(150);
+			map.get(0).setWidth(150);
+			map.get(0).setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+	
+			
+			// A FAIRE 
+//			map.get(i).setHeight(BUTTONHEIGHT);
+//			map.get(i).setWidth(BUTTONWIDTH);
+//			if(i>=0 && i<=2)
+//			{
+//				map.get(i).setPosition(baseWidth+i*(3*50+3*75),120);
+//			} else if(i>=3 && i<=5)
+//			{
+//				map.get(i).setPosition(baseWidth+i*(3*50+3*75),240);
+//			} else
+//			{
+//				map.get(i).setPosition(baseWidth+i*(3*50+3*75),360);
+//			}
+
 		}		
-		
+
 		return map;
 	}
-	
-	
-	
+
+	private void checkClick(Vector<ImageButton> map)
+	{		
+		for (int i = 0; i < map.size(); i++) {
+			final int temp = i;
+			mapButton.get(temp).addListener(new ClickListener() {
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					super.clicked(event, x, y);
+					if (mapButton.get(temp).isChecked() && mapButton.get(temp).getName() != "0") {
+						DemoScreen.mapSelector=temp;
+						DemoScreen.transition(2);
+					}	
+
+				}
+			});			
+		}
+	}
+
 	@Override
 	public void onClick(int x, int y, int button) {
 		super.onClick(x, y, button);
-		
+
 		if(mapButton.get(0).isPressed())
 		{
 			DemoScreen.mapSelector=0;
-			System.out.println("GOOO");
 			DemoScreen.transition(2);
-			
+
 		}
 	}
-	
+
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.DARK_GRAY);
@@ -165,7 +188,8 @@ public class MapSelector extends RenderingScreen {
 
 	@Override
 	public void dispose() {
-
 		super.dispose();
+		Gdx.input.setInputProcessor(lastInputProcessor);
+		stage.dispose();
 	}
 }

@@ -83,9 +83,9 @@ public class Game extends RenderingScreen {
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
 
 		// setTitle("Best Tower Defense Game you've ever seen");
-/*
-		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/cursor.png"));
-		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));*/
+
+//		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/crosshair123.png"));
+//		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
 		
 		tiledMap = new TmxMapLoader().load("data/tilemap/test1.tmx");
 

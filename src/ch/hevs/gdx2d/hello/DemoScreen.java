@@ -6,11 +6,6 @@ import ch.hevs.gdx2d.lib.ScreenManager;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
 import java.awt.Toolkit;
-import java.time.Instant;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
-
 /**
  * Show how to add multiple screen and switch between them with different transitions.
  *
@@ -44,6 +39,8 @@ public class DemoScreen extends PortableApplication {
     	s.registerScreen(Game.class); // 2
         s.registerScreen(CreditsScreen.class); // 3
         s.registerScreen(SettingGUI.class); // 4
+        
+
     }
 
     @Override
