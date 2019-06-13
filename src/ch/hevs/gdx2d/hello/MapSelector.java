@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
 
 /**
  * Created by Pierre-André Mudry on 07.05.2015.
@@ -98,7 +99,7 @@ public class MapSelector extends RenderingScreen {
 		for (int i = 0; i < results.size(); i++) {
 			if (results.get(i).contains(".tmx")) {
 
-				map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/"+indexFile+".png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/"+indexFile+""+1+".png"))))));
+				map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/"+indexFile+".png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/"+indexFile+"1.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/"+indexFile+"1.png"))))));
 
 				indexFile++;
 			}
@@ -111,8 +112,8 @@ public class MapSelector extends RenderingScreen {
 	{
 		for (int i = map.size(); i < map.capacity(); i++) {
 
-			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png"))))));
-			map.get(i).setName("SOon");
+			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png"))))));
+			map.get(i).setName("0");
 		}		
 
 		return map;
@@ -129,19 +130,20 @@ public class MapSelector extends RenderingScreen {
 //			map.get(0).setWidth(150);
 //			map.get(0).setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 	
+			map.get(i).getImage().setScale(Gdx.graphics.getWidth()/700);
 			
 			// A FAIRE 
 			map.get(i).setHeight(BUTTONHEIGHT);
 			map.get(i).setWidth(BUTTONWIDTH);
 			if(i>=0 && i<=2)
 			{
-				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.7f);
+				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.6f);
 			} else if(i>=3 && i<=5)
 			{
-				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.5f);
+				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.4f);
 			} else
 			{
-				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.3f);
+				map.get(i).setPosition(Gdx.graphics.getWidth()/2+(i%3-1)*Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight()*.2f);
 			}
 
 		}		
@@ -160,8 +162,7 @@ public class MapSelector extends RenderingScreen {
 					if (mapButton.get(temp).isChecked() && mapButton.get(temp).getName() != "0") {
 						DemoScreen.mapSelector=temp;
 						DemoScreen.transition(2);
-					}	
-
+					}
 				}
 			});			
 		}

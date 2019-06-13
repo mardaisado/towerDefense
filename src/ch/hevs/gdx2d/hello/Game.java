@@ -82,7 +82,7 @@ public class Game extends RenderingScreen {
 //		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/crosshair123.png"));
 //		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
 		
-		tiledMap = new TmxMapLoader().load("data/tilemap/0.tmx");
+		tiledMap = new TmxMapLoader().load("data/tilemap/"+ DemoScreen.mapSelector +".tmx");
 
 		float screenHeigth = Gdx.graphics.getHeight();
 		tileSize = (((int) (screenHeigth / (tiledMap.getProperties().get("width", Integer.class))) / 64f));
