@@ -1,13 +1,11 @@
 package ch.hevs.gdx2d.hello;
 
 import java.awt.Point;
-import java.time.Instant;
 import java.util.Iterator;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -56,9 +54,9 @@ public class Game extends RenderingScreen {
 	float dt = 0;
 
 	static MoneyCounter money = null;
-	
+
 	static Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/soundtrack.wav"));
-	
+
 	final static double PERCENTAGEOFSCREEN = 1.5;
 	final static boolean FULLSCREEN = false;
 	final static int START_MONEY = 1000;
@@ -72,16 +70,14 @@ public class Game extends RenderingScreen {
 			new DefenseProperties("data/images/t3.png", "data/images/t3_p.png", 300f, "ch.hevs.gdx2d.hello.Tourelle3", 300),
 			new DefenseProperties("data/images/t4.png", "data/images/t4_p.png", 200f, "ch.hevs.gdx2d.hello.Tourelle4", 1000)
 	};
-	
+
 	@Override
 	public void onInit() {
 		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
 
-		// setTitle("Best Tower Defense Game you've ever seen");
+		//		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/crosshair123.png"));
+		//		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
 
-//		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/crosshair123.png"));
-//		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-		
 		tiledMap = new TmxMapLoader().load("data/tilemap/"+ MasterScreen.mapSelector +".tmx");
 
 		float screenHeigth = Gdx.graphics.getHeight();
@@ -111,23 +107,15 @@ public class Game extends RenderingScreen {
 			}
 		}
 
-		// preview.setImage(assets[271], tileSize);
 		toDraw.add(roundManager);
 		toDraw.add(defenseGui);
 		toDraw.add(pickGui);
 		toDraw.add(money);
 		toDraw.add(playButton);
-		// toDraw.add(preview);
-		// projectile.add(new Projectile(new Point(0, 0), new Point(0, 0), tileSize,
-		// assets[180]));
-		// toDraw.add(new Tourelle4((new
-		// Point((int)((24-0.5)*tileSize*64f),(int)((3-0.5)*tileSize*64f))),ennemi,projectile));
-		// ennemis.add(new Mojojo((new
-		// Point((int)((10-0.5)*tileSize*64f),(int)((10-0.5)*tileSize*64f))),tileSize,assets[268]));
+		
 		sound.play();
 		sound.loop();
-		
-		
+
 	}
 
 	@Override
@@ -150,7 +138,7 @@ public class Game extends RenderingScreen {
 			for (Object obj : toDraw) {
 				((UpdateObject) obj).update(g);
 			}
-			
+
 			Iterator<Defense> f = defense.iterator();
 			while (f.hasNext()) {
 				Defense obj;
@@ -178,7 +166,6 @@ public class Game extends RenderingScreen {
 				}
 			}
 
-			// System.out.println("size "+ennemi.size());
 		}
 
 		// Camera fixe
@@ -189,7 +176,7 @@ public class Game extends RenderingScreen {
 		tiledMapRenderer.setView(g.getCamera());
 		tiledMapRenderer.render();
 
-		// draw object
+		// Draw Object
 
 		for (Defense obj : defense) {
 			((DrawableObject) obj).draw(g);
@@ -210,15 +197,6 @@ public class Game extends RenderingScreen {
 		}
 
 		preview.draw(g);
-		
-
-		// Draw everything
-		// g.drawTransformedPicture(Gdx.graphics.getWidth() / 2.0f,
-		// Gdx.graphics.getHeight() / 2.0f, angle, 1.0f, imgBitmap);
-		// g.drawStringCentered(Gdx.graphics.getHeight() * 0.8f, "Welcome to gdx2d !");
-		// mapManager.drawMap(g,assets);
-		// g.drawFPS();
-		// g.drawSchoolLogo();
 	}
 
 	@Override
@@ -239,14 +217,6 @@ public class Game extends RenderingScreen {
 			defenseGui.setDefense(def);
 			defenseGui.setVisible(true);
 		}
-		// System.out.println((int)((x-map0x)/(tileSize*64f)));
-		// System.out.println((int)((y-map0y)/(tileSize*64f)));
-		// System.out.println(x-map0x);
-		// System.out.println(y-map0y);
-		// System.out.println("yes: "+x +" / "+y);
-		// // is walkable
-		// System.out.println(Utils.isWalkable(Utils.getTile(new Point(x-map0x,y-map0y),
-		// tiledLayer)));
 	}
 
 	@Override
@@ -261,19 +231,18 @@ public class Game extends RenderingScreen {
 					null, "posable", tiledMap)) == true
 					&& Utils.checkDefenseCollision(defense, (int) x - map0x, (int) y - map0y, 30) == false) {
 				if (money.getMoneyCount() >= (int) nowDragable.properties.price) {
-					// defense.add(new Tourelle(new Point(x-map0x,y-map0y),ennemi,projectile));
 					Defense d = Utils.createDefense((String) nowDragable.properties.classDefense, new Point(x - map0x, y - map0y),
 							ennemi, projectile);
 					if (d != null) {
 						defense.add(d);
 					}
-					// System.out.println((String)nowDragable.defense[3]);
 					money.takeOffMoneyCount((int) nowDragable.properties.price);
 				}
 			}
 		}
 	}
 
+	// Only for the test, not in the final version !
 	@Override
 	public void onKeyUp(int keycode) {
 		super.onKeyUp(keycode);

@@ -1,6 +1,5 @@
 package ch.hevs.gdx2d.hello;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -14,15 +13,19 @@ import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
 public class Dragable implements DrawableObject {
-	BitmapImage image;
-	float posX;
-	float posY;
-	float width;
-	DefenseProperties properties;
 	
-	BitmapFont font;
+	private BitmapImage image;
+	
+	private float posX;
+	private float posY;
+	private float width;
+	
+	public DefenseProperties properties;
+	
+	private BitmapFont font;
 	
 	public Dragable(DefenseProperties properties,float posX,float posY,float width) {
+		
 		this.properties = properties;
 		image = new BitmapImage(properties.pickImage);
 		this.posX = posX;

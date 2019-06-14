@@ -12,10 +12,10 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
 public class MoneyCounter implements DrawableObject,UpdateObject{
 
-	float x;
-	float y;
+	private float x;
+	private float y;
 	
-	BitmapFont font;
+	private BitmapFont font;
 	
 	private int moneyCount;
 	

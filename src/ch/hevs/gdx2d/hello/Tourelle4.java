@@ -15,7 +15,6 @@ public class Tourelle4 extends Defense{
 	final static float RADIUS = Game.defenseProperties[3].radius;
 	final static float COOLDOWN = 0.3f;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile180.png";
-	//final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile249.png";
 	final static String PROJECTILE_URL = "data/assets/PNG/Retina/towerDefense_tile273.png";
 	final static int[] UPGRADE_COST= {PRICE,2000,3000};
 	
@@ -29,9 +28,8 @@ public class Tourelle4 extends Defense{
 	public Tourelle4(Point pos,Vector<Ennemi> ennemi,Vector<Object> projectile) {
 		super(pos,ennemi,projectile,DEFENSE_NAME,RADIUS,COOLDOWN,UPGRADE_COST,DAMAGE);
 		
-		//SET IMAGE
 		base = new BitmapImage(BASE_URL);
-		//movingPart = new BitmapImage(MOVINGPART_URL);
+		
 		projectileBtp = new BitmapImage(PROJECTILE_URL);
 	}
 	
@@ -56,19 +54,14 @@ public class Tourelle4 extends Defense{
 
 	@Override
 	public void draw(GdxGraphics g) {
-		//draw the base
-		g.drawTransformedPicture(pos.x, pos.y, 0,Game.tileSize/2, base);
 		
-		//draw the "tourelle"
-		//g.drawTransformedPicture(pos.x, pos.y, angle, Game.tileSize/2, movingPart);
+		g.drawTransformedPicture(pos.x, pos.y, 0,Game.tileSize/2, base);
 	}
 
 	@Override
 	public boolean update(GdxGraphics g) {
-		// scan
 		Ennemi target = findEnnemi();
 		
-		// shot
 		dt += Game.FRAME_TIME;
 		if(target != null) {	// NO ENNEMI FOUND
 			// Process update

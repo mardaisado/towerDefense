@@ -3,7 +3,6 @@ package ch.hevs.gdx2d.hello;
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 
-import java.awt.Point;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,34 +13,23 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Scaling;
 
 /**
- * Created by Pierre-André Mudry on 07.05.2015.
- * HES-SO Valais, 2015
+ * A screen for choose the map to play
  */
 public class MapMenu extends RenderingScreen {
 
-	Skin skin;
-	Stage stage;
+	private Stage stage;
 
-	/* Vector of initial capacity(size) of 2 */
-	Vector<ImageButton> mapButton = new Vector<ImageButton>(9);
+	private Vector<ImageButton> mapButton = new Vector<ImageButton>(9);
 
-	BitmapFont font;
-
-	TextureAtlas buttonAtlas;
-
-	InputProcessor lastInputProcessor;
+	private InputProcessor lastInputProcessor;
 
 	final static int BUTTONWIDTH = 50 ;
 
@@ -49,7 +37,6 @@ public class MapMenu extends RenderingScreen {
 
 	@Override
 	public void onInit() {
-
 
 		stage = new Stage() {
 			@Override
@@ -61,8 +48,9 @@ public class MapMenu extends RenderingScreen {
 				return super.keyDown(keyCode);
 			}
 		};
+		
 		lastInputProcessor = Gdx.input.getInputProcessor();
-		Gdx.input.setInputProcessor(stage);// Make the stage consume events
+		Gdx.input.setInputProcessor(stage);
 
 		loadMapButton(mapButton,"data/tilemap");
 
@@ -70,9 +58,6 @@ public class MapMenu extends RenderingScreen {
 
 		setPosition(mapButton);
 
-		/**
-		 * Adds the buttons to the stage
-		 */
 		for (int i = 0; i < mapButton.size(); i++) {
 			stage.addActor(mapButton.get(i));
 		}
@@ -82,7 +67,14 @@ public class MapMenu extends RenderingScreen {
 
 	}
 
-	Vector<ImageButton> loadMapButton(Vector<ImageButton> map,String path)
+	/**
+	 * Func for fill the ImageButton vector with the correct image for each map on the path
+	 *
+	 *	 * @param Vector ImageButton map
+	 *	 * @param String path      
+	 * @return ImageButton Vector with the preview of the map
+	 */
+	private Vector<ImageButton> loadMapButton(Vector<ImageButton> map,String path)
 	{
 		int indexFile=0;
 		List<String> results = new ArrayList<String>();
@@ -108,7 +100,13 @@ public class MapMenu extends RenderingScreen {
 		return map;
 	}
 
-	Vector<ImageButton> fillVector(Vector<ImageButton> map)
+	/**
+	 * Func for fill the ImageButton vector (the free place) with the soon image
+	 *
+	 *	 * @param Vector ImageButton map   
+	 * @return ImageButton Vector with the "soon" image
+	 */
+	private Vector<ImageButton> fillVector(Vector<ImageButton> map)
 	{
 		for (int i = map.size(); i < map.capacity(); i++) {
 
@@ -119,20 +117,19 @@ public class MapMenu extends RenderingScreen {
 		return map;
 	}
 
-	Vector<ImageButton> setPosition(Vector<ImageButton> map)
+	/**
+	 * Func for set the ImageButton vector position and size
+	 *
+	 *	 * @param Vector ImageButton map
+	 * @return ImageButton Vector with the position and size
+	 */
+	private Vector<ImageButton> setPosition(Vector<ImageButton> map)
 	{
-		int baseWidth=(Gdx.graphics.getWidth()-(3*50)-(3*75))/2;
-	
-		int baseHeight=(Gdx.graphics.getHeight()-(3*50)-(3*75))/2;
+
 		for (int i = 0; i < map.size(); i++) {
-			
-//			map.get(0).setHeight(150);
-//			map.get(0).setWidth(150);
-//			map.get(0).setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-	
+
 			map.get(i).getImage().setScale(Gdx.graphics.getWidth()/500);
-			
-			// A FAIRE 
+
 			map.get(i).setHeight(BUTTONHEIGHT);
 			map.get(i).setWidth(BUTTONWIDTH);
 			if(i>=0 && i<=2)
@@ -151,6 +148,13 @@ public class MapMenu extends RenderingScreen {
 		return map;
 	}
 
+	/**
+	 * Func for check which button is clicked
+	 *
+	 *	 * @param Vector ImageButton map    
+	 * 
+	 * Launch the game with the correct map (mapSelector on MasterScreen class)
+	 */
 	private void checkClick(Vector<ImageButton> map)
 	{		
 		for (int i = 0; i < map.size(); i++) {

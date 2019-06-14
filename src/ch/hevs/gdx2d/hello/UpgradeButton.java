@@ -76,7 +76,6 @@ public class UpgradeButton implements DrawableObject,UpdateObject{
 
 	@Override
 	public void update(GdxGraphics g) {
-		// TODO Auto-generated method stub
 		if(defense != null) {
 			if (defense.level >= Game.MAX_LEVEL) {
 				notClickable = true;

@@ -21,23 +21,24 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 
 public class RoundManager implements UpdateObject, DrawableObject{
 
+	PlayButton playButton;
+	
+	JSONObject roundScript;
 	JSONArray listOfEnnemi;
+	
+	BitmapFont font;
 
 	Vector<Ennemi> ennemi;
 
 	int timeDelta=0;
 
-	PlayButton playButton;
 	boolean play_state = false;
+	
 	int round=1;
 	int maxRound=0;
 
-	JSONObject roundScript;
-
 	float x;
 	float y;
-
-	BitmapFont font;
 
 	public RoundManager(Vector<Ennemi> ennemi, PlayButton playButton) {
 
@@ -60,6 +61,12 @@ public class RoundManager implements UpdateObject, DrawableObject{
 		font = generator.generateFont(parameter);
 	}
 
+	/**
+	 * Func for fill the JSONObject with the JSON File
+	 *
+	 *	 * @param String path
+	 * @return JSONObject charged
+	 */
 	private JSONObject chargeObj(String path)
 	{
 		JSONObject obj;
@@ -73,6 +80,13 @@ public class RoundManager implements UpdateObject, DrawableObject{
 
 		return obj;
 	}
+	
+	/**
+	 * Func for search if the time is in the array
+	 *
+	 *	 * @param int timeToFound
+	 * @return boolean, true if yes
+	 */
 	private boolean searchTime(int timeToFound)
 	{
 		for (int i = 0; i < listOfEnnemi.size(); i++) {
@@ -85,6 +99,12 @@ public class RoundManager implements UpdateObject, DrawableObject{
 		return false;
 	}
 
+	/**
+	 * Func for set the round max
+	 *
+	 *	 * @param Object obj
+	 * @return Integer with the max round number
+	 */
 	private int defineMax(Object obj)
 	{
 		if(obj!=null)
@@ -94,12 +114,20 @@ public class RoundManager implements UpdateObject, DrawableObject{
 		}
 		return 0;
 	}
+	
 	public void play() {
 		play_state = true;
 		timeDelta=0;
 		listOfEnnemi=getRoundList(round,roundScript);
 	}
 
+	/**
+	 * Func for get the round list in the JSON Object
+	 *
+	 *	 * @param int round
+	 *	 * @param Object obj
+	 * @return JSONArray with the round list
+	 */
 	public JSONArray getRoundList(int round, Object obj)
 	{
 

@@ -9,24 +9,24 @@ import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 public abstract class Ennemi implements DrawableObject {
 
 	protected Point pos;
-	
+
 	protected int progress;
-	
+
 	protected int hp;
-	
+
 	private int reward;	
-	
+
 	private boolean alive = true;
-	
+
 	public Ennemi(int hp, int reward) {
 		this.hp = hp;
 		this.reward=reward;
 	}
-	
+
 	/**
 	 * Func for return ennemi's reward
 	 *
-	 * @return reward of the ennmi
+	 * @return reward of the ennemi
 	 */
 	public int getReward()
 	{
@@ -42,7 +42,7 @@ public abstract class Ennemi implements DrawableObject {
 	{
 		return progress;
 	}
-	
+
 	/**
 	 * Func for return ennemis'hp
 	 *
@@ -51,7 +51,7 @@ public abstract class Ennemi implements DrawableObject {
 	public int getHP() {
 		return hp;
 	}
-	
+
 	/**
 	 * Func for return ennemis'position
 	 *
@@ -60,7 +60,7 @@ public abstract class Ennemi implements DrawableObject {
 	public Point getPos() {
 		return new Point((int)(pos.x*Game.tileSize),(int)(pos.y*Game.tileSize));
 	}
-	
+
 	/**
 	 * Func for return ennemis'position
 	 *
@@ -69,7 +69,7 @@ public abstract class Ennemi implements DrawableObject {
 	public Point getPosNoScale() {
 		return pos;
 	}
-	
+
 	/**
 	 * Func for give damage at the ennemi
 	 *
@@ -80,21 +80,17 @@ public abstract class Ennemi implements DrawableObject {
 	public void giveDamage(int damage)
 	{
 		hp= hp-damage;
-		
+
 		if(hp <= 0 && alive)
 		{
 			alive = false;
 			Game.money.addMoneyCount(reward);
 		}
 	}
-	
+
 	@Override
 	public abstract void draw(GdxGraphics g);
 
 	public abstract boolean update(GdxGraphics g);
-
-
-
-
 
 }

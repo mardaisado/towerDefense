@@ -164,6 +164,14 @@ public class Mojojo extends Ennemi {
 		return new Point((int)(output.x*scale),(int)(output.y*scale)) ;
 	}
 
+	/**
+	 * Check if the ennemi is on the end tile
+	 *
+	 * @param TiledMapTile test
+	 *            The Tile to check
+	 *            
+	 * Stop the Game and change the screen to the endScreen	 *
+	 */
 	private void checkEnd(TiledMapTile test)
 	{
 		if(Utils.returnStateForBool(null, test, "end", map))
