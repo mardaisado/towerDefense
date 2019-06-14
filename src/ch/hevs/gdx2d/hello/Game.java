@@ -59,7 +59,7 @@ public class Game extends RenderingScreen {
 
 	final static double PERCENTAGEOFSCREEN = 1.5;
 	final static boolean FULLSCREEN = false;
-	final static int START_MONEY = 1000;
+	final static int START_MONEY = 10000;
 	final static int MAX_LEVEL = 3;
 	final static float PERCENTAGEOFREWARD = 0.5f;
 

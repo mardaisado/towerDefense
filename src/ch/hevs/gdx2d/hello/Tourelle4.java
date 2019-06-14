@@ -11,7 +11,7 @@ public class Tourelle4 extends Defense{
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle qui tire beaucoup";
 	final static int PRICE = Game.defenseProperties[3].price;
-	final static int DAMAGE = 10;
+	final static int DAMAGE = 3;
 	final static float RADIUS = Game.defenseProperties[3].radius;
 	final static float COOLDOWN = 0.3f;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile180.png";
@@ -43,7 +43,7 @@ public class Tourelle4 extends Defense{
 					target = tmp;
 					angle = getAngle(target.getPos());
 				}
-				if(((Mojojo)tmp).getProgress() > ((Mojojo)target).getProgress()) {
+				if(((EnnemiWalk)tmp).getProgress() > ((EnnemiWalk)target).getProgress()) {
 					target = tmp;
 					angle = getAngle(target.getPos());
 				}

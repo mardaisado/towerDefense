@@ -11,7 +11,7 @@ public class Tourelle2 extends Defense{
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle moins jolie";
 	final static int PRICE = Game.defenseProperties[1].price;
-	final static int DAMAGE = 10;
+	final static int DAMAGE = 5;
 	final static float RADIUS = Game.defenseProperties[1].radius;
 	final static float COOLDOWN = 0.6f;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile182.png";
@@ -55,7 +55,7 @@ public class Tourelle2 extends Defense{
 				dt = 0;
 				
 				// SHOOT !!!
-				projectile.add(new Missile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,damage,80,ennemi));
+				projectile.add(new Missile(new Point(pos.x, pos.y), new Point(((EnnemiWalk) (target)).prediction(10)), Game.tileSize, projectileBtp,damage,80,ennemi));
 				//projectile.add(new Projectile(new Point(pos.x, pos.y), new Point(((Mojojo) (target)).prediction(10)), Game.tileSize, projectileBtp,10,(Mojojo)(target)));
 				nbHits++;
 			}
@@ -76,7 +76,7 @@ public class Tourelle2 extends Defense{
 					target = tmp;
 					angle = getAngle(target.getPos());
 				}
-				if(((Mojojo)tmp).getProgress() > ((Mojojo)target).getProgress()) {
+				if(((EnnemiWalk)tmp).getProgress() > ((EnnemiWalk)target).getProgress()) {
 					target = tmp;
 					angle = getAngle(target.getPos());
 				}

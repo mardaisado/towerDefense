@@ -9,7 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 
-public class Mojojo extends Ennemi {
+public class EnnemiWalk extends Ennemi {
 
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile299.png";
 
@@ -25,7 +25,7 @@ public class Mojojo extends Ennemi {
 
 	private TiledMapTileLayer tiledLayer;
 
-	public Mojojo(TiledMap map, int hp, int reward) {
+	public EnnemiWalk(TiledMap map, int hp, int reward) {
 
 		super(hp, reward);
 		this.tiledLayer=(TiledMapTileLayer) map.getLayers().get(0);

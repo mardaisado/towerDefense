@@ -146,7 +146,7 @@ public class RoundManager implements UpdateObject, DrawableObject{
 		if (play_state) {
 			if(searchTime(timeDelta))
 			{
-				ennemi.add(new Mojojo(Game.tiledMap,100,100));
+				ennemi.add(new EnnemiWalk(Game.tiledMap,100,100));
 			}
 
 			timeDelta++;

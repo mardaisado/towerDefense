@@ -10,9 +10,9 @@ public class Tourelle3 extends Defense{
 	// CONSTANT OF THE DEFENSE
 	final static String DEFENSE_NAME = "Tourelle qui tire loin";
 	final static int PRICE = Game.defenseProperties[2].price;
-	final static int DAMAGE = 10;
+	final static int DAMAGE = 5;
 	final static float RADIUS = Game.defenseProperties[2].radius;
-	final static float COOLDOWN = 0.4f;
+	final static float COOLDOWN = 0.9f;
 	final static String BASE_URL = "data/assets/PNG/Retina/towerDefense_tile181.png";
 	final static String MOVINGPART_URL = "data/assets/PNG/Retina/towerDefense_tile203.png";
 	final static String PROJECTILE_URL = "data/assets/PNG/Retina/towerDefense_tile275.png";
@@ -53,7 +53,7 @@ public class Tourelle3 extends Defense{
 			if (dt > cooldown) { // COOLDOWN
 				dt = 0;
 				
-				float angles = getAngle(new Point(((Mojojo) (target)).prediction(10)));
+				float angles = getAngle(new Point(((EnnemiWalk) (target)).prediction(10)));
 				
 				// SHOOT !!!
 				projectile.add(new RangeProjectile(new Point(pos.x, pos.y),angles , Game.tileSize, projectileBtp,damage,600,ennemi));
@@ -77,7 +77,7 @@ public class Tourelle3 extends Defense{
 					target = tmp;
 					angle = getAngle(target.getPos());
 				}
-				if(((Mojojo)tmp).getProgress() > ((Mojojo)target).getProgress()) {
+				if(((EnnemiWalk)tmp).getProgress() > ((EnnemiWalk)target).getProgress()) {
 					target = tmp;
 					angle = getAngle(target.getPos());
 				}
