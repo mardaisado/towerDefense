@@ -71,7 +71,7 @@ public abstract class Defense implements DrawableObject,DeleteObject {
 	public float getAngle(Point target) {
 	    float angle = (float) Math.toDegrees(Math.atan2(target.y - pos.y, target.x - pos.x));
 
-	    angle -= 90; //offset i don't know why :)
+	    angle -= 90;
 	    
 	    if(angle < 0){
 	        angle += 360;
