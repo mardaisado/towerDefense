@@ -1,21 +1,5 @@
-  {"1": [
-    {
-      "type": "Moj",
-      "delay": 30
-    },
-    {
-      "type": "Moj",
-      "delay": 60
-    },
-    {
-      "type": "Moj",
-      "delay": 90
-    },
-    {
-      "type": "Moj",
-      "delay": 110
-    }
-  ],"2": [
+{
+  "1": [
     {
       "type": "Moj",
       "delay": 30
@@ -32,7 +16,8 @@
       "type": "Moj",
       "delay": 150
     }
-  ],"3": [
+  ],
+  "2": [
     {
       "type": "Moj",
       "delay": 30
@@ -47,9 +32,106 @@
     },
     {
       "type": "Moj",
-      "delay": 110
+      "delay": 150
     }
-  ],"4": [
+  ],
+  "3": [
+    {
+      "type": "Moj",
+      "delay": 10
+    },
+    {
+      "type": "Moj",
+      "delay": 60
+    },
+    {
+      "type": "Moj",
+      "delay": 130
+    },
+    {
+      "type": "Moj",
+      "delay": 80
+    },
+    {
+      "type": "Moj",
+      "delay": 90
+    },
+    {
+      "type": "Moj",
+      "delay": 170
+    }
+  ],
+  "4": [
+    {
+      "type": "Moj",
+      "delay": 30
+    },
+    {
+      "type": "Moj",
+      "delay": 60
+    },
+    {
+      "type": "Moj",
+      "delay": 90
+    },
+    {
+      "type": "Moj",
+      "delay": 150
+    }
+  ],
+  "5": [
+    {
+      "type": "Moj",
+      "delay": 10
+    },
+    {
+      "type": "Moj",
+      "delay": 60
+    },
+    {
+      "type": "Moj",
+      "delay": 130
+    },
+    {
+      "type": "Moj",
+      "delay": 80
+    },
+    {
+      "type": "Moj",
+      "delay": 90
+    },
+    {
+      "type": "Moj",
+      "delay": 170
+    }
+  ],
+  "6": [
+    {
+      "type": "Moj",
+      "delay": 10
+    },
+    {
+      "type": "Moj",
+      "delay": 60
+    },
+    {
+      "type": "Moj",
+      "delay": 130
+    },
+    {
+      "type": "Moj",
+      "delay": 80
+    },
+    {
+      "type": "Moj",
+      "delay": 90
+    },
+    {
+      "type": "Moj",
+      "delay": 170
+    }
+  ],
+  "7": [
     {
       "type": "Moj",
       "delay": 30
@@ -67,4 +149,4 @@
       "delay": 150
     }
   ]
-  }
+}

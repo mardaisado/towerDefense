@@ -44,7 +44,9 @@ public class EndScreen extends RenderingScreen {
 				return super.keyDown(keyCode);
 			}
 		};
+
 		lastInputProcessor = Gdx.input.getInputProcessor();
+		Gdx.input.setInputProcessor(stage);
 
 		skin = new Skin(Gdx.files.internal("data/ui/flat-earth/skin/flat-earth-ui.json"));
 

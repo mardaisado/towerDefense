@@ -243,12 +243,12 @@ public class Game extends RenderingScreen {
 	}
 
 	// Only for the test, not in the final version !
-	@Override
-	public void onKeyUp(int keycode) {
-		super.onKeyUp(keycode);
-
-		ennemi.add(new Mojojo(tiledMap, 30, 100));
-	}
+//	@Override
+//	public void onKeyUp(int keycode) {
+//		super.onKeyUp(keycode);
+//
+//		ennemi.add(new Mojojo(tiledMap, 30, 100));
+//	}
 
 	@Override
 	public void onDrag(int x, int y) {
