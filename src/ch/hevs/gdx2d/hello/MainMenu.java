@@ -25,7 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
  * Menu for "The Tower Defense"
  *
  */
-public class DemoGUI extends RenderingScreen {
+public class MainMenu extends RenderingScreen {
 	Skin skin;
 	Stage stage;
 	TextButton newGameButton;
@@ -97,7 +97,7 @@ public class DemoGUI extends RenderingScreen {
 				super.clicked(event, x, y);
 
 				if (newGameButton.isChecked()) {
-					DemoScreen.transition(1);
+					MasterScreen.transition(1);
 				}			
 					
 			}
@@ -109,7 +109,7 @@ public class DemoGUI extends RenderingScreen {
 				super.clicked(event, x, y);
 
 				if (settingGameButton.isChecked()) {
-					DemoScreen.transition(4);
+					MasterScreen.transition(4);
 				}			
 					
 			}

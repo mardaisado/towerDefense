@@ -29,7 +29,7 @@ import com.badlogic.gdx.utils.Scaling;
  * Created by Pierre-André Mudry on 07.05.2015.
  * HES-SO Valais, 2015
  */
-public class MapSelector extends RenderingScreen {
+public class MapMenu extends RenderingScreen {
 
 	Skin skin;
 	Stage stage;
@@ -56,7 +56,7 @@ public class MapSelector extends RenderingScreen {
 			public boolean keyDown(int keyCode) {
 
 				if (keyCode == Input.Keys.ESCAPE) {
-					DemoScreen.transition(0);
+					MasterScreen.transition(0);
 				}
 				return super.keyDown(keyCode);
 			}
@@ -160,8 +160,8 @@ public class MapSelector extends RenderingScreen {
 				public void clicked(InputEvent event, float x, float y) {
 					super.clicked(event, x, y);
 					if (mapButton.get(temp).isChecked() && mapButton.get(temp).getName() != "0") {
-						DemoScreen.mapSelector=temp;
-						DemoScreen.transition(2);
+						MasterScreen.mapSelector=temp;
+						MasterScreen.transition(2);
 					}
 				}
 			});			
@@ -174,8 +174,8 @@ public class MapSelector extends RenderingScreen {
 
 		if(mapButton.get(0).isPressed())
 		{
-			DemoScreen.mapSelector=0;
-			DemoScreen.transition(2);
+			MasterScreen.mapSelector=0;
+			MasterScreen.transition(2);
 
 		}
 	}

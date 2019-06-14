@@ -169,7 +169,7 @@ public class Mojojo extends Ennemi {
 		if(Utils.returnStateForBool(null, test, "end", map))
 		{
 			Game.sound.stop();
-			DemoScreen.transition(3);
+			MasterScreen.transition(3);
 		}
 	}
 

@@ -6,15 +6,8 @@ import ch.hevs.gdx2d.lib.ScreenManager;
 import ch.hevs.gdx2d.lib.utils.Logger;
 
 import java.awt.Toolkit;
-/**
- * Show how to add multiple screen and switch between them with different transitions.
- *
- * @author Pierre-André Mudry (mui)
- * @version 1.1
- */
 
-
-public class DemoScreen extends PortableApplication {
+public class MasterScreen extends PortableApplication {
 
 	final static double PERCENTAGEOFSCREEN = 1.5;
 	final static boolean FULLSCREEN = true;
@@ -23,7 +16,7 @@ public class DemoScreen extends PortableApplication {
     
     static int mapSelector=0;
 
-	public DemoScreen() {
+	public MasterScreen() {
 
 		super((int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().width),(int)(PERCENTAGEOFSCREEN*Toolkit.getDefaultToolkit().getScreenSize().height),FULLSCREEN);
 
@@ -34,11 +27,11 @@ public class DemoScreen extends PortableApplication {
     public void onInit() {
     	setTitle("Best Tower Defense Game you've ever seen");
     	Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
-    	s.registerScreen(DemoGUI.class); // 0
-    	s.registerScreen(MapSelector.class); // 1
+    	s.registerScreen(MainMenu.class); // 0
+    	s.registerScreen(MapMenu.class); // 1
     	s.registerScreen(Game.class); // 2
-        s.registerScreen(CreditsScreen.class); // 3
-        s.registerScreen(SettingGUI.class); // 4
+        s.registerScreen(EndScreen.class); // 3
+        s.registerScreen(SettingMenu.class); // 4
         
 
     }
@@ -88,6 +81,6 @@ public class DemoScreen extends PortableApplication {
 
     public static void main(String[] args) {
     	
-        new DemoScreen();
+        new MasterScreen();
     }
 }

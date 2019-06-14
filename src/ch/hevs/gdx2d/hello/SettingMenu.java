@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.hello;
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen;
 import ch.hevs.gdx2d.lib.GdxGraphics;
+import ch.hevs.gdx2d.lib.ScreenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,25 +17,21 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 
 /**
- * Created by Pierre-André Mudry on 07.05.2015.
- * HES-SO Valais, 2015
+ * Menu for "The Tower Defense"
+ *
  */
-public class CreditsScreen extends RenderingScreen {
-	
-	TextButton menuGameButton;
-	Label lblMessage;
-	
+public class SettingMenu extends RenderingScreen {
 	Skin skin;
 	Stage stage;
+	TextButton quitGameButton;
 
 	BitmapFont font;
 	
@@ -44,42 +41,36 @@ public class CreditsScreen extends RenderingScreen {
 	
 	@Override
 	public void onInit() {
+		System.out.println("fddp");
 		int buttonWidth = Gdx.graphics.getWidth()/5;
 		int buttonHeight = Gdx.graphics.getHeight()/15;
+		
+		skin = new Skin(Gdx.files.internal("data/ui/flat-earth/skin/flat-earth-ui.json"));
 
 		stage = new Stage() {
 			@Override
 			public boolean keyDown(int keyCode) {
 
 		        if (keyCode == Input.Keys.ESCAPE) {
-		        	DemoScreen.transition(0);
+		        	MasterScreen.transition(0);
 		        }
 				return super.keyDown(keyCode);
 			}
 		};
+		
 		lastInputProcessor = Gdx.input.getInputProcessor();
 		Gdx.input.setInputProcessor(stage);// Make the stage consume events
 
-		skin = new Skin(Gdx.files.internal("data/ui/flat-earth/skin/flat-earth-ui.json"));
-		
 		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
 		
-		lblMessage = new Label("Dommage ! Mais tu peux rejouer ! (Bientot tu pouras regarder une pub pour continuer) ", skin);
-		lblMessage.setPosition(Gdx.graphics.getWidth() / 2 - lblMessage.getWidth()/2 , (int) (Gdx.graphics.getHeight() * .5 - lblMessage.getHeight()/2));
-//		lblMessage.setAlignment(Align.center, Align.center);
-//		lblMessage.setAlignment(Align.center);
-		lblMessage.setFontScale(Gdx.graphics.getWidth()/1200);
 		
+		quitGameButton = new TextButton("EXIT", skin); // Use the initialized skin
+		//quitGameButton.setColor(buttonColor);
+		quitGameButton.setWidth(buttonWidth);
+		quitGameButton.setHeight(buttonHeight);
+		quitGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
 		
-		menuGameButton = new TextButton("MENU", skin); // Use the initialized skin
-		//settingGameButton.setColor(Color.ORANGE);
-		menuGameButton.setWidth(buttonWidth);
-		menuGameButton.setHeight(buttonHeight);
-		menuGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
-		
-		
-		menuGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3 - buttonHeight/2));
-
+		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3));
 		
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(optimusF);
@@ -89,36 +80,40 @@ public class CreditsScreen extends RenderingScreen {
 		/**
 		 * Adds the buttons to the stage
 		 */
-		stage.addActor(menuGameButton);
-		stage.addActor(lblMessage);
+		stage.addActor(quitGameButton);
 
 		/**
 		 * Register listener
 		 */
-		menuGameButton.addListener(new ClickListener() {
+		quitGameButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 				
-				if (menuGameButton.isChecked()) {
-					DemoScreen.transition(0);
+				if (quitGameButton.isChecked()) {
+					MasterScreen.transition(0);
 				}	
 					
 			}
 		});		
+		
 	}
 
+	
 	@Override
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear(Color.DARK_GRAY);
 		
+		
+		// This is required for having the GUI work properly
 		stage.act();
-		stage.draw();		
+		stage.draw();
 	}
 
 	@Override
 	public void dispose() {
-		Gdx.input.setInputProcessor(lastInputProcessor);
 		super.dispose();
+		Gdx.input.setInputProcessor(lastInputProcessor);
+		stage.dispose();
 	}
 }
