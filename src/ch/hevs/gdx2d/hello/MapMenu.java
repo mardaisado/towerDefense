@@ -110,7 +110,7 @@ public class MapMenu extends RenderingScreen {
 	{
 		for (int i = map.size(); i < map.capacity(); i++) {
 
-			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/998.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/998.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/999.png"))))));
+			map.add(new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/998.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/998.png")))),new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("data/tilemap/preview/998.png"))))));
 			map.get(i).setName("0");
 		}		
 
