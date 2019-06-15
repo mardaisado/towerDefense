@@ -194,7 +194,7 @@ public class MapMenu extends RenderingScreen {
 	@Override
 	public void dispose() {
 		super.dispose();
-		Gdx.input.setInputProcessor(lastInputProcessor);
+		Gdx.input.setInputProcessor(lastInputProcessor); // recover the lastInput processor
 		stage.dispose();
 	}
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -38,6 +37,7 @@ public class EndScreen extends RenderingScreen {
 			@Override
 			public boolean keyDown(int keyCode) {
 
+				// if the escape button is press => return to the main menu
 				if (keyCode == Input.Keys.ESCAPE) {
 					MasterScreen.transition(0);
 				}
@@ -50,29 +50,29 @@ public class EndScreen extends RenderingScreen {
 
 		skin = new Skin(Gdx.files.internal("data/ui/flat-earth/skin/flat-earth-ui.json"));
 
+		// LABEL
 		lblMessage = new Label("Dommage ! Mais tu peux rejouer ! (Bientot tu pouras regarder une pub pour continuer) ", skin);
 		lblMessage.setPosition(Gdx.graphics.getWidth() / 2 - lblMessage.getWidth()/2 , (int) (Gdx.graphics.getHeight() * .5 - lblMessage.getHeight()/2));
 		lblMessage.setFontScale(Gdx.graphics.getWidth()/1200);
 
+		// BUTTON
 		menuGameButton = new TextButton("MENU", skin);
 		menuGameButton.setWidth(buttonWidth);
 		menuGameButton.setHeight(buttonHeight);
 		menuGameButton.getLabel().setFontScale(Gdx.graphics.getWidth()/1200);
-
 		menuGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3 - buttonHeight/2));
-
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		
-		parameter.color = Color.WHITE;
-		
+		//add to stage
 		stage.addActor(menuGameButton);
 		stage.addActor(lblMessage);
 
+		// button listener
 		menuGameButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 
+				// return to the main menu
 				if (menuGameButton.isChecked()) {
 					MasterScreen.transition(0);
 				}	
@@ -90,7 +90,7 @@ public class EndScreen extends RenderingScreen {
 
 	@Override
 	public void dispose() {
-		Gdx.input.setInputProcessor(lastInputProcessor);
+		Gdx.input.setInputProcessor(lastInputProcessor);	// recover the lastInput processor
 		super.dispose();
 	}
 }

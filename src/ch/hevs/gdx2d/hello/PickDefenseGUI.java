@@ -1,20 +1,21 @@
 package ch.hevs.gdx2d.hello;
 
-import java.util.Vector;
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
+/**
+ * Just an image where drawables are draw
+ */
 public class PickDefenseGUI implements DrawableObject,UpdateObject{
 
+	private BitmapImage image;
+	
+	public float x;
+	public float y;
+	public float facteur;
 
-	BitmapImage image;
-	float x;
-	float y;
-	float facteur;
-
-	public PickDefenseGUI(Vector<Dragable> dragable) {
-
+	public PickDefenseGUI() {
 		image = new BitmapImage("data/images/backDefense.png");
 		x = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		y = (float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f)*image.getImage().getWidth()/image.getImage().getHeight());
@@ -28,8 +29,7 @@ public class PickDefenseGUI implements DrawableObject,UpdateObject{
 
 	@Override
 	public void update(GdxGraphics g) {
-
-
+		//nothing
 	}
 
 }

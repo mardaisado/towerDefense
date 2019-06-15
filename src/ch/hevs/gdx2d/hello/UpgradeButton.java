@@ -11,22 +11,25 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
+/**
+ * UpgradeButton : a button in the overviewGui. can upgrade a defense
+ */
 public class UpgradeButton implements DrawableObject,UpdateObject{
 
-	BitmapImage greyButton;
-	BitmapImage greenButton;
-	BitmapImage button;
+	private BitmapImage greyButton;
+	private BitmapImage greenButton;
+	private BitmapImage button;
 	
-	BitmapFont font;
+	private BitmapFont font;
 	
-	float overviewX;
-	float overviewY;
-	float x;
-	float y;
+	private float overviewX;
+	private float overviewY;
+	private float x;
+	private float y;
 	
-	Defense defense;
+	private Defense defense;
 	
-	boolean notClickable = false;
+	private boolean notClickable = false;
 	
 	final float X = 0.92f;
 	final float Y = 0.7f;
@@ -37,8 +40,8 @@ public class UpgradeButton implements DrawableObject,UpdateObject{
 		this.overviewX = x;
 		this.overviewY = y;
 		
+		// FONT
 		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
-		
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(optimusF);
 		parameter.size = generator.scaleForPixelHeight((int) (x/10.0));
@@ -50,10 +53,20 @@ public class UpgradeButton implements DrawableObject,UpdateObject{
 		
 	}
 	
+	/**
+	 * Func that set the defense to sell
+	 *
+	 * @param defense : the defense to sell
+	 */
 	public void setDefense(Defense defense) {
 		this.defense = defense;
 	}
 	
+	/**
+	 * Func that check if the button is clicked
+	 *
+	 * @param x, y : mouse position
+	 */
 	public void clicked(int x,int y) {
 		if ((x >= (X*overviewY-2*this.y) && x <= (X*overviewY) && y >= overviewX*Y-this.x && y <= overviewX*Y+this.x)&&!notClickable) {
 			defense.upgrade();

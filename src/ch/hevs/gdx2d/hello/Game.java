@@ -26,43 +26,21 @@ import ch.hevs.gdx2d.lib.utils.Logger;
  * @version 0.3
  */
 public class Game extends RenderingScreen {
-	static final double FRAME_TIME = 0.015; // Duration of each frame
-
-	Vector<Object> toDraw = new Vector<Object>();
-	Vector<Ennemi> ennemi = new Vector<Ennemi>();
-	Vector<Defense> defense = new Vector<Defense>();
-	Vector<Dragable> dragable = new Vector<Dragable>();
-	Vector<Object> projectile = new Vector<Object>();
-
-	static TiledMap tiledMap;
-	TiledMapRenderer tiledMapRenderer;
-	static float tileSize;
-	Point lastClick;
-	Preview preview;
-	PickDefenseGUI pickGui;
-	OverviewGUI defenseGui;
-	PlayButton playButton;
-	RoundManager roundManager;
-	TiledMapTileLayer tiledLayer;
-	Dragable nowDragable;
-
-	int map0x;
-	int map0y;
-
-	int defSelec = 0;
-
-	float dt = 0;
-
-	static MoneyCounter money = null;
-
-	static Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/soundtrack.wav"));
-
+	
+	// MAIN GAME CONSTANTS
+	final static double FRAME_TIME = 0.015; // Duration of each frame
 	final static double PERCENTAGEOFSCREEN = 1.5;
 	final static boolean FULLSCREEN = false;
 	final static int START_MONEY = 2500;
 	final static int MAX_LEVEL = 3;
 	final static float PERCENTAGEOFREWARD = 0.5f;
-
+	
+	// static objects
+	static Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/soundtrack.wav"));
+	static MoneyCounter money = null;
+	static TiledMap tiledMap;
+	static float tileSize;
+	
 	// { pick image, dragable image, radius, class, price}
 	static DefenseProperties[] defenseProperties = {
 			new DefenseProperties("data/images/t1.png", "data/images/t1_p.png", 200f, "ch.hevs.gdx2d.hello.Tourelle", 100),
@@ -71,13 +49,38 @@ public class Game extends RenderingScreen {
 			new DefenseProperties("data/images/t4.png", "data/images/t4_p.png", 200f, "ch.hevs.gdx2d.hello.Tourelle4", 1000)
 	};
 
+	// VECTORS
+	private Vector<Object> toDraw = new Vector<Object>();
+	private Vector<Ennemi> ennemi = new Vector<Ennemi>();
+	private Vector<Defense> defense = new Vector<Defense>();
+	private Vector<Dragable> dragable = new Vector<Dragable>();
+	private Vector<Object> projectile = new Vector<Object>();
+	
+	// GUI
+	private Preview preview;
+	private PickDefenseGUI pickGui;
+	private OverviewGUI defenseGui;
+	private PlayButton playButton;
+	private Dragable nowDragable;
+	private RoundManager roundManager;
+	
+	// MAP
+	private TiledMapRenderer tiledMapRenderer;
+	TiledMapTileLayer tiledLayer;
+	private int map0x;
+	private int map0y;
+	
+	private Point lastClick;
+	int defSelec = 0;
+
+	private float dt = 0;
+
 	@Override
 	public void onInit() {
-		Logger.dbg("Game", "Tower Defense Game v1.0.0, | aurher, jermer (c) 2019");
+		Logger.dbg("Game", "Tower Defense Game v0.3, | aurher, jermer (c) 2019");
 
-		//		Pixmap pm = new Pixmap(Gdx.files.internal("/data/ui/crosshair123.png"));
-		//		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-
+		
+		// MAP INIT
 		tiledMap = new TmxMapLoader().load("data/tilemap/"+ MasterScreen.mapSelector +".tmx");
 
 		float screenHeigth = Gdx.graphics.getHeight();
@@ -91,31 +94,26 @@ public class Game extends RenderingScreen {
 		map0y = (int) ((Gdx.graphics.getHeight()
 				- (tiledMap.getProperties().get("height", Integer.class) * tileSize * 64f)) / 2f);
 
+		// GUI INIT
 		preview = new Preview();
-		pickGui = new PickDefenseGUI(dragable);
+		pickGui = new PickDefenseGUI();
 		defenseGui = new OverviewGUI();
 		money = new MoneyCounter(START_MONEY);
 		playButton = new PlayButton(ennemi);
 		roundManager = new RoundManager(ennemi, playButton);
 
-		for (int i = 0; i < (defenseProperties.length / 2 + defenseProperties.length % 2); i++) {
-			for (int j = 0; j < 2; j++) {
-				if (i * 2 + j < defenseProperties.length) {
-					dragable.add(new Dragable(defenseProperties[i * 2 + j], pickGui.x + (95 + 110 * j) * pickGui.facteur,
-							pickGui.x - (95 + 110 * i) * pickGui.facteur, 90 * pickGui.facteur / 2));
-				}
-			}
-		}
+		Utils.placeDrawable(defenseProperties, pickGui, dragable);
 
+		// ADD IN VECTORS
 		toDraw.add(roundManager);
 		toDraw.add(defenseGui);
 		toDraw.add(pickGui);
 		toDraw.add(money);
 		toDraw.add(playButton);
 		
+		// PLAY MUSIC
 		sound.play();
 		sound.loop();
-
 	}
 
 	@Override
@@ -143,7 +141,7 @@ public class Game extends RenderingScreen {
 			while (f.hasNext()) {
 				Defense obj;
 				obj = f.next();
-				if (((Defense) obj).update(g)) {
+				if (((DeleteObject) obj).update(g)) {
 					f.remove();
 				}
 			}
@@ -177,7 +175,6 @@ public class Game extends RenderingScreen {
 		tiledMapRenderer.render();
 
 		// Draw Object
-
 		for (Defense obj : defense) {
 			((DrawableObject) obj).draw(g);
 		}
@@ -196,6 +193,7 @@ public class Game extends RenderingScreen {
 			((DrawableObject) obj).draw(g);
 		}
 
+		// draw the preview at the end
 		preview.draw(g);
 	}
 
@@ -209,9 +207,10 @@ public class Game extends RenderingScreen {
 			defenseGui.clicked(x - map0x, y - map0y);
 		}
 
-		// play button test
+		// playButton test
 		playButton.clicked(x - map0x, y - map0y, roundManager);
 
+		// check if the defense is clicked
 		Defense def = Utils.getDefenseClicked(defense, x - map0x, y - map0y);
 		if (def != null) {
 			defenseGui.setDefense(def);
@@ -221,16 +220,17 @@ public class Game extends RenderingScreen {
 
 	@Override
 	public void onRelease(int x, int y, int button) {
-
 		super.onRelease(x, y, button);
 
 		if (preview.getVisible()) {
 			preview.setVisible(false);
-
+			// check is the place is "posable"
 			if ((Utils.returnStateForBool(new Point((int) ((x - map0x) / tileSize), (int) ((y - map0y) / tileSize)),
 					null, "posable", tiledMap)) == true
 					&& Utils.checkDefenseCollision(defense, (int) x - map0x, (int) y - map0y, 30) == false) {
+				//check if the player has enough money
 				if (money.getMoneyCount() >= (int) nowDragable.properties.price) {
+					// create the defense
 					Defense d = Utils.createDefense((String) nowDragable.properties.classDefense, new Point(x - map0x, y - map0y),
 							ennemi, projectile);
 					if (d != null) {
@@ -253,6 +253,8 @@ public class Game extends RenderingScreen {
 	@Override
 	public void onDrag(int x, int y) {
 		super.onDrag(x, y);
+		
+		//check what is the defense that was clicked
 		for (Dragable obj : dragable) {
 			boolean h = ((Dragable) obj).check(lastClick.x, lastClick.y);
 			if (h == true) {
@@ -263,7 +265,6 @@ public class Game extends RenderingScreen {
 					preview.setVisible(true);
 					preview.setRadius((float) obj.properties.radius);
 					preview.setImage(new BitmapImage((String) obj.properties.previewImage), tileSize);
-					// System.out.println((obj.defense[3]));
 				}
 				if ((Utils.returnStateForBool(
 						new Point((int) ((x - map0x) / Game.tileSize), (int) ((y - map0y) / Game.tileSize)), null,
@@ -275,7 +276,6 @@ public class Game extends RenderingScreen {
 				}
 
 				preview.move(x - map0x, y - map0y);
-
 			}
 		}
 	}

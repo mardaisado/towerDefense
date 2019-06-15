@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
+/**
+ * Money counter on the left upper corner
+ */
 public class MoneyCounter implements DrawableObject,UpdateObject{
 
 	private float x;
@@ -24,8 +27,8 @@ public class MoneyCounter implements DrawableObject,UpdateObject{
 		x = 0.98f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		y = 0.02f*(float)((Game.tiledMap.getProperties().get("height",Integer.class)*Game.tileSize*64f));
 		
+		// FONT
 		FileHandle optimusF = Gdx.files.internal("data/font/Fonts/Kenney Pixel Square.ttf");
-		
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(optimusF);
 		parameter.size = generator.scaleForPixelHeight((int) (x/20.0));
@@ -33,31 +36,40 @@ public class MoneyCounter implements DrawableObject,UpdateObject{
 		font = generator.generateFont(parameter);
 	}
 	
-	public void setMoneyCount(int moneyCount) {
-		this.moneyCount = moneyCount;
-	}
-	
+	/**
+	 * Func that add money
+	 *
+	 * @param moneyToAdd : the money to add
+	 */
 	public void addMoneyCount(int moneyToAdd) {
 		moneyCount += moneyToAdd;
 	}
 	
+	/**
+	 * Func that remove money
+	 *
+	 * @param moneyToTakeOff : the money to remove
+	 */
 	public void takeOffMoneyCount(int moneyToTakeOff) {
 		moneyCount -= moneyToTakeOff;
 	}
 	
+	/**
+	 * Func that get the amount of money
+	 *
+	 * @return money amount
+	 */
 	public int getMoneyCount() {
 		return moneyCount;
 	}
 
 	@Override
 	public void update(GdxGraphics g) {
-		// TODO Auto-generated method stub
-		
+		//nothing
 	}
 
 	@Override
 	public void draw(GdxGraphics g) {
-		// TODO Auto-generated method stub
 		g.drawString(y, x,moneyCount + "$", font);
 	}
 	

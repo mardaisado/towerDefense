@@ -10,24 +10,32 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
+/**
+ * RangeProjectile : this create an projectile that make damage at the ennemi the projectile is pearcing
+ */
 public class RangeProjectile implements DrawableObject,DeleteObject{
 
-	Point startPoint;
-	Point pos;
-	float scale;
-	BitmapImage image;
-	int offsetX;
-	int offsetY;
-	int steps = 10;
-	boolean delete = false;
-	float angle;
-	Vector<Ennemi> ennemi;
-	int power;
-	float rangeSq;
-	float radiusSq;
-	static final float RADIUS_HITBOX = 30f;
+	private Point startPoint;
 
-	Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop2.mp3"));
+	private float rangeSq;
+	private float radiusSq;
+	static final float RADIUS_HITBOX = 30f;
+	
+	private Point pos;
+	private float angle;
+	
+	private Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop2.mp3"));
+	
+	private BitmapImage image;
+	private float scale;
+	static final int ANIM = 5;
+	
+	private int power;
+	
+	private int offsetX;
+	private int offsetY;
+	
+	private Vector<Ennemi> ennemi;
 	
 	public RangeProjectile(Point startPoint,float angle,float scale,BitmapImage image,int power,float range,Vector<Ennemi> ennemi) {
 		this.pos = startPoint;
@@ -39,19 +47,16 @@ public class RangeProjectile implements DrawableObject,DeleteObject{
 		this.rangeSq = range*range*Game.tileSize*Game.tileSize;
 		this.radiusSq = RADIUS_HITBOX*RADIUS_HITBOX*Game.tileSize*Game.tileSize;
 		this.angle = angle;
-//		steps = (int) (startPoint.distance(endPoint)/(Game.tileSize*32f));
-		//System.out.println("steps : "+steps);
+
 		offsetX = (int)( Math.cos(Math.toRadians(angle+90))*(Game.tileSize*32f));
 		offsetY = (int)( Math.sin(Math.toRadians(angle+90))*(Game.tileSize*32f));
 
-//	    angle = (float) Math.toDegrees(Math.atan2(endPoint.y - pos.y, endPoint.x - pos.x))-90;
-//
-//	    if(angle < 0){
-//	        angle += 360;
-//	    }
 	}
 	
-	public void checkDamage() {
+	/**
+	 * Func that check if there is an ennemi where the projectile is
+	 */
+	private void checkDamage() {
 		for (int i = 0; i < ennemi.size(); i++) {
 			Ennemi target = ennemi.elementAt(i);
 			if (pos.distanceSq(target.getPos()) < radiusSq) {

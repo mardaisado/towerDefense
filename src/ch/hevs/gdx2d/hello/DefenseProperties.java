@@ -1,12 +1,14 @@
 package ch.hevs.gdx2d.hello;
-
+/**
+ * Structure to define a defense
+ */
 public class DefenseProperties {
 	
-	String pickImage;
-	String previewImage;
-	float radius;
-	String classDefense;
-	int price;
+	public String pickImage;
+	public String previewImage;
+	public float radius;
+	public String classDefense;
+	public int price;
 	
 	DefenseProperties(String pickImage,String previewImage,	float radius,String classDefense,int price){
 		this.pickImage = pickImage;

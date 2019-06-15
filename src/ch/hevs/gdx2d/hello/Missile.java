@@ -10,35 +10,39 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage;
 import ch.hevs.gdx2d.lib.GdxGraphics;
 import ch.hevs.gdx2d.lib.interfaces.DrawableObject;
 
+/**
+ * Missile : this create an missile that make zone damage
+ */
 public class Missile implements DrawableObject,DeleteObject {
 
-	Point endPoint;
-	Point pos;
-	float scale;
-	BitmapImage image;
-	int offsetX;
-	int offsetY;
-	int steps = 10;
-	int anim = 5;
-	int index = 0;
-	boolean delete = false;
-	float angle;
-	Vector<Ennemi> ennemi;
-	int power;
-	float radiusSq;
-
-	Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop2.mp3"));
+	private Point pos;
+	private float angle;
 	
+	private Vector<Ennemi> ennemi;
+	
+	private Sound sound= Gdx.audio.newSound(Gdx.files.internal("data/sound/chop2.mp3"));
+	
+	private BitmapImage image;
+	private float scale;
+	static final int ANIM = 5;
+	
+	private int power;
+	private float radiusSq;
+	
+	private int offsetX;
+	private int offsetY;
+	private int steps;
+	private int index = 0;
+
 	public Missile(Point startPoint,Point endPoint,float scale,BitmapImage image,int power,float radius,Vector<Ennemi> ennemi) {
 		this.pos = startPoint;
-		this.endPoint = endPoint;
 		this.scale = scale;
 		this.image = image;
 		this.ennemi=ennemi;
 		this.power=power;
 		this.radiusSq = radius*radius;
 		steps = (int) (startPoint.distance(endPoint)/(Game.tileSize*32f));
-		//System.out.println("steps : "+steps);
+		
 		if(steps > 0) {
 			offsetX = (endPoint.x-pos.x)/steps;
 			offsetY = (endPoint.y-pos.y)/steps;
@@ -51,8 +55,10 @@ public class Missile implements DrawableObject,DeleteObject {
 	    }
 	}
 	
-	
-	public void zoneDamage() {
+	/**
+	 * func that make damage to everyone is on a zone near the explosion pos
+	 */
+	private void zoneDamage() {
 		for (int i = 0; i < ennemi.size(); i++) {
 			Ennemi target = ennemi.elementAt(i);
 			if (pos.distanceSq(target.getPos()) < radiusSq) {
@@ -62,12 +68,12 @@ public class Missile implements DrawableObject,DeleteObject {
 		}
 	}
 	
-
+	@Override
 	public boolean update(GdxGraphics g) {
 		if (index < steps) {
 			pos.translate(offsetX, offsetY);
 		}
-		else if(index < steps+anim){
+		else if(index < steps+ANIM){
 			if (index == steps) {
 				// explosion degats
 				zoneDamage();
@@ -78,6 +84,7 @@ public class Missile implements DrawableObject,DeleteObject {
 
 		}
 		else {
+			// delete the missile
 			return true;
 		}
 		index++;

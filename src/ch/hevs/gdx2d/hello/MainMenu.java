@@ -36,8 +36,8 @@ public class MainMenu extends RenderingScreen {
 		Gdx.input.setInputProcessor(stage);
 
 		skin = new Skin(Gdx.files.internal("data/ui/flat-earth/skin/flat-earth-ui.json"));
-		//skin = new Skin(new TextureAtlas(Gdx.files.internal("data/ui/kenney-atlas/skin/ui-blue.atlas")));
 
+		// BUTTONS
 		newGameButton = new TextButton("PLAY", skin);
 		newGameButton.setWidth(buttonWidth);
 		newGameButton.setHeight(buttonHeight);
@@ -58,16 +58,18 @@ public class MainMenu extends RenderingScreen {
 		settingGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .5));
 		quitGameButton.setPosition(Gdx.graphics.getWidth() / 2 - buttonWidth / 2, (int) (Gdx.graphics.getHeight() * .3));
 
+		// add to stage
 		stage.addActor(newGameButton);
 		stage.addActor(settingGameButton);
 		stage.addActor(quitGameButton);
 
-
+		// button listener
 		newGameButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 
+				// transition to map selector
 				if (newGameButton.isChecked()) {
 					MasterScreen.transition(1);
 				}			
@@ -80,6 +82,7 @@ public class MainMenu extends RenderingScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 
+				// transition to settings
 				if (settingGameButton.isChecked()) {
 					MasterScreen.transition(4);
 				}			
@@ -92,6 +95,7 @@ public class MainMenu extends RenderingScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 
+				// quit the game
 				if (quitGameButton.isChecked()) {
 					Gdx.app.exit();
 					System.out.println("Closed Game by user");
@@ -112,7 +116,7 @@ public class MainMenu extends RenderingScreen {
 	@Override
 	public void dispose() {
 		super.dispose();
-		Gdx.input.setInputProcessor(lastInputProcessor);
+		Gdx.input.setInputProcessor(lastInputProcessor);	// recover the lastInput processor
 		stage.dispose();
 	}
 }
